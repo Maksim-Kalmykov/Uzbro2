@@ -74,6 +74,7 @@
           type="font/woff2"
           crossorigin>
 
+    <!-- ⚡ КРИТИЧЕСКИЙ БЛОК: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <style>
         #heroSection {
             position: relative;
@@ -93,6 +94,7 @@
             z-index: 0;
             pointer-events: none;
             background-color: #000000;
+            /* НЕТ background-image! Будет добавлен через JS */
         }
         body.light-theme .hero__bg {
             background-color: #f0f2f5;
@@ -100,6 +102,7 @@
     </style>
 
     <style>
+        /* ----- RESET & BASE ----- */
         *,
         *::before,
         *::after {
@@ -127,6 +130,7 @@
             max-width: 100%;
         }
 
+        /* ----- FONTS ----- */
         @font-face {
             font-family: 'Inter';
             src: url('fonts/Inter-Regular.woff2') format('woff2'),
@@ -241,6 +245,7 @@
             font-display: swap;
         }
 
+        /* ----- ICONS ----- */
         .fas,
         .fa-solid {
             font-family: 'Font Awesome 6 Free';
@@ -305,6 +310,7 @@
         .fa-flask:before { content: "\f0c3"; }
         .fa-temperature-low:before { content: "\f76b"; }
 
+        /* ----- CSS VARIABLES ----- */
         :root {
             --bg-color: #000000;
             --bg-secondary: #0a0a0a;
@@ -380,6 +386,7 @@
             --focus-glow: #1a1a2e;
         }
 
+        /* ----- CONTAINER ----- */
         .container {
             max-width: 80rem;
             margin: 0 auto;
@@ -389,6 +396,7 @@
             width: 100%;
         }
 
+        /* ----- VISUALLY HIDDEN ----- */
         .visually-hidden {
             position: absolute;
             width: 0.0625rem;
@@ -401,6 +409,7 @@
             white-space: nowrap;
         }
 
+        /* ----- USER SELECT ----- */
         html,
         body {
             -webkit-user-select: none;
@@ -488,6 +497,7 @@
             transition: transform 0.05s ease;
         }
 
+        /* ----- TRANSITIONS ----- */
         body,
         body *,
         body::before,
@@ -562,6 +572,7 @@
                         box-shadow 0.3s ease;
         }
 
+        /* ----- HOVER & ACTIVE STATES ----- */
         @media (hover: none) and (pointer: coarse) {
             .btn--primary:active {
                 background: var(--btn-primary-hover-bg);
@@ -687,6 +698,7 @@
             }
         }
 
+        /* ----- FOCUS STATES ----- */
         a:focus-visible,
         button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
         .service-card:focus-visible,
@@ -720,6 +732,7 @@
             background: rgba(26, 26, 46, 0.05);
         }
 
+        /* ----- SCROLL TO TOP ----- */
         .scroll-to-top {
             position: fixed;
             bottom: 2.25rem;
@@ -813,6 +826,7 @@
             }
         }
 
+        /* ----- THEME SWITCH ----- */
         .theme-switch-icon {
             background: transparent;
             border: none;
@@ -880,6 +894,7 @@
             background: radial-gradient(circle at 20% 30%, rgba(26, 26, 46, 0.03) 0%, transparent 50%);
         }
 
+        /* ----- STARS ----- */
         .theme__star {
             position: fixed;
             background: #1a1a2e;
@@ -906,6 +921,7 @@
             }
         }
 
+        /* ----- HEADER ----- */
         .page-header {
             background: var(--header-bg);
             border-bottom: 0.0625rem solid var(--border-color);
@@ -1098,6 +1114,7 @@
             padding-top: 70px;
         }
 
+       /* ----- HERO ----- */
         .hero {
             position: relative;
             overflow: hidden;
@@ -1163,6 +1180,7 @@
             color: var(--text-secondary);
             font-weight: 500;
             min-height: 4rem;
+            /* Фиксируем поведение при печати */
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
@@ -1245,6 +1263,7 @@
             }
         }
 
+        /* ----- TICKER ----- */
         .hero-ticker {
             position: absolute;
             bottom: 0;
@@ -1296,6 +1315,7 @@
             animation-play-state: paused;
         }
 
+        /* ----- SECTIONS ----- */
         section {
             padding: 3rem 0;
         }
@@ -1310,6 +1330,7 @@
             text-transform: uppercase;
         }
 
+        /* ----- PARALLAX ----- */
         .section--parallax {
             position: relative;
             overflow: hidden;
@@ -1332,6 +1353,7 @@
             will-change: transform;
         }
 
+        /* ----- SERVICES ----- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
@@ -1430,6 +1452,7 @@
             margin-top: 3rem;
         }
 
+        /* ----- STATS ----- */
         .container-stats {
             margin-top: 0;
             padding-top: 2rem;
@@ -1464,6 +1487,7 @@
             margin-bottom: 0.375rem;
         }
 
+        /* ----- FEATURES SLIDER ----- */
         .slider-grid {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -1582,6 +1606,7 @@
             }
         }
 
+        /* ----- GALLERY ----- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1630,6 +1655,7 @@
             }
         }
 
+        /* ----- CONTACTS ----- */
         .contacts-top-row {
             display: flex;
             flex-wrap: wrap;
@@ -1796,6 +1822,7 @@
             margin-top: 1rem;
         }
 
+        /* ----- REVIEWS ----- */
         .reviews-grid {
             display: flex;
             flex-wrap: wrap;
@@ -1892,6 +1919,7 @@
             margin: 1.25rem 0;
         }
 
+        /* ----- BOOKING ----- */
         .booking-section {
             background: var(--booking-bg);
             border: 0.0625rem solid var(--border-color);
@@ -1956,6 +1984,7 @@
             padding-bottom: 3.75rem;
         }
         
+        /* АДАПТИВ ДЛЯ QR-КОДА НА МОБИЛЬНЫХ */
         @media (max-width: 768px) {
             .booking-grid {
                 grid-template-columns: 1fr;
@@ -2014,6 +2043,7 @@
             }
         }
 
+        /* ----- BUTTONS ----- */
         .btn {
             display: inline-block;
             font-weight: 700;
@@ -2088,6 +2118,7 @@
             width: auto;
         }
 
+        /* ----- LINKS ----- */
         .contacts-link {
             color: var(--accent-color);
             text-decoration: none;
@@ -2110,6 +2141,7 @@
             margin-right: 0.75rem;
         }
 
+        /* ----- DIVIDER ----- */
         .brutal-divider {
             height: 0.125rem;
             background: linear-gradient(90deg, var(--accent-color), var(--border-color), var(--bg-color));
@@ -2121,6 +2153,7 @@
             margin: 0 0 0.9375rem 0;
         }
 
+        /* ----- FOOTER ----- */
         .footer {
             background: var(--footer-bg);
             border-top: 0.0625rem solid var(--border-color);
@@ -2140,6 +2173,7 @@
             padding: 0.3125rem;
         }
 
+        /* ----- FLOATING OBJECTS ----- */
         .floating-object {
             position: absolute;
             z-index: 0;
@@ -2190,6 +2224,7 @@
         .floating-object:nth-child(11) { top: 40%; left: 60%; animation: floatPath2 72s ease-in-out infinite; }
         .floating-object:nth-child(12) { top: 75%; left: 50%; animation: floatPath3 81s ease-in-out infinite; }
 
+        /* ----- ANIMATIONS ----- */
         .fade-on-scroll {
             transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
                         transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -2256,6 +2291,7 @@
             51%, 100% { opacity: 0; }
         }
 
+        /* ----- PARTICLES ----- */
         #particles-js {
             position: fixed;
             top: 0;
@@ -2270,6 +2306,7 @@
             scroll-margin-top: 3rem;
         }
 
+        /* ----- PWA БАННЕР ПОД ШАПКОЙ ----- */
         .pwa-top-banner {
             position: fixed;
             top: 70px;
@@ -2384,6 +2421,7 @@
             }
         }
         
+        /* Бургер кнопка на max-width 992px */
         @media (max-width: 992px) {
             .nav-links {
                 display: none;
@@ -2438,37 +2476,37 @@
             }
         }
 
-        /* ⬇️ АДАПТИВ ДЛЯ СЛАЙДЕРА - РАБОЧАЯ ВЕРСИЯ ⬇️ */
+        /* ============================================================ */
+        /* ⬇️ НОВЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ УСТРОЙСТВАХ ⬇️  */
+        /* ============================================================ */
         @media (max-width: 768px) {
+            /* Ускоряем скролл свайпом на мобильных */
             .features-slider {
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x mandatory;
                 scroll-behavior: smooth;
-                overflow-x: auto;
-                overflow-y: hidden;
-                cursor: grab;
-                touch-action: pan-x;
             }
 
             .features-slider__track {
                 padding: 3rem 0;
                 gap: 1rem;
-                display: flex;
-                width: fit-content;
             }
 
             .feature-card {
                 min-width: 75vw;
                 max-width: 85vw;
                 scroll-snap-align: start;
+                scroll-snap-stop: always;
                 flex-shrink: 0;
                 padding: 1.25rem;
             }
 
+            /* Убираем лишние отступы у слайдера */
             .slider-grid {
                 gap: 0.5rem;
             }
 
+            /* Скрываем кнопки навигации на мобильных (они уже скрыты выше) */
             .slider-grid .slider-nav-btn {
                 display: none !important;
             }
@@ -2485,6 +2523,14 @@
                 gap: 0.75rem;
                 padding: 2rem 0;
             }
+
+            .feature-card__title {
+                font-size: 1rem;
+            }
+
+            .feature-card__text {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 360px) {
@@ -2497,6 +2543,14 @@
             .features-slider__track {
                 gap: 0.5rem;
                 padding: 1.5rem 0;
+            }
+
+            .feature-card__title {
+                font-size: 0.9rem;
+            }
+
+            .feature-card__text {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -2533,6 +2587,7 @@
         }
     </script>
 
+    <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <script>
         (function() {
             var hero = document.getElementById('heroSection');
@@ -2983,6 +3038,7 @@
     <span class="scroll-to-top__icon fas fa-arrow-up"></span>
 </button>
 
+<!-- PWA баннер под шапкой -->
 <div id="pwaTopBanner" class="pwa-top-banner hide">
     <div class="pwa-top-banner__text">
         <span>📲</span>
@@ -3013,7 +3069,9 @@ if (typeof particlesJS !== 'undefined') {
     });
 }
 
-// Добавляем фон hero только после полной загрузки
+// ============================================
+// ДОБАВЛЯЕМ ФОН HERO ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ (чтобы не было скачка)
+// ============================================
 (function() {
     var heroBg = document.getElementById('heroBg');
     if (heroBg) {
@@ -3023,7 +3081,9 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// PWA баннер
+// ============================================
+// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО КОГДА БРАУЗЕР ГОТОВ
+// ============================================
 (function() {
     const banner = document.getElementById('pwaTopBanner');
     const installBtn = document.getElementById('pwaInstallBtn');
@@ -3033,6 +3093,7 @@ if (typeof particlesJS !== 'undefined') {
     let bannerTimeout = null;
     let bannerVisible = false;
     
+    // ПРОВЕРКА ТОЛЬКО ПО РЕАЛЬНОМУ СОСТОЯНИЮ, БЕЗ localStorage
     function isAppInstalled() {
         return window.matchMedia('(display-mode: standalone)').matches || 
                window.navigator.standalone === true;
@@ -3055,13 +3116,18 @@ if (typeof particlesJS !== 'undefined') {
     
     function showBanner() {
         if (!banner) return;
+        
+        // Проверяем реальное состояние установки
         if (isAppInstalled()) {
             banner.classList.add('hide');
             return;
         }
+        
+        // Проверяем готов ли браузер к установке
         if (!deferredPrompt) {
             return;
         }
+        
         banner.classList.remove('hide');
         bannerVisible = true;
         setTimeout(() => {
@@ -3069,6 +3135,7 @@ if (typeof particlesJS !== 'undefined') {
                 banner.classList.add('show');
             }
         }, 50);
+        
         if (bannerTimeout) clearTimeout(bannerTimeout);
         bannerTimeout = setTimeout(() => {
             hideBanner();
@@ -3080,6 +3147,7 @@ if (typeof particlesJS !== 'undefined') {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then(function(choiceResult) {
+                    // НЕ сохраняем в localStorage, полагаемся только на display-mode
                     deferredPrompt = null;
                     if (choiceResult.outcome === 'accepted') {
                         hideBanner();
@@ -3098,35 +3166,46 @@ if (typeof particlesJS !== 'undefined') {
     window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault();
         deferredPrompt = e;
+        // Показываем баннер только если приложение реально не установлено
         if (!isAppInstalled()) {
             showBanner();
         }
     });
     
+    // Слушаем изменения display-mode (когда приложение устанавливается или удаляется)
     if (window.matchMedia) {
         const displayModeQuery = window.matchMedia('(display-mode: standalone)');
         displayModeQuery.addEventListener('change', function(e) {
             if (e.matches) {
+                // Приложение установили
                 hideBanner();
             } else {
+                // Приложение удалили или вышли из него
+                // Сбрасываем deferredPrompt и ждём новое событие beforeinstallprompt
                 deferredPrompt = null;
+                // Баннер не показываем сразу, ждём нового beforeinstallprompt
                 if (banner) banner.classList.add('hide');
                 bannerVisible = false;
             }
         });
     }
     
+    // При загрузке проверяем реальное состояние
     if (isAppInstalled()) {
         if (banner) banner.classList.add('hide');
     }
 })();
 
-// Фикс дерганья контента на мобильных
+// ============================================
+// ФИКС ДЕРГАНЬЯ КОНТЕНТА НА МОБИЛЬНЫХ УСТРОЙСТВАХ
+// ============================================
 (function() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
+    
     let ticking = false;
     let lastVh = vh;
+    
     function updateVh() {
         const newVh = window.innerHeight * 0.01;
         if (Math.abs(newVh - lastVh) > 0.05) {
@@ -3135,13 +3214,16 @@ if (typeof particlesJS !== 'undefined') {
         }
         ticking = false;
     }
+    
     window.addEventListener('resize', function() {
         if (!ticking) {
             requestAnimationFrame(updateVh);
             ticking = true;
         }
     }, { passive: true });
+    
     updateVh();
+    
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
         window.addEventListener('load', function() {
             setTimeout(function() { 
@@ -3152,22 +3234,28 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// Фиксация высоты hero
+// ============================================
+// ФИКСАЦИЯ ВЫСОТЫ HERO-СЕКЦИИ (БЕЗ СКАЧКОВ)
+// ============================================
 (function() {
     const hero = document.getElementById('heroSection');
     if (!hero) return;
+    
     let heroFixedHeight = null;
     let resizeTimer = null;
+    
     function fixHeroHeight() {
         const viewportHeight = window.innerHeight;
         const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
         const desiredHeight = Math.max(viewportHeight - headerHeight, 450);
+        
         if (heroFixedHeight === null || Math.abs(hero.offsetHeight - desiredHeight) > 50) {
             heroFixedHeight = desiredHeight;
             hero.style.minHeight = heroFixedHeight + 'px';
             hero.style.height = heroFixedHeight + 'px';
         }
     }
+    
     function onOrientationChange() {
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
@@ -3175,30 +3263,39 @@ if (typeof particlesJS !== 'undefined') {
             fixHeroHeight();
         }, 100);
     }
+    
     window.addEventListener('load', () => {
         fixHeroHeight();
         setTimeout(fixHeroHeight, 100);
     });
+    
     if (window.matchMedia) {
         window.matchMedia('(orientation: portrait)').addEventListener('change', onOrientationChange);
         window.matchMedia('(orientation: landscape)').addEventListener('change', onOrientationChange);
     }
 })();
 
-// Параллакс эффект
+// ============================================
+// ПАРАЛЛАКС ЭФФЕКТ ЧЕРЕЗ JS
+// ============================================
 (function() {
     const heroBg = document.querySelector('.hero__bg');
     const parallaxBg = document.querySelector('.section__bg');
+    
     if (!heroBg && !parallaxBg) return;
+    
     let ticking = false;
+    
     function applyParallax() {
         const scrollY = window.scrollY;
+        
         if (heroBg) {
             const heroSection = document.getElementById('heroSection');
             if (heroSection) {
                 const rect = heroSection.getBoundingClientRect();
                 const heroTop = rect.top + scrollY;
                 const heroBottom = heroTop + rect.height;
+                
                 if (scrollY + window.innerHeight > heroTop && scrollY < heroBottom) {
                     const offset = (scrollY - heroTop) * 0.3;
                     heroBg.style.transform = `translateY(${offset}px)`;
@@ -3207,12 +3304,14 @@ if (typeof particlesJS !== 'undefined') {
                 }
             }
         }
+        
         if (parallaxBg) {
             const parallaxSection = document.getElementById('parallax-combined');
             if (parallaxSection) {
                 const rect = parallaxSection.getBoundingClientRect();
                 const sectionTop = rect.top + scrollY;
                 const sectionBottom = sectionTop + rect.height;
+                
                 if (scrollY + window.innerHeight > sectionTop && scrollY < sectionBottom) {
                     const offset = (scrollY - sectionTop) * 0.4;
                     parallaxBg.style.transform = `translateY(${offset}px)`;
@@ -3221,14 +3320,17 @@ if (typeof particlesJS !== 'undefined') {
                 }
             }
         }
+        
         ticking = false;
     }
+    
     function onScroll() {
         if (!ticking) {
             requestAnimationFrame(applyParallax);
             ticking = true;
         }
     }
+    
     let resizeTimeout;
     function onResize() {
         if (resizeTimeout) clearTimeout(resizeTimeout);
@@ -3238,29 +3340,82 @@ if (typeof particlesJS !== 'undefined') {
             applyParallax();
         }, 100);
     }
+    
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
+    
     setTimeout(applyParallax, 100);
 })();
 
-// Показ контента
+// ОСТАЛЬНОЙ JS КОД (тема, меню, кнопка вверх, счетчики, слайдер, услуги)
 (function() {
     let isReady = false;
     let readyTimeout = null;
+    
     function showContent() {
         if (isReady) return;
         isReady = true;
+        
         if (readyTimeout) clearTimeout(readyTimeout);
+        
         readyTimeout = setTimeout(() => {
             document.body.classList.add('ready');
             readyTimeout = null;
         }, 50);
     }
+    
     window.addEventListener('load', showContent);
     setTimeout(showContent, 150);
 })();
 
-// Контекстное меню
+(function() {
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        window.addEventListener('load', function() {
+            setTimeout(function() { window.scrollTo(0, 1); }, 100);
+        });
+    }
+})();
+
+(function() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    if (!lazyImages.length) return;
+    
+    let rafQueue = [];
+    
+    function batchAddClass(images) {
+        if (rafQueue.length) return;
+        rafQueue = images;
+        requestAnimationFrame(() => {
+            rafQueue.forEach(img => img.classList.add('loaded'));
+            rafQueue = [];
+        });
+    }
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            const toLoad = [];
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    toLoad.push(entry.target);
+                    imageObserver.unobserve(entry.target);
+                }
+            });
+            if (toLoad.length) batchAddClass(toLoad);
+        }, { rootMargin: '50px', threshold: 0.01 });
+        
+        lazyImages.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                imageObserver.observe(img);
+                img.addEventListener('load', () => batchAddClass([img]), { once: true });
+            }
+        });
+    } else {
+        requestAnimationFrame(() => lazyImages.forEach(img => img.classList.add('loaded')));
+    }
+})();
+
 document.addEventListener('contextmenu', function(e) {
     const isFooter = e.target.closest('.footer');
     const isContacts = e.target.closest('#info');
@@ -3270,7 +3425,6 @@ document.addEventListener('contextmenu', function(e) {
     }
 });
 
-// Тема
 const themeIcon = document.getElementById('theme-toggle-icon');
 const mobileThemeIcon = document.getElementById('mobile-theme-icon');
 const themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
@@ -3324,7 +3478,6 @@ function handleThemeChange() {
 if (themeIcon) themeIcon.addEventListener('click', handleThemeChange);
 if (mobileThemeIcon) mobileThemeIcon.addEventListener('click', handleThemeChange);
 
-// Мобильное меню
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileNav = document.getElementById('mobileNav');
 
@@ -3360,7 +3513,6 @@ setTimeout(function() {
     document.querySelector('.page-header')?.classList.add('page-header--visible');
 }, 100);
 
-// Кнопка вверх
 const scrollBtn = document.getElementById('scrollToTopBtn');
 const progressCircle = document.querySelector('.scroll-progress-ring__circle');
 const CIRCUMFERENCE = 2 * Math.PI * 26;
@@ -3414,7 +3566,6 @@ if (scrollBtn) {
     scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 }
 
-// Typewriter
 const typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
 let i = 0;
 const typewriterElement = document.getElementById('typewriter-text');
@@ -3430,16 +3581,19 @@ function typeWriter() {
 }
 setTimeout(typeWriter, 500);
 
-// 3D эффект для карточек услуг
 (function() {
     const cards = document.querySelectorAll('.service-card');
     if (!cards.length) return;
+    
     cards.forEach(function(card) {
         let cardRect = null;
         let rafId = null;
+        
         function updateCardRect() { cardRect = card.getBoundingClientRect(); }
+        
         card.addEventListener('mouseenter', updateCardRect);
         card.addEventListener('mouseleave', function() { card.style.transform = ''; if (rafId) cancelAnimationFrame(rafId); });
+        
         card.addEventListener('mousemove', function(e) {
             if (!cardRect) return;
             if (rafId) cancelAnimationFrame(rafId);
@@ -3454,11 +3608,11 @@ setTimeout(typeWriter, 500);
                 rafId = null;
             });
         });
+        
         window.addEventListener('resize', updateCardRect, { passive: true });
     });
 })();
 
-// Анимация счетчиков
 function animateCounter(id, target, duration) {
     let current = 0;
     const elem = document.getElementById(id);
@@ -3486,41 +3640,227 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР - ПРОСТАЯ РАБОЧАЯ ВЕРСИЯ ⬇️
+// ⬇️ УЛУЧШЕННАЯ ЛОГИКА ДЛЯ СЛАЙДЕРА С ПОРОГОМ 25% ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    // Кнопки навигации
-    prevBtn.addEventListener('click', function() {
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let isMobile = window.innerWidth <= 768;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+    let touchCurrentY = 0;
+    let isSwiping = false;
+    let swipeDirection = null;
+    let snapTimeout = null;
+
+    // Функция для определения ширины шага (карточка + gap)
+    function getStepSize() {
         const track = document.querySelector('.features-slider__track');
-        if (!track) return;
+        if (!track) return 300;
         const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
+        if (!firstCard) return 300;
         const cardWidth = firstCard.offsetWidth;
         const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
+        return cardWidth + gap;
+    }
+
+    // Функция для притягивания к ближайшему слайду
+    function snapToNearest() {
+        const step = getStepSize();
+        if (step <= 0) return;
+        
         const currentScroll = sliderWrapper.scrollLeft;
-        sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
+        const nearestIndex = Math.round(currentScroll / step);
+        const targetScroll = nearestIndex * step;
+        
+        sliderWrapper.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+
+    // Обработчики для мыши (десктоп)
+    const onDragStart = function(e) {
+        isDragging = true;
+        sliderWrapper.classList.add('features-slider--dragging');
+        startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+        startScrollLeft = sliderWrapper.scrollLeft;
+    };
+
+    const onDragMove = function(e) {
+        if (!isDragging) return;
+        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+        sliderWrapper.scrollLeft = startScrollLeft - (clientX - startX);
+    };
+
+    const onDragEnd = function() {
+        isDragging = false;
+        sliderWrapper.classList.remove('features-slider--dragging');
+        setTimeout(snapToNearest, 50);
+    };
+
+    // Обработчики для тач-событий (мобильные)
+    const onTouchStart = function(e) {
+        if (window.innerWidth > 768) return;
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        touchCurrentX = touchStartX;
+        touchCurrentY = touchStartY;
+        isSwiping = true;
+        swipeDirection = null;
+        if (snapTimeout) {
+            clearTimeout(snapTimeout);
+            snapTimeout = null;
+        }
+        // Запоминаем начальную позицию скролла
+        startScrollLeft = sliderWrapper.scrollLeft;
+    };
+
+    const onTouchMove = function(e) {
+        if (!isSwiping || window.innerWidth > 768) return;
+        const touch = e.touches[0];
+        touchCurrentX = touch.clientX;
+        touchCurrentY = touch.clientY;
+
+        const deltaX = touchCurrentX - touchStartX;
+        const deltaY = touchCurrentY - touchStartY;
+
+        if (!swipeDirection) {
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+                swipeDirection = 'horizontal';
+            } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 10) {
+                swipeDirection = 'vertical';
+            }
+        }
+
+        // Если горизонтальный свайп — прокручиваем слайдер и блокируем скролл страницы
+        if (swipeDirection === 'horizontal') {
+            e.preventDefault();
+            sliderWrapper.scrollLeft = startScrollLeft - deltaX;
+        }
+    };
+
+    const onTouchEnd = function(e) {
+        if (!isSwiping || window.innerWidth > 768) {
+            isSwiping = false;
+            return;
+        }
+
+        // Если был горизонтальный свайп
+        if (swipeDirection === 'horizontal') {
+            const deltaX = touchCurrentX - touchStartX;
+            const step = getStepSize();
+            const threshold = step * 0.25; // ⬅️ ПОРОГ 25% ОТ ШИРИНЫ КАРТОЧКИ!
+
+            if (Math.abs(deltaX) > threshold) {
+                // Свайп достаточно длинный — переключаем слайд
+                if (deltaX > 0) {
+                    // Свайп вправо — предыдущий слайд
+                    const currentScroll = sliderWrapper.scrollLeft;
+                    const targetScroll = Math.max(0, currentScroll - step);
+                    sliderWrapper.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // Свайп влево — следующий слайд
+                    const currentScroll = sliderWrapper.scrollLeft;
+                    const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+                    const targetScroll = Math.min(maxScroll, currentScroll + step);
+                    sliderWrapper.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                }
+                // После переключения притягиваем к слайду
+                snapTimeout = setTimeout(snapToNearest, 150);
+            } else {
+                // Свайп слишком короткий — притягиваем к ближайшему
+                snapTimeout = setTimeout(snapToNearest, 50);
+            }
+        } else {
+            // Вертикальный свайп или тап — притягиваем к ближайшему
+            snapTimeout = setTimeout(snapToNearest, 50);
+        }
+
+        isSwiping = false;
+        swipeDirection = null;
+    };
+
+    // Очищаем старые обработчики
+    sliderWrapper.removeEventListener('mousedown', onDragStart);
+    window.removeEventListener('mousemove', onDragMove);
+    window.removeEventListener('mouseup', onDragEnd);
+    sliderWrapper.removeEventListener('touchstart', onTouchStart);
+    sliderWrapper.removeEventListener('touchmove', onTouchMove);
+    sliderWrapper.removeEventListener('touchend', onTouchEnd);
+    sliderWrapper.removeEventListener('touchcancel', onTouchEnd);
+
+    // Добавляем новые обработчики
+    sliderWrapper.addEventListener('mousedown', onDragStart);
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', onDragEnd);
+    sliderWrapper.addEventListener('touchstart', onTouchStart, { passive: true });
+    sliderWrapper.addEventListener('touchmove', onTouchMove, { passive: false });
+    sliderWrapper.addEventListener('touchend', onTouchEnd, { passive: true });
+    sliderWrapper.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
+    // Кнопки навигации
+    prevBtn.addEventListener('click', function() {
+        const step = getStepSize();
+        if (step > 0) {
+            const currentScroll = sliderWrapper.scrollLeft;
+            const targetScroll = Math.max(0, currentScroll - step);
+            sliderWrapper.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+            setTimeout(snapToNearest, 150);
+        }
     });
 
     nextBtn.addEventListener('click', function() {
-        const track = document.querySelector('.features-slider__track');
-        if (!track) return;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
-        const currentScroll = sliderWrapper.scrollLeft;
-        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
+        const step = getStepSize();
+        if (step > 0) {
+            const currentScroll = sliderWrapper.scrollLeft;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            const targetScroll = Math.min(maxScroll, currentScroll + step);
+            sliderWrapper.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+            setTimeout(snapToNearest, 150);
+        }
     });
+
+    // При скролле с клавиатуры или трекпада
+    let scrollSnapTimeout;
+    sliderWrapper.addEventListener('scroll', function() {
+        clearTimeout(scrollSnapTimeout);
+        scrollSnapTimeout = setTimeout(snapToNearest, 300);
+    }, { passive: true });
+
+    // Обновляем при ресайзе
+    let resizeTimeout2;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout2);
+        resizeTimeout2 = setTimeout(function() {
+            isMobile = window.innerWidth <= 768;
+            setTimeout(snapToNearest, 100);
+        }, 300);
+    }, { passive: true });
+
+    // Первоначальный снап
+    setTimeout(snapToNearest, 500);
 }
 
-// Fade on scroll
 const fadeElements = document.querySelectorAll('.fade-on-scroll');
 const fadeObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -3530,7 +3870,6 @@ const fadeObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1 });
 fadeElements.forEach(el => fadeObserver.observe(el));
 
-// Выбор услуг
 const serviceCards = document.querySelectorAll('.service-card[data-service]');
 const bookingLink = document.getElementById('bookingLink');
 const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
@@ -3567,7 +3906,6 @@ serviceCards.forEach(card => {
 });
 updateBookingLink();
 
-// Плавный скролл
 function removeHashFromUrl() {
     if (window.history && history.pushState) {
         history.pushState('', document.title, window.location.pathname + window.location.search);
@@ -3602,15 +3940,17 @@ if (window.location.hash) {
     }, 200);
 }
 
-// Бегущая строка
 (function() {
     const tickerElement = document.querySelector('.ticker');
     const tickerWrap = document.querySelector('.ticker-wrap');
+    
     if (tickerElement && tickerWrap) {
         let isPaused = false;
+        
         function updateAriaLabel() {
             tickerWrap.setAttribute('aria-label', isPaused ? 'Бегущая строка на паузе. Нажмите для воспроизведения' : 'Бегущая строка с преимуществами. Нажмите для паузы');
         }
+        
         tickerWrap.addEventListener('click', () => {
             if (isPaused) {
                 tickerElement.style.animationPlayState = 'running';
@@ -3625,7 +3965,6 @@ if (window.location.hash) {
     }
 })();
 
-// Service Worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./js/sw.js').catch(error => console.log('SW registration failed: ', error));
