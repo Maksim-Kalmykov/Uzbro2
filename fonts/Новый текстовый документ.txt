@@ -1,0 +1,96 @@
+Inter-Black.woff
+Inter-Black.woff2
+Inter-Bold.woff
+Inter-Bold.woff2
+Inter-BoldItalic.woff
+Inter-BoldItalic.woff2
+Inter-ExtraBold.woff
+Inter-ExtraBold.woff2
+Inter-Italic.woff
+Inter-Italic.woff2
+Inter-Medium.woff
+Inter-Medium.woff2
+Inter-MediumItalic.woff
+Inter-MediumItalic.woff2
+Inter-Regular.woff
+Inter-Regular.woff2
+Inter-SemiBold.woff
+Inter-SemiBold.woff2
+Inter-SemiBoldItalic.woff
+Inter-SemiBoldItalic.woff2
+
+webfonts
+fa-brands-400.woff2
+fa-regular-400.woff2
+fa-solid-900.woff2
+
+
+1. Добавь loading="lazy" в нужные места. 
+2. Навигацию через кнопку таб на клавиатуре оставь только для интерактивных элементов и которые важны для доступности, думаю с iframe карты можно убрать. 
+Я имею ввиду tabindex. 
+3. На светлой теме рамки какието пиксельные и грубые, может добавить тень? 
+
+4. Проверь полностью сайт на все возможные пункты и дай обратную связь чего не хватает, что можно улучшить. 
+В будущем я сделаю разбивку по файлам, PWA приложение, сделаю разные легкие картинки для каждого типа устройств и вендорные префиксы. 
+В корне сайта, есть папка "fonts" в ней есть файлы: Inter-Black.woff
+Inter-Black.woff2,
+Inter-Bold.woff,
+Inter-Bold.woff2,
+Inter-BoldItalic.woff,
+Inter-BoldItalic.woff2,
+Inter-ExtraBold.woff,
+Inter-ExtraBold.woff2,
+Inter-Italic.woff,
+Inter-Italic.woff2,
+Inter-Medium.woff,
+Inter-Medium.woff2,
+Inter-MediumItalic.woff,
+Inter-MediumItalic.woff2,
+Inter-Regular.woff,
+Inter-Regular.woff2,
+Inter-SemiBold.woff,
+Inter-SemiBold.woff2,
+Inter-SemiBoldItalic.woff,
+Inter-SemiBoldItalic.woff2 Также в этой паке лежит папка "webfonts" с файлами внутри:
+fa-brands-400.woff2,
+fa-regular-400.woff2,
+fa-solid-900.woff2 
+Замени все ссылки стороних ресурсов шрифтов на ссылки локальных шрифтов, если каких то не будет хватать то все равно 
+впиши и дай заметку какие шрифты и куда скачать.
+
+
+
+
+1. Добавь loading="lazy" в нужные места. 
+2. Навигацию через кнопку таб на клавиатуре оставь только для интерактивных элементов и которые важны для доступности, думаю с iframe карты можно убрать. Я имею ввиду tabindex. 
+3. На светлой теме рамки какие-то пиксельные и грубые, может добавить тень? 
+
+1. Отключи получение фокуса при нажатии клавиши таб на клавиатуре на элементах: встроенной карты через iframe и у кнопки смены цветовой темы. 
+2. Добавь тени для outline при фокусе и для эффектов наведения где есть рамка. 
+
+
+1. добавь ховер эффект для кнопок с прозрачным фоном - на обоих цветовых темах. 2. В теге head есть строка "    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">" Но я хочу чтобы все шрифты подключались локально с папки. Рядом с файлом index.html есть папка "fonts" в ней есть такие файлы шрифтов: Inter-Black.woff2,
+Inter-Bold.woff,
+Inter-Bold.woff2,
+Inter-BoldItalic.woff,
+Inter-BoldItalic.woff2,
+Inter-ExtraBold.woff,
+Inter-ExtraBold.woff2,
+Inter-Italic.woff,
+Inter-Italic.woff2,
+Inter-Medium.woff,
+Inter-Medium.woff2,
+Inter-MediumItalic.woff,
+Inter-MediumItalic.woff2,
+Inter-Regular.woff,
+Inter-Regular.woff2,
+Inter-SemiBold.woff,
+Inter-SemiBold.woff2,
+Inter-SemiBoldItalic.woff,
+Inter-SemiBoldItalic.woff2. Также в папке "fonts" есть папка "webfonts" В которой находятся такие файлы шрифтов: fa-brands-400.woff2,
+fa-regular-400.woff2,
+fa-solid-900.woff2. Подключи шрифты локально! Если каких шрифтов нету то дай инструкции где скачать и как подключить.
+
+
+
+

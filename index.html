@@ -1,0 +1,3789 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma"
+          content="no-cache">
+    <meta http-equiv="Expires"
+          content="0">
+
+    <link rel="icon"
+          type="image/svg+xml"
+          href="./favicon.svg">
+    <link rel="icon"
+          type="image/png"
+          href="./icons/favicon-96x96.png"
+          sizes="96x96">
+    <link rel="shortcut icon"
+          href="./favicon.ico">
+    <link rel="apple-touch-icon"
+          sizes="180x180"
+          href="./icons/apple-touch-icon.png">
+    <link rel="manifest"
+          href="./manifest.json">
+
+    <meta name="apple-mobile-web-app-title"
+          content="УЗБРО Барбершоп">
+    <meta name="theme-color"
+          content="#000000">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+    <meta name="apple-mobile-web-app-title"
+          content="УЗБРО">
+    <meta name="mobile-web-app-capable"
+          content="yes">
+
+    <title>УЗБРО | Барбершоп в Омске — Мужские стрижки, бритьё бороды</title>
+    <meta name="description"
+          content="Барбершоп Узбро в Омске. Мужские стрижки, бритье опасной бритвой, моделирование бороды. Мастер с 10-летним стажем. Запись онлайн. ТЦ Миллениум.">
+    <meta name="keywords"
+          content="барбершоп Омск, мужская стрижка Омск, бритье бороды Омск, барбер Омск, УЗБРО, стрижка бороды, опасное бритье, мужской парикмахер Омск">
+    <meta name="author"
+          content="УЗБРО Барбершоп">
+    <meta name="robots"
+          content="index, follow">
+
+    <meta property="og:title"
+          content="УЗБРО | Барбершоп в Омске">
+    <meta property="og:description"
+          content="Мужские стрижки, бритье опасной бритвой, моделирование бороды. Запись онлайн.">
+    <meta property="og:type"
+          content="website">
+    <meta property="og:url"
+          content="https://uzbro.ru">
+    <meta property="og:locale"
+          content="ru_RU">
+
+    <link rel="canonical"
+          href="https://uzbro.ru">
+
+    <link rel="preload"
+          href="fonts/Inter-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin>
+    <link rel="preload"
+          href="fonts/Inter-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin>
+
+    <!-- ⚡ КРИТИЧЕСКИЙ БЛОК: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
+    <style>
+        #heroSection {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center 30%;
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+            background-color: #000000;
+            /* НЕТ background-image! Будет добавлен через JS */
+        }
+        body.light-theme .hero__bg {
+            background-color: #f0f2f5;
+        }
+    </style>
+
+    <style>
+        /* ----- RESET & BASE ----- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100%;
+            scrollbar-gutter: stable;
+            scroll-behavior: smooth;
+            font-size: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            line-height: 1.5;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            max-width: 100%;
+        }
+
+        /* ----- FONTS ----- */
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Regular.woff2') format('woff2'),
+                 url('fonts/Inter-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Italic.woff2') format('woff2'),
+                 url('fonts/Inter-Italic.woff') format('woff');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Medium.woff2') format('woff2'),
+                 url('fonts/Inter-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-MediumItalic.woff2') format('woff2'),
+                 url('fonts/Inter-MediumItalic.woff') format('woff');
+            font-weight: 500;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-SemiBold.woff2') format('woff2'),
+                 url('fonts/Inter-SemiBold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-SemiBoldItalic.woff2') format('woff2'),
+                 url('fonts/Inter-SemiBoldItalic.woff') format('woff');
+            font-weight: 600;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Bold.woff2') format('woff2'),
+                 url('fonts/Inter-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-BoldItalic.woff2') format('woff2'),
+                 url('fonts/Inter-BoldItalic.woff') format('woff');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-ExtraBold.woff2') format('woff2'),
+                 url('fonts/Inter-ExtraBold.woff') format('woff');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('fonts/Inter-Black.woff2') format('woff2'),
+                 url('fonts/Inter-Black.woff') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            src: url('fonts/webfonts/fa-solid-900.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            src: url('fonts/webfonts/fa-regular-400.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            src: url('fonts/webfonts/fa-brands-400.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* ----- ICONS ----- */
+        .fas,
+        .fa-solid {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .far,
+        .fa-regular {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 400;
+        }
+
+        .fab,
+        .fa-brands {
+            font-family: 'Font Awesome 6 Brands';
+            font-weight: 400;
+        }
+
+        .fa,
+        .fas,
+        .far,
+        .fab,
+        .fa-solid,
+        .fa-regular,
+        .fa-brands {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+        }
+
+        .fa-fist-raised:before { content: "\f6de"; }
+        .fa-scissors:before { content: "\f0c4"; }
+        .fa-crown:before { content: "\f521"; }
+        .fa-cut:before { content: "\f0c4"; }
+        .fa-crop-alt:before { content: "\f565"; }
+        .fa-hand-sparkles:before { content: "\f65d"; }
+        .fa-hand-holding-heart:before { content: "\f4be"; }
+        .fa-fire:before { content: "\f06d"; }
+        .fa-palette:before { content: "\f53f"; }
+        .fa-map-marker-alt:before { content: "\f3c5"; }
+        .fa-clock:before { content: "\f017"; }
+        .fa-phone-alt:before { content: "\f879"; }
+        .fa-globe:before { content: "\f0ac"; }
+        .fa-credit-card:before { content: "\f09d"; }
+        .fa-money-bill-wave:before { content: "\f53a"; }
+        .fa-qrcode:before { content: "\f029"; }
+        .fa-users:before { content: "\f0c0"; }
+        .fa-whatsapp:before { content: "\f232"; }
+        .fa-telegram:before { content: "\f2c6"; }
+        .fa-star:before { content: "\f005"; }
+        .fa-quote-right:before { content: "\f10e"; }
+        .fa-shield-alt:before { content: "\f3ed"; }
+        .fa-arrow-up:before { content: "\f062"; }
+        .fa-bars:before { content: "\f0c9"; }
+        .fa-times:before { content: "\f00d"; }
+        .fa-sun:before { content: "\f185"; }
+        .fa-moon:before { content: "\f186"; }
+        .fa-chevron-left:before { content: "\f053"; }
+        .fa-chevron-right:before { content: "\f054"; }
+        .fa-flask:before { content: "\f0c3"; }
+        .fa-temperature-low:before { content: "\f76b"; }
+
+        /* ----- CSS VARIABLES ----- */
+        :root {
+            --bg-color: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #0a0a0a;
+            --text-color: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #aaa;
+            --border-color: #2a2a2a;
+            --accent-color: #ffffff;
+            --accent-hover: #ffffff;
+            --btn-primary-bg: #ffffff;
+            --btn-primary-color: #000000;
+            --btn-primary-hover-bg: #000000;
+            --btn-primary-hover-color: #ffffff;
+            --header-bg: #000000;
+            --footer-bg: #000000;
+            --ticker-bg: #e0e0e0;
+            --ticker-text: #000000;
+            --stat-bg: rgba(10, 10, 10, 0.85);
+            --feature-bg: rgba(15, 15, 15, 0.85);
+            --social-bg: #1a1a1a;
+            --booking-bg: #0c0c0c;
+            --qr-border: #ffffff;
+            --shadow-color: rgba(255, 255, 255, 0.15);
+            --shadow-color-light: rgba(0, 0, 0, 0.08);
+            --gradient-start: #000000;
+            --gradient-end: #0a0a0a;
+            --focus-glow: rgba(255, 215, 0, 0.7);
+            --focus-glow-dark: #ffd700;
+            --focus-shadow: 0 0 0 0.1875rem rgba(255, 215, 0, 0.7),
+                            0 0 0 0.5rem rgba(255, 215, 0, 0.3),
+                            0 0 1.25rem rgba(255, 215, 0, 0.5);
+            --focus-shadow-light: 0 0 0 0.1875rem #1a1a2e,
+                                  0 0 0 0.5rem rgba(26, 26, 46, 0.25),
+                                  0 0 1.25rem rgba(26, 26, 46, 0.4);
+            --transition-default: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --border-radius-card: 0.75rem;
+            --border-radius-btn: 0.5rem;
+            --container-padding: 1.25rem;
+            --font-size-base: 1rem;
+            --font-size-h1: 2.2rem;
+            --font-size-h2: 1.8rem;
+            --font-size-h3: 1.5rem;
+        }
+
+        body.light-theme {
+            --bg-color: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-color: #1a1a2e;
+            --text-secondary: #2c3e50;
+            --text-muted: #5a6c7e;
+            --border-color: #d4dee8;
+            --accent-color: #1a1a2e;
+            --accent-hover: #2c3e50;
+            --btn-primary-bg: #1a1a2e;
+            --btn-primary-color: #ffffff;
+            --btn-primary-hover-bg: #2c3e50;
+            --btn-primary-hover-color: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --footer-bg: #ffffff;
+            --ticker-bg: #1a1a2e;
+            --ticker-text: #ffffff;
+            --stat-bg: rgba(255, 255, 255, 0.92);
+            --feature-bg: rgba(255, 255, 255, 0.92);
+            --social-bg: #e8edf2;
+            --booking-bg: #ffffff;
+            --qr-border: #1a1a2e;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow-color-light: rgba(0, 0, 0, 0.05);
+            --gradient-start: #e8edf2;
+            --gradient-end: #ffffff;
+            --focus-glow: #1a1a2e;
+        }
+
+        /* ----- CONTAINER ----- */
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* ----- VISUALLY HIDDEN ----- */
+        .visually-hidden {
+            position: absolute;
+            width: 0.0625rem;
+            height: 0.0625rem;
+            margin: -0.0625rem;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+            white-space: nowrap;
+        }
+
+        /* ----- USER SELECT ----- */
+        html,
+        body {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .footer,
+        .footer *,
+        #info,
+        #info *,
+        .contacts-address,
+        .contacts-address *,
+        .contacts-worktime,
+        .contacts-worktime *,
+        .contacts-payment,
+        .contacts-payment *,
+        .contacts-social,
+        .contacts-social *,
+        .address-detail,
+        .work-time,
+        .payment-methods,
+        .payment-item,
+        .social-contacts,
+        .social-link,
+        .contacts-link,
+        .contacts-link-underline {
+            -webkit-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: text;
+        }
+
+        a:not(.footer *):not(#info *),
+        button:not(.footer *):not(#info *),
+        .btn:not(.footer *):not(#info *),
+        .service-card:not(.footer *):not(#info *),
+        .social-link:not(.footer *):not(#info *),
+        .nav-link:not(.footer *):not(#info *),
+        .mobile-menu-btn:not(.footer *):not(#info *),
+        .scroll-to-top:not(.footer *):not(#info *),
+        .feature-card:not(.footer *):not(#info *),
+        .stat-item:not(.footer *):not(#info *),
+        .gallery-item:not(.footer *):not(#info *),
+        .booking-qr__img:not(.footer *):not(#info *),
+        .master-photo__img:not(.footer *):not(#info *) {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a,
+        button,
+        .btn,
+        .service-card,
+        .social-link,
+        .nav-link,
+        .mobile-menu-btn,
+        .scroll-to-top,
+        .feature-card,
+        .stat-item,
+        .gallery-item,
+        .booking-qr__img,
+        .master-photo__img,
+        .theme-switch-icon {
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:active,
+        button:active,
+        .btn:active,
+        .service-card:active,
+        .social-link:active,
+        .scroll-to-top:active,
+        .feature-card:active,
+        .stat-item:active,
+        .gallery-item:active {
+            transform: scale(0.98);
+            transition: transform 0.05s ease;
+        }
+
+        /* ----- TRANSITIONS ----- */
+        body,
+        body *,
+        body::before,
+        .page-header,
+        .navbar,
+        .nav-link,
+        .btn,
+        .service-card,
+        .service-card__price,
+        .service-card__icon,
+        .stat-item,
+        .feature-card,
+        .gallery-item__img,
+        .social-link,
+        .booking-section,
+        .booking-qr,
+        .booking-content,
+        .footer,
+        .theme-switch-icon,
+        .progress,
+        .progress__bar,
+        .floating-object,
+        .master-photo__img,
+        .booking-qr__img,
+        .contacts-link,
+        .footer-link-accent,
+        .footer__link,
+        .hero__badge,
+        .hero__title,
+        .hero__tagline,
+        .ticker-wrap,
+        .ticker__item,
+        .section__title,
+        .icon-wrapper span,
+        .contacts__title,
+        .address-detail,
+        .work-time,
+        .payment-methods,
+        .payment-item,
+        .social-contacts,
+        .review-link .btn,
+        .reviews-text,
+        .review-author,
+        .quote-icon,
+        .master-photo__text,
+        .booking-content__title,
+        .booking-content__text,
+        .booking-footer-text,
+        .brutal-divider,
+        .map-container,
+        .map-container iframe,
+        .typewriter-cursor {
+            transition: background-color 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                        color 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                        border-color 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                        fill 0.3s ease,
+                        stroke 0.3s ease,
+                        box-shadow 0.3s ease,
+                        opacity 0.3s ease;
+        }
+
+        .btn,
+        .service-card,
+        .social-link,
+        .nav-link,
+        .feature-card,
+        .stat-item {
+            transition: background-color 0.3s ease,
+                        color 0.3s ease,
+                        border-color 0.3s ease,
+                        transform 0.2s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        /* ----- HOVER & ACTIVE STATES ----- */
+        @media (hover: none) and (pointer: coarse) {
+            .btn--primary:active {
+                background: var(--btn-primary-hover-bg);
+                color: var(--btn-primary-hover-color);
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0.9375rem var(--shadow-color);
+                transform: scale(0.96);
+            }
+
+            .btn--outline-light:active {
+                background: var(--accent-color);
+                color: var(--bg-color);
+                transform: scale(0.96);
+            }
+
+            .btn--header:active {
+                background: var(--btn-primary-hover-bg);
+                color: var(--btn-primary-hover-color);
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0.75rem var(--shadow-color);
+                transform: scale(0.96);
+            }
+
+            .service-card:active {
+                border-color: var(--accent-color);
+                background: var(--bg-secondary);
+                box-shadow: 0 1.5625rem 2.5rem -0.9375rem var(--shadow-color);
+                transform: scale(0.98);
+            }
+
+            .social-link:active {
+                border-color: var(--accent-color);
+                background: var(--bg-secondary);
+                transform: translateY(-0.125rem) scale(0.97);
+            }
+
+            .nav-link:active {
+                color: var(--accent-color);
+                transform: scale(0.98);
+            }
+
+            .scroll-to-top:active {
+                background: var(--accent-color);
+                color: var(--bg-color);
+                transform: scale(0.95);
+            }
+
+            .feature-card:active {
+                background: var(--bg-secondary);
+                transform: translateY(-0.1875rem) scale(0.98);
+            }
+
+            .stat-item:active {
+                border-color: var(--accent-color);
+                transform: translateY(-0.1875rem) scale(0.98);
+                background: var(--bg-secondary);
+            }
+
+            .mobile-menu-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn--primary:hover {
+                background: var(--btn-primary-hover-bg);
+                color: var(--btn-primary-hover-color);
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0.9375rem var(--shadow-color);
+            }
+
+            .service-card:hover {
+                border-color: var(--accent-color);
+                background: var(--bg-secondary);
+                box-shadow: 0 1.5625rem 2.5rem -0.9375rem var(--shadow-color);
+            }
+
+            .social-link:hover {
+                border-color: var(--accent-color);
+                background: var(--bg-secondary);
+                transform: translateY(-0.125rem);
+            }
+
+            .nav-link:hover {
+                color: var(--accent-color);
+            }
+
+            .btn--header:hover {
+                background: var(--btn-primary-hover-bg);
+                color: var(--btn-primary-hover-color);
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0.75rem var(--shadow-color);
+                transform: translateY(-2px);
+            }
+
+            .scroll-to-top:hover {
+                background: var(--accent-color);
+                color: var(--bg-color);
+                transform: scale(1.05);
+            }
+
+            .feature-card:hover {
+                background: var(--bg-secondary);
+                transform: translateY(-0.1875rem);
+            }
+
+            .stat-item:hover {
+                border-color: var(--accent-color);
+                transform: translateY(-0.1875rem);
+                background: var(--bg-secondary);
+            }
+
+            .gallery-item:hover .gallery-item__img {
+                filter: grayscale(0%);
+                transform: scale(1.02);
+            }
+
+            .btn--outline-light:hover {
+                background: var(--accent-color);
+                color: var(--bg-color);
+                transform: translateY(-2px);
+                box-shadow: 0 0.5rem 1rem var(--shadow-color);
+            }
+        }
+
+        /* ----- FOCUS STATES ----- */
+        a:focus-visible,
+        button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
+        .service-card:focus-visible,
+        .btn:focus-visible,
+        .nav-link:focus-visible {
+            outline: 0.1875rem solid var(--focus-glow-dark);
+            outline-offset: 0.1875rem;
+            transition: var(--transition-default);
+            position: relative;
+            z-index: 10;
+        }
+
+        body:not(.light-theme) a:focus-visible,
+        body:not(.light-theme) button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
+        body:not(.light-theme) .service-card:focus-visible,
+        body:not(.light-theme) .btn:focus-visible,
+        body:not(.light-theme) .nav-link:focus-visible {
+            box-shadow: var(--focus-shadow);
+            transform: scale(1.02);
+            border-radius: 0.5rem;
+        }
+
+        body.light-theme a:focus-visible,
+        body.light-theme button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
+        body.light-theme .service-card:focus-visible,
+        body.light-theme .btn:focus-visible,
+        body.light-theme .nav-link:focus-visible {
+            box-shadow: var(--focus-shadow-light);
+            transform: scale(1.02);
+            border-radius: 0.5rem;
+            background: rgba(26, 26, 46, 0.05);
+        }
+
+        /* ----- SCROLL TO TOP ----- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2.25rem;
+            right: 1.25rem;
+            width: 3.75rem;
+            height: 3.75rem;
+            background: var(--bg-card);
+            border: none;
+            color: var(--text-color);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: opacity 0.3s ease,
+                        visibility 0.3s ease,
+                        transform 0.2s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 0.125rem 0.625rem var(--shadow-color);
+            touch-action: manipulation;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:active {
+            transform: scale(0.95);
+            transition: transform 0.05s ease;
+        }
+
+        .scroll-to-top:focus-visible {
+            outline: 0.1875rem solid #ffd700 !important;
+            outline-offset: 0.1875rem !important;
+            transform: scale(1) !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 0 0.1875rem rgba(255, 215, 0, 0.7),
+                        0 0 0 0.5rem rgba(255, 215, 0, 0.3),
+                        0 0 1.25rem rgba(255, 215, 0, 0.5) !important;
+        }
+
+        .scroll-progress-ring {
+            position: absolute;
+            top: -0.125rem;
+            left: -0.125rem;
+            width: calc(100% + 0.25rem);
+            height: calc(100% + 0.25rem);
+            transform: rotate(-90deg);
+        }
+
+        .scroll-progress-ring__circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 3;
+        }
+
+        body.light-theme .scroll-progress-ring__circle-bg {
+            stroke: rgba(26, 26, 46, 0.2);
+        }
+
+        .scroll-progress-ring__circle {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 226.194;
+            stroke-dashoffset: 226.194;
+            transition: stroke-dashoffset 0.05s linear;
+        }
+
+        .scroll-to-top__icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            transition: transform 0.2s;
+            z-index: 2;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .scroll-to-top:hover {
+                background: var(--accent-color);
+                transform: scale(1.05);
+            }
+
+            .scroll-to-top:hover .scroll-to-top__icon {
+                color: var(--bg-color);
+                transform: translateY(-2px);
+            }
+        }
+
+        /* ----- THEME SWITCH ----- */
+        .theme-switch-icon {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.4rem;
+            transition: color 0.3s ease,
+                        transform 0.2s ease;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            outline: none;
+        }
+
+        .theme-switch-icon:focus-visible {
+            outline: 0.1875rem solid var(--focus-glow-dark);
+            outline-offset: 0.1875rem;
+            transition: var(--transition-default);
+            position: relative;
+            z-index: 10;
+        }
+
+        body:not(.light-theme) .theme-switch-icon:focus-visible {
+            box-shadow: var(--focus-shadow);
+            transform: scale(1.02);
+            border-radius: 0.5rem;
+        }
+
+        body.light-theme .theme-switch-icon:focus-visible {
+            box-shadow: var(--focus-shadow-light);
+            transform: scale(1.02);
+            border-radius: 0.5rem;
+            background: rgba(26, 26, 46, 0.05);
+        }
+
+        .theme-switch-icon:hover {
+            color: var(--btn-primary-hover-color);
+        }
+
+        body.light-theme .theme-switch-icon {
+            color: var(--text-secondary);
+        }
+
+        body.light-theme .theme-switch-icon:hover {
+            color: var(--accent-color);
+        }
+
+        .theme--padding {
+            margin-left: 0.5rem;
+        }
+
+        body.light-theme::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(26, 26, 46, 0.03) 0%, transparent 50%);
+        }
+
+        /* ----- STARS ----- */
+        .theme__star {
+            position: fixed;
+            background: #1a1a2e;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: starFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes starFloat {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.5;
+            }
+            80% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-6.25rem) translateX(1.25rem);
+                opacity: 0;
+            }
+        }
+
+        /* ----- HEADER ----- */
+        .page-header {
+            background: var(--header-bg);
+            border-bottom: 0.0625rem solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .page-header--visible {
+            transform: translateY(0);
+        }
+
+        .navbar {
+            padding: 0.75rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+
+        .logo__title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.03125rem;
+            color: var(--accent-color);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo__subtitle {
+            font-size: 0.5rem;
+            letter-spacing: 0.125rem;
+            color: var(--text-muted);
+            margin-top: 0.125rem;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            letter-spacing: 0.03125rem;
+            padding: 0.5rem;
+            white-space: nowrap;
+            touch-action: manipulation;
+        }
+
+        .nav-link:active {
+            transform: scale(0.98);
+            transition: transform 0.05s ease;
+        }
+
+        body.light-theme .nav-link {
+            position: relative;
+        }
+
+        body.light-theme .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -0.25rem;
+            left: 0;
+            width: 0;
+            height: 0.125rem;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            body.light-theme .nav-link:hover::after {
+                width: 100%;
+            }
+        }
+
+        .btn--header {
+            background: var(--btn-primary-bg);
+            color: var(--btn-primary-color);
+            border: 0.125rem solid var(--accent-color);
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            touch-action: manipulation;
+            border-radius: var(--border-radius-btn);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09375rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn--header:active {
+            transform: scale(0.96);
+            transition: transform 0.05s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .btn--header:hover {
+                background: var(--btn-primary-hover-bg);
+                color: var(--btn-primary-hover-color);
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0.75rem var(--shadow-color);
+                transform: translateY(-2px);
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+            touch-action: manipulation;
+        }
+
+        .mobile-menu-btn:active {
+            transform: scale(0.95);
+            transition: transform 0.05s ease;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 0.0625rem solid var(--border-color);
+            z-index: 999;
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav .nav-link {
+            display: block;
+            text-align: center;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .mobile-theme-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-card);
+            border: 0.0625rem solid var(--border-color);
+            border-radius: 2rem;
+            padding: 0.5rem;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-theme-icon:active {
+            transform: scale(0.98);
+        }
+
+        main {
+            padding-top: 70px;
+        }
+
+       /* ----- HERO ----- */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+            height: auto;
+        }
+        
+        .hero__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center 30%;
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero__content > div {
+            max-width: 90%;
+            padding-right: 2rem;
+            width: 100%;
+        }
+        
+        .hero__badge {
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.0625rem;
+            color: var(--accent-color);
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            border-radius: 1.25rem;
+        }
+        
+        .hero__title {
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        
+        .hero__tagline {
+            font-size: 0.95rem;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            min-height: 4rem;
+            /* Фиксируем поведение при печати */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+            line-height: 1.4;
+        }
+        
+        .hero__buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            white-space: normal;
+            width: 100%;
+            min-height: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 480px) {
+            .hero__title {
+                font-size: 3.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero__content {
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .hero__content > div {
+                max-width: 100%;
+                padding-right: 0;
+            }
+            .hero__title {
+                font-size: 2.75rem;
+            }
+            .hero__tagline {
+                font-size: 0.9rem;
+                min-height: 3.5rem;
+            }
+            .hero__buttons {
+                flex-wrap: wrap;
+                white-space: normal;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .hero__buttons {
+                flex-direction: column;
+            }
+            .hero__title {
+                font-size: 2.5rem;
+            }
+            .hero__tagline {
+                font-size: 0.85rem;
+                min-height: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 2.4rem;
+            }
+            .hero__badge {
+                font-size: 0.6rem;
+            }
+            .hero__buttons .btn {
+                font-size: 0.7rem;
+                padding: 0.5rem 0.75rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero__title {
+                font-size: 1.75rem;
+            }
+            .hero__tagline {
+                font-size: 0.75rem;
+                min-height: 2.8rem;
+            }
+        }
+
+        /* ----- TICKER ----- */
+        .hero-ticker {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: var(--ticker-bg);
+            padding: 0.4rem 0;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .ticker {
+            display: flex;
+            width: fit-content;
+            animation: tickerScroll 50s linear infinite;
+        }
+
+        .ticker__content {
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .ticker__item {
+            padding: 0 2rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.09375rem;
+            color: var(--ticker-text);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-wrap:hover .ticker {
+            animation-play-state: paused;
+        }
+
+        /* ----- SECTIONS ----- */
+        section {
+            padding: 3rem 0;
+        }
+
+        .section__title {
+            font-size: var(--font-size-h2);
+            margin-bottom: 2rem;
+            border-left: 0.375rem solid var(--accent-color);
+            padding-left: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        /* ----- PARALLAX ----- */
+        .section--parallax {
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .section__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/10.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        /* ----- SERVICES ----- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 1.25rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 0.18rem solid var(--border-color);
+            padding: 1.5rem;
+            transition: var(--transition-default);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            border-radius: var(--border-radius-card);
+            touch-action: manipulation;
+        }
+
+        .service-card:active {
+            transform: scale(0.98);
+            transition: transform 0.05s ease;
+        }
+
+        .service-card--selected {
+            border-color: var(--accent-color);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0.9375rem var(--shadow-color);
+        }
+
+        .service-card--selected::after {
+            content: '✓';
+            position: absolute;
+            top: 0.9375rem;
+            right: 1.25rem;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .service-card__icon {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s;
+        }
+
+        .service-card__title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .service-card__price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin: 1rem 0 0.75rem;
+            border-bottom: 0.125rem solid var(--border-color);
+            display: inline-block;
+            padding-bottom: 0.25rem;
+            transition: border-color 0.3s;
+        }
+
+        .service-card__desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .service-card:hover .service-card__icon {
+                transform: scale(1.05);
+            }
+            .service-card:hover .service-card__price {
+                border-bottom-color: var(--accent-color);
+            }
+        }
+
+        .services-footer {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* ----- STATS ----- */
+        .container-stats {
+            margin-top: 0;
+            padding-top: 2rem;
+        }
+
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 8.75rem;
+            background: var(--stat-bg);
+            backdrop-filter: blur(0.125rem);
+            padding: 1.5rem 1rem;
+            border: 0.0625rem solid var(--border-color);
+            transition: 0.3s;
+            border-radius: 0.75rem;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .stat-item__number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 0.375rem;
+        }
+
+        /* ----- FEATURES SLIDER ----- */
+        .slider-grid {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider-nav-btn {
+            background: var(--bg-card);
+            border: 0.125rem solid var(--accent-color);
+            color: var(--accent-color);
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            touch-action: manipulation;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .slider-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .slider-nav-btn:hover {
+                background: var(--accent-color);
+                color: var(--bg-color);
+                transform: scale(1.05);
+                box-shadow: 0 0.25rem 1rem var(--shadow-color);
+            }
+        }
+
+        .features-slider {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            overscroll-behavior-x: contain;
+            touch-action: pan-y pinch-zoom;
+            scroll-behavior: smooth;
+        }
+
+        .features-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .features-slider:active {
+            cursor: grabbing;
+        }
+
+        .features-slider--dragging {
+            cursor: grabbing;
+            scroll-behavior: auto;
+        }
+
+        .features-slider--dragging .features-slider__track {
+            cursor: grabbing;
+            pointer-events: none;
+        }
+
+        .features-slider__track {
+            display: flex;
+            gap: 1.75rem;
+            width: fit-content;
+            padding: 6rem 0;
+            margin: 0;
+            cursor: grab;
+        }
+
+        .feature-card {
+            min-width: 13.75rem;
+            background: var(--feature-bg);
+            backdrop-filter: blur(0.125rem);
+            padding: 1.5rem;
+            border-left: 0.25rem solid var(--accent-color);
+            flex-shrink: 0;
+            transition: 0.3s;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .feature-card__icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+        }
+
+        .feature-card__title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .feature-card__text {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .slider-grid .slider-nav-btn:first-child,
+            .slider-grid .slider-nav-btn:last-child {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slider-grid .slider-nav-btn {
+                display: flex;
+            }
+        }
+
+        /* ----- GALLERY ----- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.75rem;
+            margin-top: 1.875rem;
+        }
+
+        .gallery-item {
+            background-color: var(--bg-card);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .gallery-item__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.4s ease;
+            display: block;
+        }
+
+        .gallery-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 678px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                max-width: 25rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* ----- CONTACTS ----- */
+        .contacts-top-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 3.75rem;
+        }
+
+        .contacts-address {
+            flex: 1;
+            min-width: 15.625rem;
+        }
+
+        .contacts-map {
+            flex: 2;
+            min-width: 18.75rem;
+        }
+
+        .contacts-bottom-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: space-between;
+        }
+
+        .contacts-worktime,
+        .contacts-payment,
+        .contacts-social {
+            flex: 1;
+            min-width: 12.5rem;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-card);
+            border: 0.0625rem solid var(--border-color);
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .icon-wrapper {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-bottom: 1rem;
+        }
+
+        .icon-wrapper span {
+            font-size: 1.8rem;
+        }
+
+        .contacts__title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .address-detail,
+        .work-time,
+        .payment-methods {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            line-height: 1;
+        }
+
+        .payment-item .icon-wrapper {
+            margin-bottom: 0;
+        }
+
+        .payment-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .social-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            background: var(--social-bg);
+            padding: 0.75rem 1.125rem;
+            border: 0.0625rem solid var(--border-color);
+            line-height: 1;
+            width: 100%;
+            border-radius: 0.5rem;
+            touch-action: manipulation;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .social-link:active {
+            transform: scale(0.97);
+            transition: transform 0.05s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .social-link:hover {
+                box-shadow: 0 0.25rem 1rem var(--shadow-color);
+            }
+        }
+
+        .social-link__icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .social-link__icon span {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .img_max {
+            width: 1.25rem;
+            height: 1.25rem;
+            object-fit: contain;
+        }
+
+        body.light-theme .img_max {
+            filter: invert(100%);
+        }
+
+        .map-container {
+            background: var(--bg-card);
+            border: 0.0625rem solid var(--border-color);
+            min-height: 20rem;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 20rem;
+            border: none;
+            display: block;
+        }
+
+        .contact-phone {
+            margin-top: 1rem;
+        }
+
+        .contact-online {
+            margin-top: 1rem;
+        }
+
+        /* ----- REVIEWS ----- */
+        .reviews-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .reviews-links-col {
+            flex: 1;
+            min-width: 12.5rem;
+        }
+
+        .reviews-content-col {
+            flex: 1;
+            border-left: 0.0625rem solid var(--border-color);
+            padding-left: 2.5rem;
+        }
+
+        .reviews-links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .review-link {
+            width: 100%;
+        }
+
+        .review-link .btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .review-link .btn:hover {
+                box-shadow: 0 0.25rem 1rem var(--shadow-color);
+            }
+        }
+
+        .master-photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 1.875rem;
+            padding-top: 1.25rem;
+            border-top: 0.0625rem solid var(--border-color);
+        }
+
+        .master-photo__img {
+            max-width: 11.25rem;
+            width: 100%;
+            height: auto;
+            border-radius: 17%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .master-photo__text {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 0.0625rem;
+        }
+
+        .master-photo__text span {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .quote-icon {
+            font-size: 1.8rem;
+            opacity: 0.6;
+        }
+
+        .reviews-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+        }
+
+        .review-author {
+            margin-top: 0.625rem;
+        }
+
+        .reviews-divider {
+            margin: 1.25rem 0;
+        }
+
+        /* ----- BOOKING ----- */
+        .booking-section {
+            background: var(--booking-bg);
+            border: 0.0625rem solid var(--border-color);
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+        
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 0;
+            min-height: 17.5rem;
+        }
+        
+        .booking-content {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .booking-content__title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-content__text {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .booking-qr {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            border-left: 0.0625rem solid var(--border-color);
+        }
+        
+        .booking-qr__img {
+            max-width: 11.25rem;
+            width: 100%;
+            height: auto;
+            border: 0.125rem solid var(--qr-border);
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+        
+        .booking-footer {
+            padding: 1.25rem 2rem;
+            border-top: 0.0625rem solid var(--border-color);
+            text-align: center;
+        }
+        
+        .booking-wrapper {
+            padding-bottom: 3.75rem;
+        }
+        
+        /* АДАПТИВ ДЛЯ QR-КОДА НА МОБИЛЬНЫХ */
+        @media (max-width: 768px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            
+            .booking-content {
+                padding: 1.875rem 1.25rem;
+            }
+            
+            .booking-content__title {
+                font-size: 1.5rem;
+            }
+            
+            .booking-qr {
+                border-left: none;
+                border-top: 0.0625rem solid var(--border-color);
+                padding: 1.875rem 1.25rem;
+            }
+            
+            .booking-qr__img {
+                max-width: 8.75rem;
+                width: auto;
+            }
+            
+            .booking-footer {
+                padding: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .booking-qr {
+                padding: 1.25rem;
+            }
+            
+            .booking-qr__img {
+                max-width: 7rem;
+            }
+            
+            .booking-content {
+                padding: 1.25rem;
+            }
+            
+            .booking-content__title {
+                font-size: 1.3rem;
+            }
+            
+            .booking-content__text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .booking-qr__img {
+                max-width: 6rem;
+            }
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn {
+            display: inline-block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09375rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 0.125rem solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border-radius: var(--border-radius-btn);
+            touch-action: manipulation;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            transition: transform 0.05s ease;
+        }
+
+        .btn--primary {
+            background: var(--btn-primary-bg);
+            color: var(--btn-primary-color);
+            border: 0.125rem solid var(--accent-color);
+        }
+
+        .btn--outline-light {
+            background: transparent;
+            color: var(--accent-color);
+            border: 0.125rem solid var(--accent-color);
+        }
+
+        .btn--pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 0.75rem rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        .booking-link {
+            padding: 0.75rem 1.75rem;
+            font-size: 0.85rem;
+            display: inline-block;
+            width: auto;
+        }
+
+        /* ----- LINKS ----- */
+        .contacts-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 0.3125rem;
+        }
+
+        .contacts-link-underline {
+            color: var(--accent-color);
+            text-decoration: underline;
+            padding: 0.3125rem;
+        }
+
+        .footer-link-accent {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .inline-icon {
+            display: inline-flex;
+            margin-right: 0.75rem;
+        }
+
+        /* ----- DIVIDER ----- */
+        .brutal-divider {
+            height: 0.125rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--border-color), var(--bg-color));
+            width: 100%;
+            margin: 1.875rem 0 1.25rem;
+        }
+
+        .brutal-divider--small {
+            margin: 0 0 0.9375rem 0;
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            background: var(--footer-bg);
+            border-top: 0.0625rem solid var(--border-color);
+            padding: 2.5rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer__text {
+            padding-bottom: 0.4375rem;
+        }
+
+        .footer__link {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.3125rem;
+        }
+
+        /* ----- FLOATING OBJECTS ----- */
+        .floating-object {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.075;
+            font-size: clamp(2rem, 9vw, 5.5rem);
+            color: var(--accent-color);
+            will-change: transform;
+        }
+
+        @keyframes floatPath1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(8vw, -6vh) rotate(12deg); }
+            40% { transform: translate(-5vw, 10vh) rotate(-8deg); }
+            60% { transform: translate(12vw, 4vh) rotate(18deg); }
+            80% { transform: translate(-6vw, -4vh) rotate(-10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes floatPath2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-10vw, 5vh) rotate(-15deg); }
+            40% { transform: translate(6vw, -8vh) rotate(15deg); }
+            60% { transform: translate(-4vw, 12vh) rotate(-20deg); }
+            80% { transform: translate(8vw, -5vh) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes floatPath3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(5vw, -8vh) rotate(-18deg); }
+            40% { transform: translate(-8vw, 6vh) rotate(22deg); }
+            60% { transform: translate(10vw, -3vh) rotate(-12deg); }
+            80% { transform: translate(-6vw, 8vh) rotate(8deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .floating-object:nth-child(1) { top: 5%; left: 3%; animation: floatPath1 80s ease-in-out infinite; }
+        .floating-object:nth-child(2) { top: 70%; left: 80%; animation: floatPath2 87s ease-in-out infinite; }
+        .floating-object:nth-child(3) { top: 27%; left: 85%; animation: floatPath3 80s ease-in-out infinite; }
+        .floating-object:nth-child(4) { top: 80%; left: 5%; animation: floatPath1 93s ease-in-out infinite; }
+        .floating-object:nth-child(5) { top: 32%; left: 12%; animation: floatPath2 80s ease-in-out infinite; }
+        .floating-object:nth-child(6) { top: 15%; left: 70%; animation: floatPath3 85s ease-in-out infinite; }
+        .floating-object:nth-child(7) { top: 55%; left: 20%; animation: floatPath1 90s ease-in-out infinite; }
+        .floating-object:nth-child(8) { top: 85%; left: 40%; animation: floatPath2 77s ease-in-out infinite; }
+        .floating-object:nth-child(9) { top: 10%; left: 35%; animation: floatPath3 95s ease-in-out infinite; }
+        .floating-object:nth-child(10) { top: 60%; left: 65%; animation: floatPath1 84s ease-in-out infinite; }
+        .floating-object:nth-child(11) { top: 40%; left: 60%; animation: floatPath2 72s ease-in-out infinite; }
+        .floating-object:nth-child(12) { top: 75%; left: 50%; animation: floatPath3 81s ease-in-out infinite; }
+
+        /* ----- ANIMATIONS ----- */
+        .fade-on-scroll {
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+                        transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            will-change: transform, opacity;
+        }
+
+        .fade-left {
+            transform: translateX(-3.75rem);
+            opacity: 0;
+        }
+
+        .fade-right {
+            transform: translateX(3.75rem);
+            opacity: 0;
+        }
+
+        .fade-up {
+            transform: translateY(3.125rem);
+            opacity: 0;
+        }
+
+        .fade-scale {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .fade-on-scroll.visible {
+            opacity: 1;
+            transform: translateX(0) translateY(0) scale(1);
+        }
+
+        .glitch-text {
+            transition: text-shadow 0.2s;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .glitch-text:hover {
+                text-shadow: -0.125rem 0 rgba(255, 0, 0, 0.4),
+                             0.125rem 0 rgba(0, 255, 255, 0.4);
+                animation: glitch 0.25s ease-in-out;
+            }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            25% { transform: translate(-0.0625rem, 0.0625rem); }
+            50% { transform: translate(0.0625rem, -0.0625rem); }
+            75% { transform: translate(-0.0625rem, -0.0625rem); }
+            100% { transform: translate(0); }
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 0.125rem;
+            height: 1.2em;
+            background-color: var(--accent-color);
+            margin-left: 0.125rem;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ----- PARTICLES ----- */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        [id] {
+            scroll-margin-top: 3rem;
+        }
+
+        /* ----- PWA БАННЕР ПОД ШАПКОЙ ----- */
+        .pwa-top-banner {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .pwa-top-banner.show {
+            transform: translateY(0);
+        }
+
+        .pwa-top-banner.hide {
+            display: none;
+        }
+
+        .pwa-top-banner__text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pwa-top-banner__text span {
+            font-size: 20px;
+        }
+
+        .pwa-top-banner__btn {
+            background: #ffffff;
+            color: #1a1a2e;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .pwa-top-banner__btn:hover {
+            transform: scale(1.02);
+            background: #f0f0f0;
+        }
+
+        .pwa-top-banner__close {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .pwa-top-banner__close:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        body.light-theme .pwa-top-banner {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
+        }
+
+        @media (max-width: 768px) {
+            .pwa-top-banner {
+                top: 70px;
+                padding: 10px 12px;
+            }
+            .pwa-top-banner__text {
+                font-size: 12px;
+            }
+            .pwa-top-banner__text span {
+                font-size: 16px;
+            }
+            .pwa-top-banner__btn {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            .pwa-top-banner__close {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pwa-top-banner {
+                flex-wrap: nowrap;
+            }
+            .pwa-top-banner__text {
+                font-size: 11px;
+            }
+        }
+        
+        /* Бургер кнопка на max-width 992px */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo {
+                align-items: flex-start;
+                text-align: left;
+            }
+        }
+        
+        @media (min-width: 993px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            .mobile-nav {
+                display: none !important;
+            }
+            .nav-links {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-container {
+                flex-direction: row;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .logo {
+                align-items: center;
+                text-align: center;
+                margin-bottom: 0;
+            }
+            .logo__title {
+                font-size: 1.5rem;
+            }
+            .logo__subtitle {
+                font-size: 0.4rem;
+                display: block;
+            }
+            .btn--header {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.65rem;
+            }
+        }
+
+        /* ============================================================ */
+        /* ⬇️ НОВЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ УСТРОЙСТВАХ ⬇️  */
+        /* ============================================================ */
+        @media (max-width: 768px) {
+            /* Ускоряем скролл свайпом на мобильных */
+            .features-slider {
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+            }
+
+            .features-slider__track {
+                padding: 3rem 0;
+                gap: 1rem;
+            }
+
+            .feature-card {
+                min-width: 75vw;
+                max-width: 85vw;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+                flex-shrink: 0;
+                padding: 1.25rem;
+            }
+
+            /* Убираем лишние отступы у слайдера */
+            .slider-grid {
+                gap: 0.5rem;
+            }
+
+            /* Скрываем кнопки навигации на мобильных (они уже скрыты выше) */
+            .slider-grid .slider-nav-btn {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .feature-card {
+                min-width: 82vw;
+                max-width: 90vw;
+                padding: 1rem;
+            }
+
+            .features-slider__track {
+                gap: 0.75rem;
+                padding: 2rem 0;
+            }
+
+            .feature-card__title {
+                font-size: 1rem;
+            }
+
+            .feature-card__text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .feature-card {
+                min-width: 88vw;
+                max-width: 94vw;
+                padding: 0.875rem;
+            }
+
+            .features-slider__track {
+                gap: 0.5rem;
+                padding: 1.5rem 0;
+            }
+
+            .feature-card__title {
+                font-size: 0.9rem;
+            }
+
+            .feature-card__text {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "УЗБРО Барбершоп",
+            "alternateName": "УЗБРО",
+            "image": "https://uzbro.ru/images/1-1.jpg",
+            "description": "Барбершоп в Омске. Мужские стрижки, бритье опасной бритвой, моделирование бороды. Мастер с 10-летним стажем.",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "ул. Фрунзе 1 корпус 4, павильон 23",
+                "addressLocality": "Омск",
+                "addressRegion": "Омская область",
+                "postalCode": "644043",
+                "addressCountry": "RU"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 54.993597,
+                "longitude": 73.356922
+            },
+            "telephone": "+79069935630",
+            "priceRange": "₽400-₽2000",
+            "openingHours": ["Mo-Su 09:00-22:00"],
+            "sameAs": [
+                "https://t.me/+79069935630",
+                "https://api.whatsapp.com/send/?phone=79069935630"
+            ],
+            "url": "https://uzbro.ru"
+        }
+    </script>
+
+    <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
+    <script>
+        (function() {
+            var hero = document.getElementById('heroSection');
+            var header = document.querySelector('.page-header');
+            var ticker = document.querySelector('.hero-ticker');
+            
+            function setHeroHeight() {
+                if (!hero) return;
+                var headerHeight = header ? header.offsetHeight : 70;
+                var tickerHeight = ticker ? ticker.offsetHeight : 0;
+                var heroHeight = Math.max(window.innerHeight - headerHeight - tickerHeight, 300);
+                hero.style.minHeight = heroHeight + 'px';
+                hero.style.height = heroHeight + 'px';
+            }
+            
+            setHeroHeight();
+            window.addEventListener('load', setHeroHeight);
+            window.addEventListener('resize', function() { requestAnimationFrame(setHeroHeight); });
+        })();
+    </script>
+</head>
+<body>
+
+<div id="particles-js" aria-hidden="true"></div>
+
+<span class="floating-object" aria-hidden="true"><span class="fas fa-fist-raised"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-scissors"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-crown"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-fist-raised"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-fist-raised"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-crown"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-fist-raised"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-scissors"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-crown"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-fist-raised"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-scissors"></span></span>
+<span class="floating-object" aria-hidden="true"><span class="fas fa-crown"></span></span>
+
+<header class="page-header" role="banner">
+    <div class="container">
+        <div class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1 class="logo__title glitch-text">УЗБРО</h1>
+                    <p class="logo__subtitle">МУЖСКИЕ СТРИЖКИ</p>
+                </div>
+
+                <nav class="nav-links" aria-label="Главная навигация">
+                    <a href="#services" class="nav-link">УСЛУГИ</a>
+                    <a href="#parallax-combined" class="nav-link">О НАС</a>
+                    <a href="#info" class="nav-link">КОНТАКТЫ</a>
+                    <a href="https://n2133024.yclients.com/" target="_blank" class="btn btn--header btn--pulse" rel="noopener noreferrer">ЗАПИСАТЬСЯ</a>
+                    <button class="theme-switch-icon" id="theme-toggle-icon" aria-label="Переключить тему">
+                        <span class="fas fa-sun"></span>
+                    </button>
+                </nav>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню" aria-expanded="false">
+                    <span class="fas fa-bars"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#services" class="nav-link">УСЛУГИ</a>
+        <a href="#parallax-combined" class="nav-link">О НАС</a>
+        <a href="#info" class="nav-link">КОНТАКТЫ</a>
+        <div class="mobile-theme-icon" id="mobile-theme-icon">
+            <span class="fas fa-sun"></span>
+            <span class="theme--padding">Тема</span>
+        </div>
+    </div>
+</header>
+
+<main id="main" role="main">
+    <section class="hero" id="heroSection" aria-label="Главный баннер">
+        <div class="hero__bg" id="heroBg" aria-hidden="true"></div>
+        <div class="container hero__content">
+            <div>
+                <span class="hero__badge fade-on-scroll fade-left">ОМСК • ТЦ МИЛЛЕНИУМ</span>
+                <h1 class="hero__title glitch-text fade-on-scroll fade-left">ВАШ СТИЛЬ<br>НАША БРИТВА<br>ОБЩИЙ УСПЕХ</h1>
+                <div class="hero__tagline fade-on-scroll fade-left" id="typewriter-text" aria-live="polite"></div>
+                <div class="hero__buttons fade-on-scroll fade-up">
+                    <a href="https://n2133024.yclients.com/" target="_blank" class="btn btn--primary btn--pulse" rel="noopener noreferrer">ЗАПИСАТЬСЯ ОНЛАЙН</a>
+                    <a href="#services" class="btn btn--outline-light">СМОТРЕТЬ УСЛУГИ</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-ticker">
+            <div class="ticker-wrap" aria-label="Бегущая строка с преимуществами. Нажмите для паузы, ещё раз нажмите для воспроизведения" role="region">
+                <div class="ticker" aria-live="polite">
+                    <div class="ticker__content">
+                        <span class="ticker__item">✔️ ОПАСНОЕ БРИТЬЕ</span>
+                        <span class="ticker__item">✔️ МУЖСКИЕ СТРИЖКИ</span>
+                        <span class="ticker__item">✔️ МОДЕЛИРОВАНИЕ БОРОДЫ</span>
+                        <span class="ticker__item">✔️ КАМУФЛЯЖ СЕДИНЫ</span>
+                        <span class="ticker__item">✔️ 7 ДНЕЙ В НЕДЕЛЮ</span>
+                        <span class="ticker__item">✔️ ОТ 400 ₽</span>
+                        <span class="ticker__item">✔️ 10+ ЛЕТ МАСТЕРСТВА</span>
+                        <span class="ticker__item">✔️ ОПАСНОЕ БРИТЬЕ</span>
+                        <span class="ticker__item">✔️ МУЖСКИЕ СТРИЖКИ</span>
+                        <span class="ticker__item">✔️ МОДЕЛИРОВАНИЕ БОРОДЫ</span>
+                        <span class="ticker__item">✔️ КАМУФЛЯЖ СЕДИНЫ</span>
+                        <span class="ticker__item">✔️ 7 ДНЕЙ В НЕДЕЛЮ</span>
+                        <span class="ticker__item">✔️ ОТ 400 ₽</span>
+                        <span class="ticker__item">✔️ 10 ЛЕТ МАСТЕРСТВА</span>
+                    </div>
+                    <div class="ticker__content">
+                        <span class="ticker__item">✔️ ОПАСНОЕ БРИТЬЕ</span>
+                        <span class="ticker__item">✔️ МУЖСКИЕ СТРИЖКИ</span>
+                        <span class="ticker__item">✔️ МОДЕЛИРОВАНИЕ БОРОДЫ</span>
+                        <span class="ticker__item">✔️ КАМУФЛЯЖ СЕДИНЫ</span>
+                        <span class="ticker__item">✔️ 7 ДНЕЙ В НЕДЕЛЮ</span>
+                        <span class="ticker__item">✔️ ОТ 400 ₽</span>
+                        <span class="ticker__item">✔️ 10+ ЛЕТ МАСТЕРСТВА</span>
+                        <span class="ticker__item">✔️ ОПАСНОЕ БРИТЬЕ</span>
+                        <span class="ticker__item">✔️ МУЖСКИЕ СТРИЖКИ</span>
+                        <span class="ticker__item">✔️ МОДЕЛИРОВАНИЕ БОРОДЫ</span>
+                        <span class="ticker__item">✔️ КАМУФЛЯЖ СЕДИНЫ</span>
+                        <span class="ticker__item">✔️ 7 ДНЕЙ В НЕДЕЛЮ</span>
+                        <span class="ticker__item">✔️ ОТ 400 ₽</span>
+                        <span class="ticker__item">✔️ 10 ЛЕТ МАСТЕРСТВА</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" aria-labelledby="services-heading">
+        <div class="container">
+            <h2 id="services-heading" class="section__title fade-on-scroll fade-right">ПРЕМИУМ УСЛУГИ</h2>
+            <div class="services-grid" role="group" aria-label="Список услуг">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340001" tabindex="0" role="button" aria-label="Мужская стрижка, цена 1900 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-cut service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Мужская стрижка</h3>
+                    <div class="service-card__price">1 900 ₽</div>
+                    <p class="service-card__desc">Машинки и ножницы, мытьё головы до и после, укладка профессиональной косметикой.</p>
+                </div>
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340043" tabindex="0" role="button" aria-label="Стрижка машинкой, цена 1400 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-crop-alt service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Стрижка машинкой</h3>
+                    <div class="service-card__price">1 400 ₽</div>
+                    <p class="service-card__desc">Две насадки, мытьё головы до и после, профессиональный уход.</p>
+                </div>
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340082" tabindex="0" role="button" aria-label="Моделирование бороды и бритьё, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-hand-sparkles service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Моделирование бороды / Бритьё</h3>
+                    <div class="service-card__price">1 600 ₽</div>
+                    <p class="service-card__desc">Создание формы, ножницы, машинка, шейвер, шаветт. Распаривание, массаж лица, компресс.</p>
+                </div>
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340124" tabindex="0" role="button" aria-label="Бритье с опасным лезвием, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-hand-holding-heart service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Бритье опасным лезвием</h3>
+                    <div class="service-card__price">1 600 ₽</div>
+                    <p class="service-card__desc">Чистовое бритьё с распариванием, шаветкой, холодный компресс, профессиональная косметика.</p>
+                </div>
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340154" tabindex="0" role="button" aria-label="Коррекция воском, цена 400 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-fire service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Коррекция воском</h3>
+                    <div class="service-card__price">400 ₽</div>
+                    <p class="service-card__desc">Удаление волос теплым воском премиум брендов. Нос / уши.</p>
+                </div>
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340217" tabindex="0" role="button" aria-label="Камуфляж седины, цена 1500 рублей. Нажмите Пробел или Enter для выбора.">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-palette service-card__icon" aria-hidden="true"></span>
+                    </div>
+                    <h3 class="service-card__title">Камуфляж седины</h3>
+                    <div class="service-card__price">1 500 ₽</div>
+                    <p class="service-card__desc">Тонирование бороды и волос, естественный вид.</p>
+                </div>
+            </div>
+            <div class="services-footer">
+                <a href="https://n2133024.yclients.com/" target="_blank" id="bookingLink" class="btn btn--primary btn--pulse booking-link" rel="noopener noreferrer">
+                    <span class="fas fa-cut" aria-hidden="true"></span> ЗАПИСАТЬСЯ
+                </a>
+                <span class="visually-hidden">Ссылка для записи на выбранные услуги</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="parallax-combined" class="section--parallax" aria-label="О нас, статистика и преимущества">
+        <div class="section__bg" aria-hidden="true"></div>
+        <div class="container container-stats">
+            <div class="stats-grid">
+                <div class="stat-item fade-on-scroll fade-up">
+                    <div class="stat-item__number" id="expCounter" aria-live="polite">0</div>
+                    <p>ЛЕТ ОПЫТА</p>
+                </div>
+                <div class="stat-item fade-on-scroll fade-up">
+                    <div class="stat-item__number" id="clientsCounter" aria-live="polite">0</div>
+                    <p>ДОВОЛЬНЫХ КЛИЕНТОВ</p>
+                </div>
+                <div class="stat-item fade-on-scroll fade-up">
+                    <div class="stat-item__number" id="servicesCounter" aria-live="polite">0</div>
+                    <p>ВИДОВ УСЛУГ</p>
+                </div>
+            </div>
+            <h2 class="section__title fade-on-scroll fade-right">ПРЕИМУЩЕСТВА</h2>
+
+            <div class="slider-grid">
+                <button class="slider-nav-btn" id="sliderPrevBtn">
+                    <span class="fas fa-chevron-left"></span>
+                </button>
+                <div class="features-slider" id="featuresSlider">
+                    <div class="features-slider__track" id="featuresScroll">
+                        <div class="feature-card">
+                            <span class="fas fa-cut feature-card__icon"></span>
+                            <h3 class="feature-card__title">Индивидуальный стиль</h3>
+                            <p class="feature-card__text">Подбор образа под клиента</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-flask feature-card__icon"></span>
+                            <h3 class="feature-card__title">Premium косметика</h3>
+                            <p class="feature-card__text">Профессиональные средства</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-shield-alt feature-card__icon"></span>
+                            <h3 class="feature-card__title">Одноразовые лезвия</h3>
+                            <p class="feature-card__text">Стерильность и безопасность</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-hand-sparkles feature-card__icon"></span>
+                            <h3 class="feature-card__title">Массаж лица</h3>
+                            <p class="feature-card__text">Расслабление после бритья</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-temperature-low feature-card__icon"></span>
+                            <h3 class="feature-card__title">Холодный компресс</h3>
+                            <p class="feature-card__text">Снятие раздражения</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-clock feature-card__icon"></span>
+                            <h3 class="feature-card__title">Без выходных</h3>
+                            <p class="feature-card__text">Ежедневно с 09:00 до 22:00</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="fas fa-credit-card feature-card__icon"></span>
+                            <h3 class="feature-card__title">Удобная оплата</h3>
+                            <p class="feature-card__text">Карта, наличные, QR-код</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-nav-btn" id="sliderNextBtn">
+                    <span class="fas fa-chevron-right"></span>
+                </button>
+            </div>
+
+            <h2 class="section__title fade-on-scroll fade-left">РАБОТЫ МАСТЕРА</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-on-scroll fade-scale">
+                    <img class="gallery-item__img" src="images/1.png" alt="Фото работы: мужская стрижка" loading="lazy">
+                </div>
+                <div class="gallery-item fade-on-scroll fade-scale">
+                    <img class="gallery-item__img" src="images/3.png" alt="Фото работы: моделирование бороды" loading="lazy">
+                </div>
+                <div class="gallery-item fade-on-scroll fade-scale">
+                    <img class="gallery-item__img" src="images/5.png" alt="Фото работы: бритье опасной бритвой" loading="lazy">
+                </div>
+                <div class="gallery-item fade-on-scroll fade-scale">
+                    <img class="gallery-item__img" src="images/6.png" alt="Фото работы: стильная укладка" loading="lazy">
+                </div>
+            </div>
+            <p class="gallery-caption">Мастер создаёт стиль, которому доверяют.</p>
+        </div>
+    </section>
+
+    <section id="info" aria-labelledby="contacts-heading">
+        <div class="container">
+            <h2 id="contacts-heading" class="section__title fade-on-scroll fade-right">КОНТАКТЫ</h2>
+            <div class="contacts-top-row">
+                <div class="contacts-address fade-on-scroll fade-left">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-map-marker-alt"></span>
+                    </div>
+                    <h3 class="contacts__title">АДРЕС</h3>
+                    <div class="address-detail">Россия, г. Омск, 644043<br>ул. Фрунзе 1 корпус 4, павильон 23.<br><br><strong>Как пройти:</strong> ТЦ Миллениум, после входа налево у фонтана, 2 этаж направо после эскалатора.</div>
+                </div>
+                <div class="contacts-map fade-on-scroll fade-right">
+                    <div class="map-container">
+                        <iframe id="map_787245062" frameborder="0" width="100%" height="600px" src="https://makemap.2gis.ru/widget?data=eJyNkM1ugzAQhN_FPQZFJphAkHJojUpQLAq0UptWOdDgUEcORsbkV3n3LkS9dy-2Zna_Xc0VKV1yzcuIqz03WvAWBV9XZM4NRwF65oXpNEcWarRquDaDD7YwsvfxMs3kjOZ4GWa1ePLjBP4szKuEnjD7gDeKMfOyw3E-B0jJ240WjRGqhuF08Tj6N-AcZq2AHkN9vFpknaF2_LJ8lBS0JAox-86rkk4x22XmFebLiOJVmHUJnWCms44eK8wWPZfgFct3SZTHww6v10aYveXicjxsQtIfulFSaTjxYbvFUKBc4rrkJxTY-K9uFqruoZ2HSO6JpUrUZiBAsKIuzBCo54wd1_WJZ7lkPJs5UGuYFyUAHce-rS20L5pUteKezRXJwqBgaHanjo8nZOZ7NiEWkr3f84htT-yp5wAWzlNq37MAChErKd9_OJefg2p0x2-_aLyVoA" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation" tabindex="-1"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts-bottom-row">
+                <div class="contacts-worktime fade-on-scroll fade-up">
+                    <div class="icon-wrapper">
+                        <span class="far fa-clock"></span>
+                    </div>
+                    <h3 class="contacts__title">РЕЖИМ РАБОТЫ</h3>
+                    <div class="work-time">Ежедневно с 09:00 до 22:00<br>Без выходных.</div>
+                    <div class="contact-phone">
+                        <div class="inline-icon">
+                            <span class="fas fa-phone-alt"></span>
+                        </div>
+                        <strong><a href="tel:+79069935630" class="contacts-link">+7‒906‒993‒56‒30</a></strong>
+                    </div>
+                    <div class="contact-online">
+                        <div class="inline-icon">
+                            <span class="fas fa-globe"></span>
+                        </div>
+                        Онлайн-запись: <a href="https://n2133024.yclients.com/" target="_blank" class="contacts-link-underline" rel="noopener noreferrer">yclients.com</a>
+                    </div>
+                </div>
+                <div class="contacts-payment fade-on-scroll fade-up">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-credit-card"></span>
+                    </div>
+                    <h3 class="contacts__title">СПОСОБЫ ОПЛАТЫ</h3>
+                    <div class="payment-methods">
+                        <div class="payment-item">
+                            <div class="icon-wrapper">
+                                <span class="fas fa-credit-card"></span>
+                            </div> Оплата картой
+                        </div>
+                        <div class="payment-item">
+                            <div class="icon-wrapper">
+                                <span class="fas fa-money-bill-wave"></span>
+                            </div> Наличный расчёт
+                        </div>
+                        <div class="payment-item">
+                            <div class="icon-wrapper">
+                                <span class="fas fa-qrcode"></span>
+                            </div> Оплата по QR-коду
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-social fade-on-scroll fade-up">
+                    <div class="icon-wrapper">
+                        <span class="fas fa-users"></span>
+                    </div>
+                    <h3 class="contacts__title">МЫ В СЕТЯХ</h3>
+                    <div class="social-contacts">
+                        <a href="https://api.whatsapp.com/send/?phone=79069935630" target="_blank" class="social-link">
+                            <div class="social-link__icon">
+                                <span class="fab fa-whatsapp"></span>
+                            </div> WhatsApp
+                        </a>
+                        <a href="https://t.me/+79069935630" target="_blank" class="social-link">
+                            <div class="social-link__icon">
+                                <span class="fab fa-telegram"></span>
+                            </div> Telegram
+                        </a>
+                        <a href="https://max.ru/u/f9LHodD0cOIP6p9mMuXI1ziWOqXj6xdq-RDZaf43ddl31hostY_dmT1FVTA" target="_blank" class="social-link">
+                            <div class="social-link__icon">
+                                <img class="img_max" src="images/max.svg" alt="Max" loading="lazy">
+                            </div> Max
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" aria-labelledby="reviews-heading">
+        <div class="container">
+            <h2 id="reviews-heading" class="section__title fade-on-scroll fade-left">ЧЕСТНОЕ МНЕНИЕ</h2>
+            <div class="reviews-grid">
+                <div class="reviews-links-col fade-on-scroll fade-left">
+                    <p class="review-link-text">Оцени нашу работу и поделись впечатлениями.</p>
+                    <div class="master-photo fade-on-scroll fade-up">
+                        <img class="master-photo__img" src="images/master.png" alt="Мастер Дмитрий - основатель барбершопа УЗБРО" loading="lazy">
+                        <p class="master-photo__text"><span>Дмитрий</span> — Топ-барбер! <br> Задает тренды, выполняет сложные креативные стрижки, отлично подбирает стиль и дает глубокие рекомендации по уходу. Основатель барбершопа УЗБРО</p>
+                    </div>
+                    <div class="reviews-links-grid">
+                        <div class="review-link">
+                            <a href="https://2gis.ru/omsk/firm/70000001113692596/tab/reviews/addreview?m=73.356922%2C54.993597%2F16" target="_blank" class="btn btn--primary" rel="noopener noreferrer nofollow">
+                                <span class="fas fa-star"></span> ОТЗЫВ НА 2ГИС
+                            </a>
+                        </div>
+                        <div class="review-link">
+                            <a href="https://yandex.ru/maps/org/uzbro/221338028379/reviews/" target="_blank" class="btn btn--primary" rel="noopener noreferrer nofollow">
+                                <span class="fas fa-star"></span> ОТЗЫВ НА Yandex
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="reviews-content-col fade-on-scroll fade-right">
+                    <span class="fas fa-quote-right quote-icon"></span>
+                    <p class="reviews-text" lang="ru">"Отличный барбершоп. Мастер Дима очень внимателен к деталям и всегда получается именно так, как задумывалось. Результатом всегда доволен. Если ни разу не были, то советую посетить этот барбершоп. 👌"</p>
+                    <p class="review-author" lang="ru">— Роман П.</p>
+                    <div class="brutal-divider reviews-divider"></div>
+                    <p class="reviews-text" lang="ru">"Приводила сына, все понравилось. Все было на высшем уровне начиная от атмосферы и заканчивая работой мастера. Не пожалели, что пришли в нужное место к нужному мастеру. Спасибо за Ваш труд)"</p>
+                    <p class="review-author" lang="ru">— Диана Т.</p>
+                    <div class="brutal-divider reviews-divider"></div>
+                    <p class="reviews-text" lang="ru">"Дмитрий приятный человек и крутой барбер, поможет с выбором стрижки и придаст уверенности на 110%. Уютная атмосфера, приятное расположение, вечно теплый приём."</p>
+                    <p class="review-author" lang="ru">— Эдвард S</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-wrapper" aria-labelledby="booking-heading">
+        <div class="container">
+            <div class="booking-section fade-on-scroll fade-up">
+                <div class="booking-grid">
+                    <div class="booking-content">
+                        <h3 id="booking-heading" class="booking-content__title">ЗАПИСЫВАЙСЯ СЕЙЧАС</h3>
+                        <p class="booking-content__text">Мастер ждёт тебя. Брутальный стиль и мужской характер.</p>
+                        <a href="https://n2133024.yclients.com/" target="_blank" class="btn btn--primary btn--pulse booking-link" rel="noopener noreferrer">
+                            <span class="fas fa-cut"></span> ЗАПИСАТЬСЯ
+                        </a>
+                    </div>
+                    <div class="booking-qr">
+                        <img class="booking-qr__img" src="images/qr-uzbro2.jpg" alt="QR-код для быстрой записи в барбершоп УЗБРО" loading="lazy">
+                    </div>
+                </div>
+                <div class="booking-footer">
+                    <div class="brutal-divider brutal-divider--small"></div>
+                    <div class="booking-footer-text">
+                        <span class="fas fa-shield-alt"></span> Без предоплаты, карта / наличные / QR-код
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <p class="footer__text">© 2026 УЗБРО БАРБЕРШОП — Омск, ТЦ Миллениум. Улица Фрунзе 1 корпус 4, павильон 23</p>
+        <p class="footer__text"><span>«Самозанятый»</span> <span>ФИО</span> <span>ИНН: 000000000000</span></p>
+        <p class="footer__text">
+            <a href="tel:+79069935630" class="footer-link-accent">+7‒906‒993‒56‒30</a>
+        </p>
+        <p class="footer__text">
+            <a href="https://n2133024.yclients.com/" target="_blank" class="footer__link" id="onlineBookingFooterLink">Онлайн-запись через YCLIENTS</a>
+        </p>
+    </div>
+</footer>
+
+<button class="scroll-to-top" id="scrollToTopBtn" aria-label="Прокрутить страницу вверх, в начало">
+    <svg class="scroll-progress-ring" width="60" height="60" viewBox="0 0 60 60">
+        <circle class="scroll-progress-ring__circle-bg" cx="30" cy="30" r="26" stroke-width="3" fill="none" />
+        <circle class="scroll-progress-ring__circle" cx="30" cy="30" r="26" stroke-width="3" fill="none" stroke-dasharray="163.3628" stroke-dashoffset="163.3628" />
+    </svg>
+    <span class="scroll-to-top__icon fas fa-arrow-up"></span>
+</button>
+
+<!-- PWA баннер под шапкой -->
+<div id="pwaTopBanner" class="pwa-top-banner hide">
+    <div class="pwa-top-banner__text">
+        <span>📲</span>
+        Установите приложение "УЗБРО" для быстрой записи
+    </div>
+    <button id="pwaInstallBtn" class="pwa-top-banner__btn">Установить</button>
+    <button id="pwaCloseBanner" class="pwa-top-banner__close">✕</button>
+</div>
+
+<script src="js/particles.min.js"></script>
+
+<script>
+if (typeof particlesJS !== 'undefined') {
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 40, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.15, random: true },
+            size: { value: 3, random: true },
+            line_linked: { enable: false },
+            move: { enable: true, speed: 1.5, direction: 'none', random: true }
+        },
+        interactivity: {
+            events: { onhover: { enable: true, mode: 'bubble' } },
+            modes: { bubble: { distance: 100, size: 5, opacity: 0.3 } }
+        }
+    });
+}
+
+// ============================================
+// ДОБАВЛЯЕМ ФОН HERO ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ (чтобы не было скачка)
+// ============================================
+(function() {
+    var heroBg = document.getElementById('heroBg');
+    if (heroBg) {
+        window.addEventListener('load', function() {
+            heroBg.style.backgroundImage = "url('images/1-1.jpg')";
+        });
+    }
+})();
+
+// ============================================
+// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО КОГДА БРАУЗЕР ГОТОВ
+// ============================================
+(function() {
+    const banner = document.getElementById('pwaTopBanner');
+    const installBtn = document.getElementById('pwaInstallBtn');
+    const closeBtn = document.getElementById('pwaCloseBanner');
+    
+    let deferredPrompt = null;
+    let bannerTimeout = null;
+    let bannerVisible = false;
+    
+    // ПРОВЕРКА ТОЛЬКО ПО РЕАЛЬНОМУ СОСТОЯНИЮ, БЕЗ localStorage
+    function isAppInstalled() {
+        return window.matchMedia('(display-mode: standalone)').matches || 
+               window.navigator.standalone === true;
+    }
+    
+    function hideBanner() {
+        if (!banner || !bannerVisible) return;
+        banner.classList.remove('show');
+        bannerVisible = false;
+        if (bannerTimeout) {
+            clearTimeout(bannerTimeout);
+            bannerTimeout = null;
+        }
+        setTimeout(() => {
+            if (!bannerVisible) {
+                banner.classList.add('hide');
+            }
+        }, 300);
+    }
+    
+    function showBanner() {
+        if (!banner) return;
+        
+        // Проверяем реальное состояние установки
+        if (isAppInstalled()) {
+            banner.classList.add('hide');
+            return;
+        }
+        
+        // Проверяем готов ли браузер к установке
+        if (!deferredPrompt) {
+            return;
+        }
+        
+        banner.classList.remove('hide');
+        bannerVisible = true;
+        setTimeout(() => {
+            if (bannerVisible) {
+                banner.classList.add('show');
+            }
+        }, 50);
+        
+        if (bannerTimeout) clearTimeout(bannerTimeout);
+        bannerTimeout = setTimeout(() => {
+            hideBanner();
+        }, 25000);
+    }
+    
+    if (installBtn) {
+        installBtn.addEventListener('click', function() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(function(choiceResult) {
+                    // НЕ сохраняем в localStorage, полагаемся только на display-mode
+                    deferredPrompt = null;
+                    if (choiceResult.outcome === 'accepted') {
+                        hideBanner();
+                    }
+                });
+            }
+        });
+    }
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            hideBanner();
+        });
+    }
+    
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Показываем баннер только если приложение реально не установлено
+        if (!isAppInstalled()) {
+            showBanner();
+        }
+    });
+    
+    // Слушаем изменения display-mode (когда приложение устанавливается или удаляется)
+    if (window.matchMedia) {
+        const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+        displayModeQuery.addEventListener('change', function(e) {
+            if (e.matches) {
+                // Приложение установили
+                hideBanner();
+            } else {
+                // Приложение удалили или вышли из него
+                // Сбрасываем deferredPrompt и ждём новое событие beforeinstallprompt
+                deferredPrompt = null;
+                // Баннер не показываем сразу, ждём нового beforeinstallprompt
+                if (banner) banner.classList.add('hide');
+                bannerVisible = false;
+            }
+        });
+    }
+    
+    // При загрузке проверяем реальное состояние
+    if (isAppInstalled()) {
+        if (banner) banner.classList.add('hide');
+    }
+})();
+
+// ============================================
+// ФИКС ДЕРГАНЬЯ КОНТЕНТА НА МОБИЛЬНЫХ УСТРОЙСТВАХ
+// ============================================
+(function() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+    
+    let ticking = false;
+    let lastVh = vh;
+    
+    function updateVh() {
+        const newVh = window.innerHeight * 0.01;
+        if (Math.abs(newVh - lastVh) > 0.05) {
+            lastVh = newVh;
+            document.documentElement.style.setProperty('--vh', newVh + 'px');
+        }
+        ticking = false;
+    }
+    
+    window.addEventListener('resize', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateVh);
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    updateVh();
+    
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        window.addEventListener('load', function() {
+            setTimeout(function() { 
+                window.scrollTo(0, 1);
+                setTimeout(function() { window.scrollTo(0, 0); }, 50);
+            }, 100);
+        });
+    }
+})();
+
+// ============================================
+// ФИКСАЦИЯ ВЫСОТЫ HERO-СЕКЦИИ (БЕЗ СКАЧКОВ)
+// ============================================
+(function() {
+    const hero = document.getElementById('heroSection');
+    if (!hero) return;
+    
+    let heroFixedHeight = null;
+    let resizeTimer = null;
+    
+    function fixHeroHeight() {
+        const viewportHeight = window.innerHeight;
+        const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+        const desiredHeight = Math.max(viewportHeight - headerHeight, 450);
+        
+        if (heroFixedHeight === null || Math.abs(hero.offsetHeight - desiredHeight) > 50) {
+            heroFixedHeight = desiredHeight;
+            hero.style.minHeight = heroFixedHeight + 'px';
+            hero.style.height = heroFixedHeight + 'px';
+        }
+    }
+    
+    function onOrientationChange() {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            heroFixedHeight = null;
+            fixHeroHeight();
+        }, 100);
+    }
+    
+    window.addEventListener('load', () => {
+        fixHeroHeight();
+        setTimeout(fixHeroHeight, 100);
+    });
+    
+    if (window.matchMedia) {
+        window.matchMedia('(orientation: portrait)').addEventListener('change', onOrientationChange);
+        window.matchMedia('(orientation: landscape)').addEventListener('change', onOrientationChange);
+    }
+})();
+
+// ============================================
+// ПАРАЛЛАКС ЭФФЕКТ ЧЕРЕЗ JS
+// ============================================
+(function() {
+    const heroBg = document.querySelector('.hero__bg');
+    const parallaxBg = document.querySelector('.section__bg');
+    
+    if (!heroBg && !parallaxBg) return;
+    
+    let ticking = false;
+    
+    function applyParallax() {
+        const scrollY = window.scrollY;
+        
+        if (heroBg) {
+            const heroSection = document.getElementById('heroSection');
+            if (heroSection) {
+                const rect = heroSection.getBoundingClientRect();
+                const heroTop = rect.top + scrollY;
+                const heroBottom = heroTop + rect.height;
+                
+                if (scrollY + window.innerHeight > heroTop && scrollY < heroBottom) {
+                    const offset = (scrollY - heroTop) * 0.3;
+                    heroBg.style.transform = `translateY(${offset}px)`;
+                } else if (scrollY < heroTop) {
+                    heroBg.style.transform = `translateY(0px)`;
+                }
+            }
+        }
+        
+        if (parallaxBg) {
+            const parallaxSection = document.getElementById('parallax-combined');
+            if (parallaxSection) {
+                const rect = parallaxSection.getBoundingClientRect();
+                const sectionTop = rect.top + scrollY;
+                const sectionBottom = sectionTop + rect.height;
+                
+                if (scrollY + window.innerHeight > sectionTop && scrollY < sectionBottom) {
+                    const offset = (scrollY - sectionTop) * 0.4;
+                    parallaxBg.style.transform = `translateY(${offset}px)`;
+                } else if (scrollY < sectionTop) {
+                    parallaxBg.style.transform = `translateY(0px)`;
+                }
+            }
+        }
+        
+        ticking = false;
+    }
+    
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(applyParallax);
+            ticking = true;
+        }
+    }
+    
+    let resizeTimeout;
+    function onResize() {
+        if (resizeTimeout) clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (heroBg) heroBg.style.transform = '';
+            if (parallaxBg) parallaxBg.style.transform = '';
+            applyParallax();
+        }, 100);
+    }
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+    
+    setTimeout(applyParallax, 100);
+})();
+
+// ОСТАЛЬНОЙ JS КОД (тема, меню, кнопка вверх, счетчики, слайдер, услуги)
+(function() {
+    let isReady = false;
+    let readyTimeout = null;
+    
+    function showContent() {
+        if (isReady) return;
+        isReady = true;
+        
+        if (readyTimeout) clearTimeout(readyTimeout);
+        
+        readyTimeout = setTimeout(() => {
+            document.body.classList.add('ready');
+            readyTimeout = null;
+        }, 50);
+    }
+    
+    window.addEventListener('load', showContent);
+    setTimeout(showContent, 150);
+})();
+
+(function() {
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        window.addEventListener('load', function() {
+            setTimeout(function() { window.scrollTo(0, 1); }, 100);
+        });
+    }
+})();
+
+(function() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    if (!lazyImages.length) return;
+    
+    let rafQueue = [];
+    
+    function batchAddClass(images) {
+        if (rafQueue.length) return;
+        rafQueue = images;
+        requestAnimationFrame(() => {
+            rafQueue.forEach(img => img.classList.add('loaded'));
+            rafQueue = [];
+        });
+    }
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            const toLoad = [];
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    toLoad.push(entry.target);
+                    imageObserver.unobserve(entry.target);
+                }
+            });
+            if (toLoad.length) batchAddClass(toLoad);
+        }, { rootMargin: '50px', threshold: 0.01 });
+        
+        lazyImages.forEach(img => {
+            if (img.complete) {
+                img.classList.add('loaded');
+            } else {
+                imageObserver.observe(img);
+                img.addEventListener('load', () => batchAddClass([img]), { once: true });
+            }
+        });
+    } else {
+        requestAnimationFrame(() => lazyImages.forEach(img => img.classList.add('loaded')));
+    }
+})();
+
+document.addEventListener('contextmenu', function(e) {
+    const isFooter = e.target.closest('.footer');
+    const isContacts = e.target.closest('#info');
+    if (!isFooter && !isContacts) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+const themeIcon = document.getElementById('theme-toggle-icon');
+const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+const themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
+const mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
+
+function updateThemeIcons(isLight) {
+    if (themeIconSpan) themeIconSpan.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+    if (mobileThemeSpan) mobileThemeSpan.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+}
+
+function addLightThemeStars() {
+    if (document.querySelector('.theme__star')) return;
+    for (let i = 0; i < 60; i++) {
+        const star = document.createElement('div');
+        star.className = 'theme__star';
+        star.style.cssText = 'position:fixed; width:' + (Math.random() * 3 + 1) + 'px; height:' + (Math.random() * 3 + 1) + 'px; left:' + (Math.random() * 100) + '%; top:' + (Math.random() * 100) + '%; animation-delay:' + (Math.random() * 8) + 's; animation-duration:' + (Math.random() * 10 + 6) + 's; opacity:0';
+        document.body.appendChild(star);
+    }
+}
+
+function removeLightThemeStars() {
+    document.querySelectorAll('.theme__star').forEach(star => star.remove());
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+    updateThemeIcons(true);
+    addLightThemeStars();
+} else {
+    document.body.classList.remove('light-theme');
+    updateThemeIcons(false);
+    removeLightThemeStars();
+}
+
+function handleThemeChange() {
+    const isLight = document.body.classList.contains('light-theme');
+    if (isLight) {
+        document.body.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcons(false);
+        removeLightThemeStars();
+    } else {
+        document.body.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcons(true);
+        addLightThemeStars();
+    }
+}
+
+if (themeIcon) themeIcon.addEventListener('click', handleThemeChange);
+if (mobileThemeIcon) mobileThemeIcon.addEventListener('click', handleThemeChange);
+
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNav = document.getElementById('mobileNav');
+
+function closeMobileMenu() {
+    mobileNav.classList.remove('open');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.innerHTML = '<span class="fas fa-bars"></span>';
+}
+
+if (mobileMenuBtn && mobileNav) {
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = mobileNav.classList.contains('open');
+        if (isOpen) {
+            closeMobileMenu();
+        } else {
+            mobileNav.classList.add('open');
+            this.setAttribute('aria-expanded', 'true');
+            this.innerHTML = '<span class="fas fa-times"></span>';
+        }
+    });
+    
+    mobileNav.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+    
+    document.addEventListener('click', function(e) {
+        if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && e.target !== mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+}
+
+setTimeout(function() {
+    document.querySelector('.page-header')?.classList.add('page-header--visible');
+}, 100);
+
+const scrollBtn = document.getElementById('scrollToTopBtn');
+const progressCircle = document.querySelector('.scroll-progress-ring__circle');
+const CIRCUMFERENCE = 2 * Math.PI * 26;
+
+if (progressCircle) {
+    progressCircle.style.strokeDasharray = CIRCUMFERENCE;
+    progressCircle.style.strokeDashoffset = CIRCUMFERENCE;
+}
+
+function updateProgressRing() {
+    if (!progressCircle) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+    progressCircle.style.strokeDashoffset = CIRCUMFERENCE * (1 - scrollPercent);
+}
+
+let tickingScroll = false;
+let tickingResize = false;
+
+function onScroll() {
+    if (!tickingScroll) {
+        requestAnimationFrame(() => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+            updateProgressRing();
+            tickingScroll = false;
+        });
+        tickingScroll = true;
+    }
+}
+
+function onResize() {
+    if (!tickingResize) {
+        requestAnimationFrame(() => {
+            updateProgressRing();
+            tickingResize = false;
+        });
+        tickingResize = true;
+    }
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onResize, { passive: true });
+onScroll();
+
+if (scrollBtn) {
+    scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+}
+
+const typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
+let i = 0;
+const typewriterElement = document.getElementById('typewriter-text');
+
+function typeWriter() {
+    if (i < typewriterText.length && typewriterElement) {
+        typewriterElement.innerHTML = typewriterText.substring(0, i + 1) + '<span class="typewriter-cursor"></span>';
+        i++;
+        setTimeout(typeWriter, 40);
+    } else if (typewriterElement) {
+        typewriterElement.innerHTML = typewriterText;
+    }
+}
+setTimeout(typeWriter, 500);
+
+(function() {
+    const cards = document.querySelectorAll('.service-card');
+    if (!cards.length) return;
+    
+    cards.forEach(function(card) {
+        let cardRect = null;
+        let rafId = null;
+        
+        function updateCardRect() { cardRect = card.getBoundingClientRect(); }
+        
+        card.addEventListener('mouseenter', updateCardRect);
+        card.addEventListener('mouseleave', function() { card.style.transform = ''; if (rafId) cancelAnimationFrame(rafId); });
+        
+        card.addEventListener('mousemove', function(e) {
+            if (!cardRect) return;
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const x = e.clientX - cardRect.left;
+                const y = e.clientY - cardRect.top;
+                const centerX = cardRect.width / 2;
+                const centerY = cardRect.height / 2;
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                rafId = null;
+            });
+        });
+        
+        window.addEventListener('resize', updateCardRect, { passive: true });
+    });
+})();
+
+function animateCounter(id, target, duration) {
+    let current = 0;
+    const elem = document.getElementById(id);
+    if (!elem) return;
+    const stepTime = 16;
+    const steps = duration / stepTime;
+    const increment = target / steps;
+    const timer = setInterval(function() {
+        current += increment;
+        if (current >= target) { elem.innerText = target; clearInterval(timer); }
+        else { elem.innerText = Math.floor(current); }
+    }, stepTime);
+}
+
+let countersStarted = false;
+const counterObserver = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !countersStarted) {
+        countersStarted = true;
+        animateCounter('expCounter', 10, 1600);
+        animateCounter('clientsCounter', 10872, 1900);
+        animateCounter('servicesCounter', 6, 1300);
+    }
+}, { threshold: 0.4 });
+const statSection = document.querySelector('.stats-grid');
+if (statSection) counterObserver.observe(statSection);
+
+const sliderWrapper = document.getElementById('featuresSlider');
+const prevBtn = document.getElementById('sliderPrevBtn');
+const nextBtn = document.getElementById('sliderNextBtn');
+
+if (sliderWrapper && prevBtn && nextBtn) {
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    
+    const onDragStart = function(e) {
+        isDragging = true;
+        sliderWrapper.classList.add('features-slider--dragging');
+        startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+        startScrollLeft = sliderWrapper.scrollLeft;
+    };
+    const onDragMove = function(e) {
+        if (!isDragging) return;
+        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+        sliderWrapper.scrollLeft = startScrollLeft - (clientX - startX);
+    };
+    const onDragEnd = function() {
+        isDragging = false;
+        sliderWrapper.classList.remove('features-slider--dragging');
+    };
+    
+    sliderWrapper.addEventListener('mousedown', onDragStart);
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', onDragEnd);
+    sliderWrapper.addEventListener('touchstart', onDragStart, { passive: true });
+    window.addEventListener('touchmove', onDragMove, { passive: true });
+    window.addEventListener('touchend', onDragEnd);
+    
+    prevBtn.addEventListener('click', () => sliderWrapper.scrollBy({ left: -300, behavior: 'smooth' }));
+    nextBtn.addEventListener('click', () => sliderWrapper.scrollBy({ left: 300, behavior: 'smooth' }));
+}
+
+const fadeElements = document.querySelectorAll('.fade-on-scroll');
+const fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+        else entry.target.classList.remove('visible');
+    });
+}, { threshold: 0.1 });
+fadeElements.forEach(el => fadeObserver.observe(el));
+
+const serviceCards = document.querySelectorAll('.service-card[data-service]');
+const bookingLink = document.getElementById('bookingLink');
+const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
+let selectedServices = [];
+
+function updateBookingLink() {
+    bookingLink.href = selectedServices.length === 0 ? baseUrl : baseUrl + selectedServices.join('');
+    bookingLink.setAttribute('aria-label', 'Записаться на выбранные услуги (' + selectedServices.length + ' выбрано)');
+}
+
+function toggleService(card, serviceId) {
+    if (card.classList.contains('service-card--selected')) {
+        card.classList.remove('service-card--selected');
+        selectedServices = selectedServices.filter(id => id !== serviceId);
+        card.setAttribute('aria-pressed', 'false');
+        let label = card.getAttribute('aria-label') || '';
+        card.setAttribute('aria-label', label.replace(' (выбрано)', ''));
+    } else {
+        card.classList.add('service-card--selected');
+        selectedServices.push(serviceId);
+        card.setAttribute('aria-pressed', 'true');
+        let label = card.getAttribute('aria-label') || '';
+        if (!label.includes('(выбрано)')) card.setAttribute('aria-label', label + ' (выбрано)');
+    }
+    updateBookingLink();
+}
+
+serviceCards.forEach(card => {
+    if (!card.hasAttribute('aria-pressed')) card.setAttribute('aria-pressed', 'false');
+    card.addEventListener('click', e => { e.stopPropagation(); toggleService(card, card.getAttribute('data-service')); });
+    card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleService(card, card.getAttribute('data-service')); }
+    });
+});
+updateBookingLink();
+
+function removeHashFromUrl() {
+    if (window.history && history.pushState) {
+        history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+}
+
+function smoothScrollToElement(targetElement) {
+    if (!targetElement) return;
+    const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: Math.max(0, targetPosition - headerHeight - 1), behavior: 'smooth' });
+    removeHashFromUrl();
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '' || href === '#/') return;
+        const target = document.querySelector(href);
+        if (target) {
+            e.preventDefault();
+            if (mobileNav?.classList.contains('open')) closeMobileMenu();
+            setTimeout(() => smoothScrollToElement(target), 10);
+        }
+    });
+});
+
+if (window.location.hash) {
+    setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) smoothScrollToElement(target);
+    }, 200);
+}
+
+(function() {
+    const tickerElement = document.querySelector('.ticker');
+    const tickerWrap = document.querySelector('.ticker-wrap');
+    
+    if (tickerElement && tickerWrap) {
+        let isPaused = false;
+        
+        function updateAriaLabel() {
+            tickerWrap.setAttribute('aria-label', isPaused ? 'Бегущая строка на паузе. Нажмите для воспроизведения' : 'Бегущая строка с преимуществами. Нажмите для паузы');
+        }
+        
+        tickerWrap.addEventListener('click', () => {
+            if (isPaused) {
+                tickerElement.style.animationPlayState = 'running';
+                isPaused = false;
+            } else {
+                tickerElement.style.animationPlayState = 'paused';
+                isPaused = true;
+            }
+            updateAriaLabel();
+        });
+        updateAriaLabel();
+    }
+})();
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./js/sw.js').catch(error => console.log('SW registration failed: ', error));
+    });
+}
+</script>
+</body>
+</html>
