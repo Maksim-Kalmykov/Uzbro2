@@ -2483,19 +2483,17 @@
             }
         }
 
-        /* ⬇️ ИСПРАВЛЕННЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (вертикальный скролл работает) ⬇️ */
+        /* ⬇️ ИСПРАВЛЕННЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (с сохранением scroll-snap-type) ⬇️ */
         @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
                 overflow-x: auto;
                 overflow-y: hidden;
                 cursor: grab;
-                /* Убираем scroll-snap-type чтобы не блокировать вертикальный скролл */
-                scroll-snap-type: none;
+                scroll-snap-type: x mandatory;
                 scroll-behavior: smooth;
-                /* Важно! touch-action: pan-y позволяет вертикальный скролл */
+                /* touch-action: pan-y разрешает вертикальный скролл */
                 touch-action: pan-y pinch-zoom;
-                /* Добавляем отступы для удобства */
                 padding: 0.5rem 0;
             }
 
@@ -2504,9 +2502,6 @@
                 gap: 1rem;
                 display: flex;
                 width: fit-content;
-                /* Добавляем плавность при скролле */
-                scroll-snap-type: x mandatory;
-                scroll-behavior: smooth;
             }
 
             .feature-card {
@@ -3661,9 +3656,6 @@ const counterObserver = new IntersectionObserver(function(entries) {
 const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
-// ============================================================
-// ⬇️ СЛАЙДЕР - ОСТАВЛЯЕМ ДЛЯ ДЕСКТОПА (кнопки + перетаскивание) ⬇️
-// ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
