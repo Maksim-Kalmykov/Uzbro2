@@ -3640,7 +3640,7 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================
-// ⬇️ НОВАЯ ЛОГИКА ДЛЯ МОБИЛЬНОГО СЛАЙДЕРА ⬇️
+// ⬇️ УПРОЩЕННАЯ ЛОГИКА ДЛЯ МОБИЛЬНОГО СЛАЙДЕРА ⬇️
 // ============================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
@@ -3650,80 +3650,27 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let isDragging = false;
     let startX = 0;
     let startScrollLeft = 0;
-    let isMobile = window.innerWidth <= 768;
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchCurrentX = 0;
-    let touchCurrentY = 0;
-    let isSwiping = false;
-    let swipeDirection = null;
-    
-    // Функция для определения ширины одной карточки (с учётом gap)
-    function getCardWidth() {
-        const track = document.querySelector('.features-slider__track');
-        if (!track) return 0;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return 0;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        return cardWidth + gap;
-    }
     
     // Функция для плавного переключения на ближайший слайд
     function snapToNearest() {
-        const cardStep = getCardWidth();
-        if (cardStep <= 0) return;
+        const track = document.querySelector('.features-slider__track');
+        if (!track) return;
+        const firstCard = track.querySelector('.feature-card');
+        if (!firstCard) return;
+        const cardWidth = firstCard.offsetWidth;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const step = cardWidth + gap;
+        
+        if (step <= 0) return;
         
         const currentScroll = sliderWrapper.scrollLeft;
-        const nearestIndex = Math.round(currentScroll / cardStep);
-        const targetScroll = nearestIndex * cardStep;
+        const nearestIndex = Math.round(currentScroll / step);
+        const targetScroll = nearestIndex * step;
         
         sliderWrapper.scrollTo({
             left: targetScroll,
             behavior: 'smooth'
         });
-    }
-    
-    // Обработчик для свайпа с порогом 50% от ширины карточки
-    function handleSwipeEnd() {
-        if (!isSwiping || !isMobile) {
-            isSwiping = false;
-            return;
-        }
-        
-        const deltaX = touchCurrentX - touchStartX;
-        const deltaY = touchCurrentY - touchStartY;
-        const cardStep = getCardWidth();
-        
-        // Определяем, что это горизонтальный свайп (горизонтальное движение больше вертикального)
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 20) {
-            const threshold = cardStep * 0.5; // 50% от ширины карточки
-            
-            if (deltaX > threshold) {
-                // Свайп вправо - предыдущий слайд
-                sliderWrapper.scrollBy({
-                    left: -cardStep,
-                    behavior: 'smooth'
-                });
-                setTimeout(snapToNearest, 100);
-            } else if (deltaX < -threshold) {
-                // Свайп влево - следующий слайд
-                sliderWrapper.scrollBy({
-                    left: cardStep,
-                    behavior: 'smooth'
-                });
-                setTimeout(snapToNearest, 100);
-            } else {
-                // Если свайп меньше порога - притягиваем к ближайшему
-                setTimeout(snapToNearest, 50);
-            }
-        } else {
-            // Если это был не горизонтальный свайп - притягиваем к ближайшему
-            setTimeout(snapToNearest, 50);
-        }
-        
-        isSwiping = false;
-        swipeDirection = null;
     }
     
     // Обработчики для мыши (десктоп)
@@ -3743,9 +3690,19 @@ if (sliderWrapper && prevBtn && nextBtn) {
     const onDragEnd = function() {
         isDragging = false;
         sliderWrapper.classList.remove('features-slider--dragging');
+        // После окончания перетаскивания притягиваем к ближайшему слайду
+        setTimeout(snapToNearest, 50);
     };
     
     // Обработчики для тач-событий (мобильные)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+    let touchCurrentY = 0;
+    let isSwiping = false;
+    let swipeDirection = null;
+    let scrollTimeout = null;
+    
     const onTouchStart = function(e) {
         const touch = e.touches[0];
         touchStartX = touch.clientX;
@@ -3754,6 +3711,11 @@ if (sliderWrapper && prevBtn && nextBtn) {
         touchCurrentY = touchStartY;
         isSwiping = true;
         swipeDirection = null;
+        // Убираем предыдущий таймаут
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = null;
+        }
     };
     
     const onTouchMove = function(e) {
@@ -3774,20 +3736,64 @@ if (sliderWrapper && prevBtn && nextBtn) {
             }
         }
         
-        // Если это горизонтальный свайп - отключаем нативный скролл
+        // Если это горизонтальный свайп - прокручиваем слайдер
         if (swipeDirection === 'horizontal') {
             e.preventDefault();
+            // Прокручиваем слайдер вручную
+            sliderWrapper.scrollLeft = startScrollLeft - (touchCurrentX - touchStartX);
         }
     };
     
     const onTouchEnd = function(e) {
-        // Если был горизонтальный свайп - обрабатываем
-        if (swipeDirection === 'horizontal' || (isSwiping && Math.abs(touchCurrentX - touchStartX) > 20)) {
-            e.preventDefault();
-            handleSwipeEnd();
+        if (!isSwiping) return;
+        
+        // Если был горизонтальный свайп и он достаточно длинный
+        if (swipeDirection === 'horizontal') {
+            const deltaX = touchCurrentX - touchStartX;
+            const track = document.querySelector('.features-slider__track');
+            if (track) {
+                const firstCard = track.querySelector('.feature-card');
+                if (firstCard) {
+                    const cardWidth = firstCard.offsetWidth;
+                    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+                    const step = cardWidth + gap;
+                    
+                    // Порог = 50% от ширины карточки
+                    const threshold = step * 0.5;
+                    
+                    if (Math.abs(deltaX) > threshold) {
+                        // Определяем направление
+                        if (deltaX > 0) {
+                            // Свайп вправо - предыдущий слайд
+                            const currentScroll = sliderWrapper.scrollLeft;
+                            const targetScroll = Math.max(0, currentScroll - step);
+                            sliderWrapper.scrollTo({
+                                left: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        } else {
+                            // Свайп влево - следующий слайд
+                            const currentScroll = sliderWrapper.scrollLeft;
+                            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+                            const targetScroll = Math.min(maxScroll, currentScroll + step);
+                            sliderWrapper.scrollTo({
+                                left: targetScroll,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else {
+                        // Если свайп меньше порога - притягиваем к ближайшему
+                        scrollTimeout = setTimeout(snapToNearest, 100);
+                    }
+                }
+            }
         } else {
-            isSwiping = false;
+            // Если это был не горизонтальный свайп - притягиваем к ближайшему
+            scrollTimeout = setTimeout(snapToNearest, 100);
         }
+        
+        isSwiping = false;
+        swipeDirection = null;
     };
     
     // Очищаем предыдущие обработчики и добавляем новые
@@ -3795,23 +3801,34 @@ if (sliderWrapper && prevBtn && nextBtn) {
     window.removeEventListener('mousemove', onDragMove);
     window.removeEventListener('mouseup', onDragEnd);
     sliderWrapper.removeEventListener('touchstart', onTouchStart);
-    window.removeEventListener('touchmove', onTouchMove);
-    window.removeEventListener('touchend', onTouchEnd);
+    sliderWrapper.removeEventListener('touchmove', onTouchMove);
+    sliderWrapper.removeEventListener('touchend', onTouchEnd);
+    sliderWrapper.removeEventListener('touchcancel', onTouchEnd);
     
     // Добавляем обработчики
     sliderWrapper.addEventListener('mousedown', onDragStart);
     window.addEventListener('mousemove', onDragMove);
     window.addEventListener('mouseup', onDragEnd);
     sliderWrapper.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-    window.addEventListener('touchend', onTouchEnd, { passive: false });
+    sliderWrapper.addEventListener('touchmove', onTouchMove, { passive: false });
+    sliderWrapper.addEventListener('touchend', onTouchEnd, { passive: true });
+    sliderWrapper.addEventListener('touchcancel', onTouchEnd, { passive: true });
     
     // Кнопки навигации
     prevBtn.addEventListener('click', function() {
-        const cardStep = getCardWidth();
-        if (cardStep > 0) {
-            sliderWrapper.scrollBy({
-                left: -cardStep,
+        const track = document.querySelector('.features-slider__track');
+        if (!track) return;
+        const firstCard = track.querySelector('.feature-card');
+        if (!firstCard) return;
+        const cardWidth = firstCard.offsetWidth;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const step = cardWidth + gap;
+        
+        if (step > 0) {
+            const currentScroll = sliderWrapper.scrollLeft;
+            const targetScroll = Math.max(0, currentScroll - step);
+            sliderWrapper.scrollTo({
+                left: targetScroll,
                 behavior: 'smooth'
             });
             setTimeout(snapToNearest, 150);
@@ -3819,31 +3836,45 @@ if (sliderWrapper && prevBtn && nextBtn) {
     });
     
     nextBtn.addEventListener('click', function() {
-        const cardStep = getCardWidth();
-        if (cardStep > 0) {
-            sliderWrapper.scrollBy({
-                left: cardStep,
+        const track = document.querySelector('.features-slider__track');
+        if (!track) return;
+        const firstCard = track.querySelector('.feature-card');
+        if (!firstCard) return;
+        const cardWidth = firstCard.offsetWidth;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const step = cardWidth + gap;
+        
+        if (step > 0) {
+            const currentScroll = sliderWrapper.scrollLeft;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            const targetScroll = Math.min(maxScroll, currentScroll + step);
+            sliderWrapper.scrollTo({
+                left: targetScroll,
                 behavior: 'smooth'
             });
             setTimeout(snapToNearest, 150);
         }
     });
     
+    // При скролле с клавиатуры или трекпада
+    let snapTimeout;
+    sliderWrapper.addEventListener('scroll', function() {
+        clearTimeout(snapTimeout);
+        snapTimeout = setTimeout(snapToNearest, 300);
+    }, { passive: true });
+    
     // Обновляем при ресайзе
     let resizeTimeout;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(function() {
-            isMobile = window.innerWidth <= 768;
-        }, 200);
+            // Пересчитываем позицию при изменении размера
+            setTimeout(snapToNearest, 100);
+        }, 300);
     }, { passive: true });
     
-    // Снап при скролле (для случаев, когда пользователь скроллит с клавиатуры или трекпада)
-    let scrollTimeout;
-    sliderWrapper.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(snapToNearest, 200);
-    }, { passive: true });
+    // Первоначальный снап после загрузки
+    setTimeout(snapToNearest, 500);
 }
 
 const fadeElements = document.querySelectorAll('.fade-on-scroll');
