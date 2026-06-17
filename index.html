@@ -2475,81 +2475,6 @@
                 font-size: 0.65rem;
             }
         }
-
-        /* ============================================================ */
-        /* ⬇️ НОВЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ УСТРОЙСТВАХ ⬇️  */
-        /* ============================================================ */
-        @media (max-width: 768px) {
-            .features-slider {
-                -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x mandatory;
-                scroll-behavior: smooth;
-            }
-
-            .features-slider__track {
-                padding: 3rem 0;
-                gap: 1rem;
-            }
-
-            .feature-card {
-                min-width: 75vw;
-                max-width: 85vw;
-                scroll-snap-align: start;
-                scroll-snap-stop: always;
-                flex-shrink: 0;
-                padding: 1.25rem;
-            }
-
-            .slider-grid {
-                gap: 0.5rem;
-            }
-
-            .slider-grid .slider-nav-btn {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .feature-card {
-                min-width: 82vw;
-                max-width: 90vw;
-                padding: 1rem;
-            }
-
-            .features-slider__track {
-                gap: 0.75rem;
-                padding: 2rem 0;
-            }
-
-            .feature-card__title {
-                font-size: 1rem;
-            }
-
-            .feature-card__text {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .feature-card {
-                min-width: 88vw;
-                max-width: 94vw;
-                padding: 0.875rem;
-            }
-
-            .features-slider__track {
-                gap: 0.5rem;
-                padding: 1.5rem 0;
-            }
-
-            .feature-card__title {
-                font-size: 0.9rem;
-            }
-
-            .feature-card__text {
-                font-size: 0.75rem;
-            }
-        }
     </style>
 
     <script type="application/ld+json">
@@ -3637,73 +3562,74 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ НОВАЯ ЛОГИКА ДЛЯ СЛАЙДЕРА С ПОРОГОМ 50% ⬇️
+// ⬇️ НОВАЯ ЛОГИКА ДЛЯ СЛАЙДЕРА С ПОРОГОМ 25% ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    let isDragging = false;
     let startX = 0;
     let startScrollLeft = 0;
-    let isMobile = window.innerWidth <= 768;
+    let isSwiping = false;
+    let swipeDirection = null;
     let touchStartX = 0;
     let touchStartY = 0;
     let touchCurrentX = 0;
     let touchCurrentY = 0;
-    let isSwiping = false;
-    let swipeDirection = null;
-    let snapTimeout = null;
 
-    // Функция для определения ширины шага (карточка + gap)
+    // Получаем ширину шага
     function getStepSize() {
         const track = document.querySelector('.features-slider__track');
-        if (!track) return 300;
+        if (!track) return 250;
         const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return 300;
+        if (!firstCard) return 250;
         const cardWidth = firstCard.offsetWidth;
         const gap = parseFloat(getComputedStyle(track).gap) || 0;
         return cardWidth + gap;
     }
 
-    // Функция для притягивания к ближайшему слайду
+    // Плавное переключение на слайд
     function snapToNearest() {
         const step = getStepSize();
         if (step <= 0) return;
-        
         const currentScroll = sliderWrapper.scrollLeft;
         const nearestIndex = Math.round(currentScroll / step);
         const targetScroll = nearestIndex * step;
-        
         sliderWrapper.scrollTo({
             left: targetScroll,
             behavior: 'smooth'
         });
     }
 
-    // Обработчики для мыши (десктоп)
-    const onDragStart = function(e) {
+    // === ОБРАБОТЧИКИ ДЛЯ МЫШИ (десктоп) ===
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+
+    sliderWrapper.addEventListener('mousedown', function(e) {
         isDragging = true;
-        sliderWrapper.classList.add('features-slider--dragging');
-        startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-        startScrollLeft = sliderWrapper.scrollLeft;
-    };
+        dragStartX = e.clientX;
+        dragStartScroll = sliderWrapper.scrollLeft;
+        sliderWrapper.style.cursor = 'grabbing';
+    });
 
-    const onDragMove = function(e) {
+    window.addEventListener('mousemove', function(e) {
         if (!isDragging) return;
-        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-        sliderWrapper.scrollLeft = startScrollLeft - (clientX - startX);
-    };
+        const deltaX = e.clientX - dragStartX;
+        sliderWrapper.scrollLeft = dragStartScroll - deltaX;
+    });
 
-    const onDragEnd = function() {
-        isDragging = false;
-        sliderWrapper.classList.remove('features-slider--dragging');
-        setTimeout(snapToNearest, 50);
-    };
+    window.addEventListener('mouseup', function() {
+        if (isDragging) {
+            isDragging = false;
+            sliderWrapper.style.cursor = 'grab';
+            setTimeout(snapToNearest, 50);
+        }
+    });
 
-    // Обработчики для тач-событий (мобильные)
-    const onTouchStart = function(e) {
+    // === ОБРАБОТЧИКИ ДЛЯ ТАЧ (мобильные) ===
+    sliderWrapper.addEventListener('touchstart', function(e) {
         const touch = e.touches[0];
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
@@ -3711,15 +3637,10 @@ if (sliderWrapper && prevBtn && nextBtn) {
         touchCurrentY = touchStartY;
         isSwiping = true;
         swipeDirection = null;
-        if (snapTimeout) {
-            clearTimeout(snapTimeout);
-            snapTimeout = null;
-        }
-        // Запоминаем начальную позицию скролла
-        startScrollLeft = sliderWrapper.scrollLeft;
-    };
+        dragStartScroll = sliderWrapper.scrollLeft;
+    }, { passive: true });
 
-    const onTouchMove = function(e) {
+    sliderWrapper.addEventListener('touchmove', function(e) {
         if (!isSwiping) return;
         const touch = e.touches[0];
         touchCurrentX = touch.clientX;
@@ -3728,6 +3649,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const deltaX = touchCurrentX - touchStartX;
         const deltaY = touchCurrentY - touchStartY;
 
+        // Определяем направление
         if (!swipeDirection) {
             if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
                 swipeDirection = 'horizontal';
@@ -3736,88 +3658,62 @@ if (sliderWrapper && prevBtn && nextBtn) {
             }
         }
 
-        // Если горизонтальный свайп — прокручиваем слайдер и блокируем скролл страницы
+        // Если горизонтальный свайп — прокручиваем слайдер
         if (swipeDirection === 'horizontal') {
             e.preventDefault();
-            sliderWrapper.scrollLeft = startScrollLeft - deltaX;
+            sliderWrapper.scrollLeft = dragStartScroll - deltaX;
         }
-    };
+    }, { passive: false });
 
-    const onTouchEnd = function(e) {
+    sliderWrapper.addEventListener('touchend', function(e) {
         if (!isSwiping) {
+            isSwiping = false;
             return;
         }
 
-        // Если был горизонтальный свайп
-        if (swipeDirection === 'horizontal') {
-            const deltaX = touchCurrentX - touchStartX;
-            const step = getStepSize();
-            const threshold = step * 0.2; // 20% от ширины карточки
+        const deltaX = touchCurrentX - touchStartX;
+        const step = getStepSize();
+        const threshold = step * 0.25; // ← ПОРОГ 25% ОТ ШИРИНЫ КАРТОЧКИ!
 
-            if (Math.abs(deltaX) > threshold) {
-                // Свайп достаточно длинный — переключаем слайд
-                if (deltaX > 0) {
-                    // Свайп вправо — предыдущий слайд
-                    const currentScroll = sliderWrapper.scrollLeft;
-                    const targetScroll = Math.max(0, currentScroll - step);
-                    sliderWrapper.scrollTo({
-                        left: targetScroll,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    // Свайп влево — следующий слайд
-                    const currentScroll = sliderWrapper.scrollLeft;
-                    const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-                    const targetScroll = Math.min(maxScroll, currentScroll + step);
-                    sliderWrapper.scrollTo({
-                        left: targetScroll,
-                        behavior: 'smooth'
-                    });
-                }
-                // После переключения притягиваем к слайду
-                snapTimeout = setTimeout(snapToNearest, 150);
+        // Проверяем, был ли горизонтальный свайп и достаточно ли он длинный
+        if (swipeDirection === 'horizontal' && Math.abs(deltaX) > threshold) {
+            // Переключаем слайд
+            const currentScroll = sliderWrapper.scrollLeft;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            
+            if (deltaX > 0) {
+                // Свайп вправо — предыдущий слайд
+                const targetScroll = Math.max(0, currentScroll - step);
+                sliderWrapper.scrollTo({ left: targetScroll, behavior: 'smooth' });
             } else {
-                // Свайп слишком короткий — притягиваем к ближайшему
-                snapTimeout = setTimeout(snapToNearest, 50);
+                // Свайп влево — следующий слайд
+                const targetScroll = Math.min(maxScroll, currentScroll + step);
+                sliderWrapper.scrollTo({ left: targetScroll, behavior: 'smooth' });
             }
+            setTimeout(snapToNearest, 200);
         } else {
-            // Вертикальный свайп или тап — притягиваем к ближайшему
-            snapTimeout = setTimeout(snapToNearest, 50);
+            // Если свайп короткий или вертикальный — притягиваем к ближайшему
+            setTimeout(snapToNearest, 100);
         }
 
         isSwiping = false;
         swipeDirection = null;
-    };
+    }, { passive: true });
 
-    // Очищаем старые обработчики
-    sliderWrapper.removeEventListener('mousedown', onDragStart);
-    window.removeEventListener('mousemove', onDragMove);
-    window.removeEventListener('mouseup', onDragEnd);
-    sliderWrapper.removeEventListener('touchstart', onTouchStart);
-    sliderWrapper.removeEventListener('touchmove', onTouchMove);
-    sliderWrapper.removeEventListener('touchend', onTouchEnd);
-    sliderWrapper.removeEventListener('touchcancel', onTouchEnd);
+    sliderWrapper.addEventListener('touchcancel', function() {
+        isSwiping = false;
+        swipeDirection = null;
+        setTimeout(snapToNearest, 100);
+    }, { passive: true });
 
-    // Добавляем новые обработчики
-    sliderWrapper.addEventListener('mousedown', onDragStart);
-    window.addEventListener('mousemove', onDragMove);
-    window.addEventListener('mouseup', onDragEnd);
-    sliderWrapper.addEventListener('touchstart', onTouchStart, { passive: true });
-    sliderWrapper.addEventListener('touchmove', onTouchMove, { passive: false });
-    sliderWrapper.addEventListener('touchend', onTouchEnd, { passive: true });
-    sliderWrapper.addEventListener('touchcancel', onTouchEnd, { passive: true });
-
-    // Кнопки навигации
+    // === КНОПКИ НАВИГАЦИИ ===
     prevBtn.addEventListener('click', function() {
         const step = getStepSize();
         if (step > 0) {
             const currentScroll = sliderWrapper.scrollLeft;
             const targetScroll = Math.max(0, currentScroll - step);
-            sliderWrapper.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
-            setTimeout(snapToNearest, 150);
+            sliderWrapper.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            setTimeout(snapToNearest, 200);
         }
     });
 
@@ -3827,28 +3723,24 @@ if (sliderWrapper && prevBtn && nextBtn) {
             const currentScroll = sliderWrapper.scrollLeft;
             const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
             const targetScroll = Math.min(maxScroll, currentScroll + step);
-            sliderWrapper.scrollTo({
-                left: targetScroll,
-                behavior: 'smooth'
-            });
-            setTimeout(snapToNearest, 150);
+            sliderWrapper.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            setTimeout(snapToNearest, 200);
         }
     });
 
-    // При скролле с клавиатуры или трекпада
-    let scrollSnapTimeout;
+    // При скролле с клавиатуры/трекпада
+    let scrollTimeout;
     sliderWrapper.addEventListener('scroll', function() {
-        clearTimeout(scrollSnapTimeout);
-        scrollSnapTimeout = setTimeout(snapToNearest, 300);
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(snapToNearest, 300);
     }, { passive: true });
 
-    // Обновляем при ресайзе
-    let resizeTimeout2;
+    // При изменении размера окна
+    let resizeTimeout;
     window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout2);
-        resizeTimeout2 = setTimeout(function() {
-            isMobile = window.innerWidth <= 768;
-            setTimeout(snapToNearest, 100);
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            setTimeout(snapToNearest, 200);
         }, 300);
     }, { passive: true });
 
