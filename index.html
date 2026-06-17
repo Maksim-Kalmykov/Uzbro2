@@ -3752,7 +3752,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         if (swipeDirection === 'horizontal') {
             const deltaX = touchCurrentX - touchStartX;
             const step = getStepSize();
-            const threshold = step * 0.5; // 50% от ширины карточки
+            const threshold = step * 0.2; // 20% от ширины карточки
 
             if (Math.abs(deltaX) > threshold) {
                 // Свайп достаточно длинный — переключаем слайд
