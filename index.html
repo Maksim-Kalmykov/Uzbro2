@@ -74,7 +74,6 @@
           type="font/woff2"
           crossorigin>
 
-    <!-- ⚡ КРИТИЧЕСКИЙ БЛОК: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <style>
         #heroSection {
             position: relative;
@@ -94,7 +93,6 @@
             z-index: 0;
             pointer-events: none;
             background-color: #000000;
-            /* НЕТ background-image! Будет добавлен через JS */
         }
         body.light-theme .hero__bg {
             background-color: #f0f2f5;
@@ -102,7 +100,6 @@
     </style>
 
     <style>
-        /* ----- RESET & BASE ----- */
         *,
         *::before,
         *::after {
@@ -130,7 +127,6 @@
             max-width: 100%;
         }
 
-        /* ----- FONTS ----- */
         @font-face {
             font-family: 'Inter';
             src: url('fonts/Inter-Regular.woff2') format('woff2'),
@@ -245,7 +241,6 @@
             font-display: swap;
         }
 
-        /* ----- ICONS ----- */
         .fas,
         .fa-solid {
             font-family: 'Font Awesome 6 Free';
@@ -310,7 +305,6 @@
         .fa-flask:before { content: "\f0c3"; }
         .fa-temperature-low:before { content: "\f76b"; }
 
-        /* ----- CSS VARIABLES ----- */
         :root {
             --bg-color: #000000;
             --bg-secondary: #0a0a0a;
@@ -386,7 +380,6 @@
             --focus-glow: #1a1a2e;
         }
 
-        /* ----- CONTAINER ----- */
         .container {
             max-width: 80rem;
             margin: 0 auto;
@@ -396,7 +389,6 @@
             width: 100%;
         }
 
-        /* ----- VISUALLY HIDDEN ----- */
         .visually-hidden {
             position: absolute;
             width: 0.0625rem;
@@ -409,7 +401,6 @@
             white-space: nowrap;
         }
 
-        /* ----- USER SELECT ----- */
         html,
         body {
             -webkit-user-select: none;
@@ -497,7 +488,6 @@
             transition: transform 0.05s ease;
         }
 
-        /* ----- TRANSITIONS ----- */
         body,
         body *,
         body::before,
@@ -572,7 +562,6 @@
                         box-shadow 0.3s ease;
         }
 
-        /* ----- HOVER & ACTIVE STATES ----- */
         @media (hover: none) and (pointer: coarse) {
             .btn--primary:active {
                 background: var(--btn-primary-hover-bg);
@@ -698,7 +687,6 @@
             }
         }
 
-        /* ----- FOCUS STATES ----- */
         a:focus-visible,
         button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
         .service-card:focus-visible,
@@ -732,7 +720,6 @@
             background: rgba(26, 26, 46, 0.05);
         }
 
-        /* ----- SCROLL TO TOP ----- */
         .scroll-to-top {
             position: fixed;
             bottom: 2.25rem;
@@ -826,7 +813,6 @@
             }
         }
 
-        /* ----- THEME SWITCH ----- */
         .theme-switch-icon {
             background: transparent;
             border: none;
@@ -894,7 +880,6 @@
             background: radial-gradient(circle at 20% 30%, rgba(26, 26, 46, 0.03) 0%, transparent 50%);
         }
 
-        /* ----- STARS ----- */
         .theme__star {
             position: fixed;
             background: #1a1a2e;
@@ -921,7 +906,6 @@
             }
         }
 
-        /* ----- HEADER ----- */
         .page-header {
             background: var(--header-bg);
             border-bottom: 0.0625rem solid var(--border-color);
@@ -1114,7 +1098,6 @@
             padding-top: 70px;
         }
 
-       /* ----- HERO ----- */
         .hero {
             position: relative;
             overflow: hidden;
@@ -1180,7 +1163,6 @@
             color: var(--text-secondary);
             font-weight: 500;
             min-height: 4rem;
-            /* Фиксируем поведение при печати */
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
@@ -1263,7 +1245,6 @@
             }
         }
 
-        /* ----- TICKER ----- */
         .hero-ticker {
             position: absolute;
             bottom: 0;
@@ -1315,7 +1296,6 @@
             animation-play-state: paused;
         }
 
-        /* ----- SECTIONS ----- */
         section {
             padding: 3rem 0;
         }
@@ -1330,7 +1310,6 @@
             text-transform: uppercase;
         }
 
-        /* ----- PARALLAX ----- */
         .section--parallax {
             position: relative;
             overflow: hidden;
@@ -1353,7 +1332,6 @@
             will-change: transform;
         }
 
-        /* ----- SERVICES ----- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
@@ -1452,7 +1430,6 @@
             margin-top: 3rem;
         }
 
-        /* ----- STATS ----- */
         .container-stats {
             margin-top: 0;
             padding-top: 2rem;
@@ -1487,7 +1464,6 @@
             margin-bottom: 0.375rem;
         }
 
-        /* ----- FEATURES SLIDER ----- */
         .slider-grid {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -1606,7 +1582,6 @@
             }
         }
 
-        /* ----- GALLERY ----- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1655,7 +1630,6 @@
             }
         }
 
-        /* ----- CONTACTS ----- */
         .contacts-top-row {
             display: flex;
             flex-wrap: wrap;
@@ -1822,7 +1796,6 @@
             margin-top: 1rem;
         }
 
-        /* ----- REVIEWS ----- */
         .reviews-grid {
             display: flex;
             flex-wrap: wrap;
@@ -1919,7 +1892,6 @@
             margin: 1.25rem 0;
         }
 
-        /* ----- BOOKING ----- */
         .booking-section {
             background: var(--booking-bg);
             border: 0.0625rem solid var(--border-color);
@@ -1984,7 +1956,6 @@
             padding-bottom: 3.75rem;
         }
         
-        /* АДАПТИВ ДЛЯ QR-КОДА НА МОБИЛЬНЫХ */
         @media (max-width: 768px) {
             .booking-grid {
                 grid-template-columns: 1fr;
@@ -2043,7 +2014,6 @@
             }
         }
 
-        /* ----- BUTTONS ----- */
         .btn {
             display: inline-block;
             font-weight: 700;
@@ -2118,7 +2088,6 @@
             width: auto;
         }
 
-        /* ----- LINKS ----- */
         .contacts-link {
             color: var(--accent-color);
             text-decoration: none;
@@ -2141,7 +2110,6 @@
             margin-right: 0.75rem;
         }
 
-        /* ----- DIVIDER ----- */
         .brutal-divider {
             height: 0.125rem;
             background: linear-gradient(90deg, var(--accent-color), var(--border-color), var(--bg-color));
@@ -2153,7 +2121,6 @@
             margin: 0 0 0.9375rem 0;
         }
 
-        /* ----- FOOTER ----- */
         .footer {
             background: var(--footer-bg);
             border-top: 0.0625rem solid var(--border-color);
@@ -2173,7 +2140,6 @@
             padding: 0.3125rem;
         }
 
-        /* ----- FLOATING OBJECTS ----- */
         .floating-object {
             position: absolute;
             z-index: 0;
@@ -2224,7 +2190,6 @@
         .floating-object:nth-child(11) { top: 40%; left: 60%; animation: floatPath2 72s ease-in-out infinite; }
         .floating-object:nth-child(12) { top: 75%; left: 50%; animation: floatPath3 81s ease-in-out infinite; }
 
-        /* ----- ANIMATIONS ----- */
         .fade-on-scroll {
             transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
                         transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -2291,7 +2256,6 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* ----- PARTICLES ----- */
         #particles-js {
             position: fixed;
             top: 0;
@@ -2306,7 +2270,6 @@
             scroll-margin-top: 3rem;
         }
 
-        /* ----- PWA БАННЕР ПОД ШАПКОЙ ----- */
         .pwa-top-banner {
             position: fixed;
             top: 70px;
@@ -2390,7 +2353,6 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
         }
 
-        /* ⬇️ БАННЕР ПОКАЗЫВАЕМ ТОЛЬКО НА МОБИЛЬНЫХ И ПЛАНШЕТАХ (ширина <= 1024px) ⬇️ */
         @media (min-width: 1025px) {
             .pwa-top-banner {
                 display: none !important;
@@ -2428,7 +2390,6 @@
             }
         }
         
-        /* Бургер кнопка на max-width 992px */
         @media (max-width: 992px) {
             .nav-links {
                 display: none;
@@ -2483,16 +2444,16 @@
             }
         }
 
-        /* ⬇️ ИСПРАВЛЕННЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (с сохранением scroll-snap-type) ⬇️ */
+        /* ⬇️ РАБОЧИЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ ⬇️ */
         @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
                 overflow-x: auto;
                 overflow-y: hidden;
-                cursor: grab;
                 scroll-snap-type: x mandatory;
                 scroll-behavior: smooth;
-                /* touch-action: pan-y разрешает вертикальный скролл */
+                cursor: grab;
+                /* Важно! touch-action: pan-y позволяет вертикальный скролл */
                 touch-action: pan-y pinch-zoom;
                 padding: 0.5rem 0;
             }
@@ -2580,7 +2541,6 @@
         }
     </script>
 
-    <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <script>
         (function() {
             var hero = document.getElementById('heroSection');
@@ -3031,7 +2991,6 @@
     <span class="scroll-to-top__icon fas fa-arrow-up"></span>
 </button>
 
-<!-- PWA баннер под шапкой - показывается ТОЛЬКО на мобильных и планшетах -->
 <div id="pwaTopBanner" class="pwa-top-banner hide">
     <div class="pwa-top-banner__text">
         <span>📲</span>
@@ -3062,9 +3021,6 @@ if (typeof particlesJS !== 'undefined') {
     });
 }
 
-// ============================================
-// ДОБАВЛЯЕМ ФОН HERO ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ (чтобы не было скачка)
-// ============================================
 (function() {
     var heroBg = document.getElementById('heroBg');
     if (heroBg) {
@@ -3074,9 +3030,6 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО НА МОБИЛЬНЫХ И ПЛАНШЕТАХ
-// ============================================
 (function() {
     const banner = document.getElementById('pwaTopBanner');
     const installBtn = document.getElementById('pwaInstallBtn');
@@ -3086,12 +3039,6 @@ if (typeof particlesJS !== 'undefined') {
     let bannerTimeout = null;
     let bannerVisible = false;
     
-    // Проверяем, является ли устройство мобильным или планшетом (ширина <= 1024px)
-    function isMobileOrTablet() {
-        return window.innerWidth <= 1024;
-    }
-    
-    // ПРОВЕРКА ТОЛЬКО ПО РЕАЛЬНОМУ СОСТОЯНИЮ, БЕЗ localStorage
     function isAppInstalled() {
         return window.matchMedia('(display-mode: standalone)').matches || 
                window.navigator.standalone === true;
@@ -3114,24 +3061,13 @@ if (typeof particlesJS !== 'undefined') {
     
     function showBanner() {
         if (!banner) return;
-        
-        // Проверяем реальное состояние установки
         if (isAppInstalled()) {
             banner.classList.add('hide');
             return;
         }
-        
-        // Проверяем, мобильное ли устройство
-        if (!isMobileOrTablet()) {
-            banner.classList.add('hide');
-            return;
-        }
-        
-        // Проверяем готов ли браузер к установке
         if (!deferredPrompt) {
             return;
         }
-        
         banner.classList.remove('hide');
         bannerVisible = true;
         setTimeout(() => {
@@ -3139,7 +3075,6 @@ if (typeof particlesJS !== 'undefined') {
                 banner.classList.add('show');
             }
         }, 50);
-        
         if (bannerTimeout) clearTimeout(bannerTimeout);
         bannerTimeout = setTimeout(() => {
             hideBanner();
@@ -3151,7 +3086,6 @@ if (typeof particlesJS !== 'undefined') {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then(function(choiceResult) {
-                    // НЕ сохраняем в localStorage, полагаемся только на display-mode
                     deferredPrompt = null;
                     if (choiceResult.outcome === 'accepted') {
                         hideBanner();
@@ -3170,59 +3104,34 @@ if (typeof particlesJS !== 'undefined') {
     window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault();
         deferredPrompt = e;
-        // Показываем баннер только если приложение реально не установлено И устройство мобильное/планшет
-        if (!isAppInstalled() && isMobileOrTablet()) {
+        if (!isAppInstalled()) {
             showBanner();
         }
     });
     
-    // Слушаем изменения display-mode (когда приложение устанавливается или удаляется)
     if (window.matchMedia) {
         const displayModeQuery = window.matchMedia('(display-mode: standalone)');
         displayModeQuery.addEventListener('change', function(e) {
             if (e.matches) {
-                // Приложение установили
                 hideBanner();
             } else {
-                // Приложение удалили или вышли из него
-                // Сбрасываем deferredPrompt и ждём новое событие beforeinstallprompt
                 deferredPrompt = null;
-                // Баннер не показываем сразу, ждём нового beforeinstallprompt
                 if (banner) banner.classList.add('hide');
                 bannerVisible = false;
             }
         });
     }
     
-    // При загрузке проверяем реальное состояние
-    if (isAppInstalled() || !isMobileOrTablet()) {
+    if (isAppInstalled()) {
         if (banner) banner.classList.add('hide');
     }
-    
-    // При ресайзе проверяем, не изменилось ли устройство
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
-            if (!isAppInstalled() && isMobileOrTablet() && deferredPrompt) {
-                showBanner();
-            } else if (!isMobileOrTablet() || isAppInstalled()) {
-                hideBanner();
-            }
-        }, 300);
-    });
 })();
 
-// ============================================
-// ФИКС ДЕРГАНЬЯ КОНТЕНТА НА МОБИЛЬНЫХ УСТРОЙСТВАХ
-// ============================================
 (function() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
-    
     let ticking = false;
     let lastVh = vh;
-    
     function updateVh() {
         const newVh = window.innerHeight * 0.01;
         if (Math.abs(newVh - lastVh) > 0.05) {
@@ -3231,16 +3140,13 @@ if (typeof particlesJS !== 'undefined') {
         }
         ticking = false;
     }
-    
     window.addEventListener('resize', function() {
         if (!ticking) {
             requestAnimationFrame(updateVh);
             ticking = true;
         }
     }, { passive: true });
-    
     updateVh();
-    
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
         window.addEventListener('load', function() {
             setTimeout(function() { 
@@ -3251,28 +3157,21 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// ФИКСАЦИЯ ВЫСОТЫ HERO-СЕКЦИИ (БЕЗ СКАЧКОВ)
-// ============================================
 (function() {
     const hero = document.getElementById('heroSection');
     if (!hero) return;
-    
     let heroFixedHeight = null;
     let resizeTimer = null;
-    
     function fixHeroHeight() {
         const viewportHeight = window.innerHeight;
         const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
         const desiredHeight = Math.max(viewportHeight - headerHeight, 450);
-        
         if (heroFixedHeight === null || Math.abs(hero.offsetHeight - desiredHeight) > 50) {
             heroFixedHeight = desiredHeight;
             hero.style.minHeight = heroFixedHeight + 'px';
             hero.style.height = heroFixedHeight + 'px';
         }
     }
-    
     function onOrientationChange() {
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
@@ -3280,39 +3179,29 @@ if (typeof particlesJS !== 'undefined') {
             fixHeroHeight();
         }, 100);
     }
-    
     window.addEventListener('load', () => {
         fixHeroHeight();
         setTimeout(fixHeroHeight, 100);
     });
-    
     if (window.matchMedia) {
         window.matchMedia('(orientation: portrait)').addEventListener('change', onOrientationChange);
         window.matchMedia('(orientation: landscape)').addEventListener('change', onOrientationChange);
     }
 })();
 
-// ============================================
-// ПАРАЛЛАКС ЭФФЕКТ ЧЕРЕЗ JS
-// ============================================
 (function() {
     const heroBg = document.querySelector('.hero__bg');
     const parallaxBg = document.querySelector('.section__bg');
-    
     if (!heroBg && !parallaxBg) return;
-    
     let ticking = false;
-    
     function applyParallax() {
         const scrollY = window.scrollY;
-        
         if (heroBg) {
             const heroSection = document.getElementById('heroSection');
             if (heroSection) {
                 const rect = heroSection.getBoundingClientRect();
                 const heroTop = rect.top + scrollY;
                 const heroBottom = heroTop + rect.height;
-                
                 if (scrollY + window.innerHeight > heroTop && scrollY < heroBottom) {
                     const offset = (scrollY - heroTop) * 0.3;
                     heroBg.style.transform = `translateY(${offset}px)`;
@@ -3321,14 +3210,12 @@ if (typeof particlesJS !== 'undefined') {
                 }
             }
         }
-        
         if (parallaxBg) {
             const parallaxSection = document.getElementById('parallax-combined');
             if (parallaxSection) {
                 const rect = parallaxSection.getBoundingClientRect();
                 const sectionTop = rect.top + scrollY;
                 const sectionBottom = sectionTop + rect.height;
-                
                 if (scrollY + window.innerHeight > sectionTop && scrollY < sectionBottom) {
                     const offset = (scrollY - sectionTop) * 0.4;
                     parallaxBg.style.transform = `translateY(${offset}px)`;
@@ -3337,17 +3224,14 @@ if (typeof particlesJS !== 'undefined') {
                 }
             }
         }
-        
         ticking = false;
     }
-    
     function onScroll() {
         if (!ticking) {
             requestAnimationFrame(applyParallax);
             ticking = true;
         }
     }
-    
     let resizeTimeout;
     function onResize() {
         if (resizeTimeout) clearTimeout(resizeTimeout);
@@ -3357,80 +3241,25 @@ if (typeof particlesJS !== 'undefined') {
             applyParallax();
         }, 100);
     }
-    
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize);
-    
     setTimeout(applyParallax, 100);
 })();
 
-// ОСТАЛЬНОЙ JS КОД (тема, меню, кнопка вверх, счетчики, слайдер, услуги)
 (function() {
     let isReady = false;
     let readyTimeout = null;
-    
     function showContent() {
         if (isReady) return;
         isReady = true;
-        
         if (readyTimeout) clearTimeout(readyTimeout);
-        
         readyTimeout = setTimeout(() => {
             document.body.classList.add('ready');
             readyTimeout = null;
         }, 50);
     }
-    
     window.addEventListener('load', showContent);
     setTimeout(showContent, 150);
-})();
-
-(function() {
-    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        window.addEventListener('load', function() {
-            setTimeout(function() { window.scrollTo(0, 1); }, 100);
-        });
-    }
-})();
-
-(function() {
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    if (!lazyImages.length) return;
-    
-    let rafQueue = [];
-    
-    function batchAddClass(images) {
-        if (rafQueue.length) return;
-        rafQueue = images;
-        requestAnimationFrame(() => {
-            rafQueue.forEach(img => img.classList.add('loaded'));
-            rafQueue = [];
-        });
-    }
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            const toLoad = [];
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    toLoad.push(entry.target);
-                    imageObserver.unobserve(entry.target);
-                }
-            });
-            if (toLoad.length) batchAddClass(toLoad);
-        }, { rootMargin: '50px', threshold: 0.01 });
-        
-        lazyImages.forEach(img => {
-            if (img.complete) {
-                img.classList.add('loaded');
-            } else {
-                imageObserver.observe(img);
-                img.addEventListener('load', () => batchAddClass([img]), { once: true });
-            }
-        });
-    } else {
-        requestAnimationFrame(() => lazyImages.forEach(img => img.classList.add('loaded')));
-    }
 })();
 
 document.addEventListener('contextmenu', function(e) {
@@ -3601,16 +3430,12 @@ setTimeout(typeWriter, 500);
 (function() {
     const cards = document.querySelectorAll('.service-card');
     if (!cards.length) return;
-    
     cards.forEach(function(card) {
         let cardRect = null;
         let rafId = null;
-        
         function updateCardRect() { cardRect = card.getBoundingClientRect(); }
-        
         card.addEventListener('mouseenter', updateCardRect);
         card.addEventListener('mouseleave', function() { card.style.transform = ''; if (rafId) cancelAnimationFrame(rafId); });
-        
         card.addEventListener('mousemove', function(e) {
             if (!cardRect) return;
             if (rafId) cancelAnimationFrame(rafId);
@@ -3625,7 +3450,6 @@ setTimeout(typeWriter, 500);
                 rafId = null;
             });
         });
-        
         window.addEventListener('resize', updateCardRect, { passive: true });
     });
 })();
@@ -3666,9 +3490,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let startScrollLeft = 0;
     
     const onDragStart = function(e) {
-        // Если ширина <= 768px - не мешаем CSS scroll-snap
         if (window.innerWidth <= 768) return;
-        
         isDragging = true;
         sliderWrapper.classList.add('features-slider--dragging');
         startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
@@ -3800,14 +3622,11 @@ if (window.location.hash) {
 (function() {
     const tickerElement = document.querySelector('.ticker');
     const tickerWrap = document.querySelector('.ticker-wrap');
-    
     if (tickerElement && tickerWrap) {
         let isPaused = false;
-        
         function updateAriaLabel() {
             tickerWrap.setAttribute('aria-label', isPaused ? 'Бегущая строка на паузе. Нажмите для воспроизведения' : 'Бегущая строка с преимуществами. Нажмите для паузы');
         }
-        
         tickerWrap.addEventListener('click', () => {
             if (isPaused) {
                 tickerElement.style.animationPlayState = 'running';
