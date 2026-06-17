@@ -2390,7 +2390,14 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #2c3e50 100%);
         }
 
-        @media (max-width: 768px) {
+        /* ⬇️ БАННЕР ПОКАЗЫВАЕМ ТОЛЬКО НА МОБИЛЬНЫХ И ПЛАНШЕТАХ (ширина <= 1024px) ⬇️ */
+        @media (min-width: 1025px) {
+            .pwa-top-banner {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
             .pwa-top-banner {
                 top: 70px;
                 padding: 10px 12px;
@@ -2476,7 +2483,7 @@
             }
         }
 
-        /* ⬇️ ДОБАВЛЯЕМ CSS ДЛЯ БЫСТРОГО СВАЙПА НА МОБИЛЬНЫХ ⬇️ */
+        /* ⬇️ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (с поддержкой вертикального скролла) ⬇️ */
         @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
@@ -2485,7 +2492,7 @@
                 overflow-x: auto;
                 overflow-y: hidden;
                 cursor: grab;
-                touch-action: pan-x;
+                touch-action: pan-x; /* ⬅️ Разрешаем только горизонтальные касания, вертикальные проходят на страницу */
             }
 
             .features-slider__track {
@@ -3022,7 +3029,7 @@
     <span class="scroll-to-top__icon fas fa-arrow-up"></span>
 </button>
 
-<!-- PWA баннер под шапкой -->
+<!-- PWA баннер под шапкой - показывается ТОЛЬКО на мобильных и планшетах -->
 <div id="pwaTopBanner" class="pwa-top-banner hide">
     <div class="pwa-top-banner__text">
         <span>📲</span>
@@ -3066,7 +3073,7 @@ if (typeof particlesJS !== 'undefined') {
 })();
 
 // ============================================
-// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО КОГДА БРАУЗЕР ГОТОВ
+// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО НА МОБИЛЬНЫХ И ПЛАНШЕТАХ
 // ============================================
 (function() {
     const banner = document.getElementById('pwaTopBanner');
@@ -3076,6 +3083,11 @@ if (typeof particlesJS !== 'undefined') {
     let deferredPrompt = null;
     let bannerTimeout = null;
     let bannerVisible = false;
+    
+    // Проверяем, является ли устройство мобильным или планшетом (ширина <= 1024px)
+    function isMobileOrTablet() {
+        return window.innerWidth <= 1024;
+    }
     
     // ПРОВЕРКА ТОЛЬКО ПО РЕАЛЬНОМУ СОСТОЯНИЮ, БЕЗ localStorage
     function isAppInstalled() {
@@ -3103,6 +3115,12 @@ if (typeof particlesJS !== 'undefined') {
         
         // Проверяем реальное состояние установки
         if (isAppInstalled()) {
+            banner.classList.add('hide');
+            return;
+        }
+        
+        // Проверяем, мобильное ли устройство
+        if (!isMobileOrTablet()) {
             banner.classList.add('hide');
             return;
         }
@@ -3150,8 +3168,8 @@ if (typeof particlesJS !== 'undefined') {
     window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault();
         deferredPrompt = e;
-        // Показываем баннер только если приложение реально не установлено
-        if (!isAppInstalled()) {
+        // Показываем баннер только если приложение реально не установлено И устройство мобильное/планшет
+        if (!isAppInstalled() && isMobileOrTablet()) {
             showBanner();
         }
     });
@@ -3175,9 +3193,22 @@ if (typeof particlesJS !== 'undefined') {
     }
     
     // При загрузке проверяем реальное состояние
-    if (isAppInstalled()) {
+    if (isAppInstalled() || !isMobileOrTablet()) {
         if (banner) banner.classList.add('hide');
     }
+    
+    // При ресайзе проверяем, не изменилось ли устройство
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            if (!isAppInstalled() && isMobileOrTablet() && deferredPrompt) {
+                showBanner();
+            } else if (!isMobileOrTablet() || isAppInstalled()) {
+                hideBanner();
+            }
+        }, 300);
+    });
 })();
 
 // ============================================
