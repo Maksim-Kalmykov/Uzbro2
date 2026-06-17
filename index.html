@@ -2483,16 +2483,20 @@
             }
         }
 
-        /* ⬇️ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (с поддержкой вертикального скролла) ⬇️ */
+        /* ⬇️ ИСПРАВЛЕННЫЙ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ (вертикальный скролл работает) ⬇️ */
         @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
-                scroll-snap-type: x mandatory;
-                scroll-behavior: smooth;
                 overflow-x: auto;
                 overflow-y: hidden;
                 cursor: grab;
-                touch-action: pan-x; /* ⬅️ Разрешаем только горизонтальные касания, вертикальные проходят на страницу */
+                /* Убираем scroll-snap-type чтобы не блокировать вертикальный скролл */
+                scroll-snap-type: none;
+                scroll-behavior: smooth;
+                /* Важно! touch-action: pan-y позволяет вертикальный скролл */
+                touch-action: pan-y pinch-zoom;
+                /* Добавляем отступы для удобства */
+                padding: 0.5rem 0;
             }
 
             .features-slider__track {
@@ -2500,6 +2504,9 @@
                 gap: 1rem;
                 display: flex;
                 width: fit-content;
+                /* Добавляем плавность при скролле */
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
             }
 
             .feature-card {
