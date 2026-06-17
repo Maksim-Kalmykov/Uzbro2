@@ -2438,24 +2438,29 @@
             }
         }
 
-        /* ⬇️ АДАПТИВ ДЛЯ СЛАЙДЕРА НА МОБИЛЬНЫХ ⬇️ */
+        /* ⬇️ АДАПТИВ ДЛЯ СЛАЙДЕРА - РАБОЧАЯ ВЕРСИЯ ⬇️ */
         @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x mandatory;
                 scroll-behavior: smooth;
+                overflow-x: auto;
+                overflow-y: hidden;
+                cursor: grab;
+                touch-action: pan-x;
             }
 
             .features-slider__track {
                 padding: 3rem 0;
                 gap: 1rem;
+                display: flex;
+                width: fit-content;
             }
 
             .feature-card {
                 min-width: 75vw;
                 max-width: 85vw;
                 scroll-snap-align: start;
-                scroll-snap-stop: always;
                 flex-shrink: 0;
                 padding: 1.25rem;
             }
@@ -2480,14 +2485,6 @@
                 gap: 0.75rem;
                 padding: 2rem 0;
             }
-
-            .feature-card__title {
-                font-size: 1rem;
-            }
-
-            .feature-card__text {
-                font-size: 0.8rem;
-            }
         }
 
         @media (max-width: 360px) {
@@ -2500,14 +2497,6 @@
             .features-slider__track {
                 gap: 0.5rem;
                 padding: 1.5rem 0;
-            }
-
-            .feature-card__title {
-                font-size: 0.9rem;
-            }
-
-            .feature-card__text {
-                font-size: 0.75rem;
             }
         }
     </style>
@@ -3497,107 +3486,13 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР С ПОРОГОМ 25% (РАБОЧАЯ ВЕРСИЯ) ⬇️
+// ⬇️ СЛАЙДЕР - ПРОСТАЯ РАБОЧАЯ ВЕРСИЯ ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    let snapTimeout = null;
-
-    // Функция для притягивания к ближайшему слайду
-    function snapToNearest() {
-        const track = document.querySelector('.features-slider__track');
-        if (!track) return;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
-
-        const currentScroll = sliderWrapper.scrollLeft;
-        const nearestIndex = Math.round(currentScroll / step);
-        const targetScroll = nearestIndex * step;
-
-        sliderWrapper.scrollTo({
-            left: targetScroll,
-            behavior: 'smooth'
-        });
-    }
-
-    // Обработчики для тач-событий
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchCurrentX = 0;
-    let isSwiping = false;
-    let swipeDirection = null;
-
-    sliderWrapper.addEventListener('touchstart', function(e) {
-        const touch = e.touches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-        touchCurrentX = touchStartX;
-        isSwiping = true;
-        swipeDirection = null;
-        if (snapTimeout) clearTimeout(snapTimeout);
-    }, { passive: true });
-
-    sliderWrapper.addEventListener('touchmove', function(e) {
-        if (!isSwiping) return;
-        const touch = e.touches[0];
-        touchCurrentX = touch.clientX;
-        const deltaX = touchCurrentX - touchStartX;
-        const deltaY = touch.clientY - touchStartY;
-
-        if (!swipeDirection) {
-            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
-                swipeDirection = 'horizontal';
-            } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 10) {
-                swipeDirection = 'vertical';
-            }
-        }
-
-        if (swipeDirection === 'horizontal') {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    sliderWrapper.addEventListener('touchend', function() {
-        if (!isSwiping) return;
-        isSwiping = false;
-
-        const deltaX = touchCurrentX - touchStartX;
-        const track = document.querySelector('.features-slider__track');
-        if (!track) return;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
-
-        // ⬇️ ПОРОГ СВАЙПА - 25% ОТ ШИРИНЫ КАРТОЧКИ ⬇️
-        const threshold = step * 0.25;
-
-        if (swipeDirection === 'horizontal' && Math.abs(deltaX) > threshold) {
-            const currentScroll = sliderWrapper.scrollLeft;
-            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-
-            if (deltaX > 0) {
-                // Свайп вправо — предыдущий слайд
-                sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
-            } else {
-                // Свайп влево — следующий слайд
-                sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
-            }
-            snapTimeout = setTimeout(snapToNearest, 250);
-        } else {
-            snapTimeout = setTimeout(snapToNearest, 100);
-        }
-
-        swipeDirection = null;
-    }, { passive: true });
-
     // Кнопки навигации
     prevBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
@@ -3609,7 +3504,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const step = cardWidth + gap;
         const currentScroll = sliderWrapper.scrollLeft;
         sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
-        setTimeout(snapToNearest, 200);
     });
 
     nextBtn.addEventListener('click', function() {
@@ -3623,25 +3517,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const currentScroll = sliderWrapper.scrollLeft;
         const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
         sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
-        setTimeout(snapToNearest, 200);
     });
-
-    // При скролле с клавиатуры/трекпада
-    let scrollSnapTimeout;
-    sliderWrapper.addEventListener('scroll', function() {
-        clearTimeout(scrollSnapTimeout);
-        scrollSnapTimeout = setTimeout(snapToNearest, 300);
-    }, { passive: true });
-
-    // При ресайзе
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(snapToNearest, 300);
-    }, { passive: true });
-
-    // Первоначальный снап
-    setTimeout(snapToNearest, 500);
 }
 
 // Fade on scroll
