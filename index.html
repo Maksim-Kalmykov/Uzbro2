@@ -3627,7 +3627,7 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР С ПОДДЕРЖКОЙ БЫСТРЫХ СВАЙПОВ ⬇️
+// ⬇️ СЛАЙДЕР С ПОДДЕРЖКОЙ БЫСТРЫХ СВАЙПОВ И ДРАГА МЫШЬЮ ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
@@ -3652,19 +3652,15 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const step = velocity * 2.5;
         let newScroll = sliderWrapper.scrollLeft + step;
         
-        // Ограничиваем
         if (newScroll < 0) newScroll = 0;
         if (newScroll > maxScroll) newScroll = maxScroll;
         
         sliderWrapper.scrollLeft = newScroll;
-        
-        // Затухание
         velocity *= 0.92;
         
         if (Math.abs(velocity) > 0.5 && newScroll > 0 && newScroll < maxScroll) {
             momentumId = requestAnimationFrame(() => applyMomentum(velocity));
         } else {
-            // Snap к ближайшей карточке
             snapToNearest();
         }
     }
@@ -3693,7 +3689,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
     
-    // Touch события
+    // ========== TOUCH СОБЫТИЯ (МОБИЛЬНЫЕ) ==========
     sliderWrapper.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 768) return;
         const touch = e.touches[0];
@@ -3721,8 +3717,8 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const deltaY = Math.abs(touch.clientY - touchStartY);
         const absDeltaX = Math.abs(deltaX);
         
-        // Определяем направление при быстром движении (порог 10px)
-        if (moveDirection === null && (absDeltaX > 10 || deltaY > 10)) {
+        // Определяем направление (порог 5px для большей чувствительности)
+        if (moveDirection === null && (absDeltaX > 5 || deltaY > 5)) {
             if (absDeltaX > deltaY) {
                 moveDirection = 'horizontal';
                 isSwiping = true;
@@ -3732,12 +3728,10 @@ if (sliderWrapper && prevBtn && nextBtn) {
             }
         }
         
-        // Если вертикальное движение - отдаём странице
         if (moveDirection === 'vertical') {
             return;
         }
         
-        // Горизонтальное движение - листаем слайдер
         if (moveDirection === 'horizontal') {
             e.preventDefault();
             const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
@@ -3746,7 +3740,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
             if (newScroll > maxScroll) newScroll = maxScroll;
             sliderWrapper.scrollLeft = newScroll;
             
-            // Вычисляем скорость для инерции
             const timeDelta = Date.now() - startTime;
             if (timeDelta > 30) {
                 const delta = lastTouchX - touch.clientX;
@@ -3762,12 +3755,10 @@ if (sliderWrapper && prevBtn && nextBtn) {
         sliderWrapper.classList.remove('features-slider--dragging');
         
         if (moveDirection === 'horizontal' && isSwiping) {
-            // Если скорость достаточная - применяем инерцию
             if (Math.abs(velocity) > 1.5) {
                 if (momentumId) cancelAnimationFrame(momentumId);
                 momentumId = requestAnimationFrame(() => applyMomentum(velocity));
             } else {
-                // Иначе просто snap
                 snapToNearest();
             }
         }
@@ -3777,42 +3768,48 @@ if (sliderWrapper && prevBtn && nextBtn) {
         velocity = 0;
     }, { passive: true });
     
-    // Обработчики для мыши (десктоп)
+    // ========== MOUSE СОБЫТИЯ (ДЕСКТОП - ДРАГ ЛКМ) ==========
     let mouseStartX = 0;
     let mouseStartScrollLeft = 0;
     let isMouseDragging = false;
     
     sliderWrapper.addEventListener('mousedown', function(e) {
-        if (window.innerWidth > 768) {
-            isMouseDragging = true;
-            sliderWrapper.classList.add('features-slider--dragging');
-            mouseStartX = e.clientX;
-            mouseStartScrollLeft = sliderWrapper.scrollLeft;
-            e.preventDefault();
-        }
+        // Работает на всех размерах экрана
+        isMouseDragging = true;
+        sliderWrapper.classList.add('features-slider--dragging');
+        mouseStartX = e.clientX;
+        mouseStartScrollLeft = sliderWrapper.scrollLeft;
+        sliderWrapper.style.cursor = 'grabbing';
+        e.preventDefault();
     });
     
     window.addEventListener('mousemove', function(e) {
-        if (!isMouseDragging || window.innerWidth > 768) return;
+        if (!isMouseDragging) return;
         const deltaX = mouseStartX - e.clientX;
-        sliderWrapper.scrollLeft = mouseStartScrollLeft + deltaX;
+        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        let newScroll = mouseStartScrollLeft + deltaX;
+        if (newScroll < 0) newScroll = 0;
+        if (newScroll > maxScroll) newScroll = maxScroll;
+        sliderWrapper.scrollLeft = newScroll;
     });
     
     window.addEventListener('mouseup', function() {
-        if (window.innerWidth > 768 && isMouseDragging) {
+        if (isMouseDragging) {
             isMouseDragging = false;
             sliderWrapper.classList.remove('features-slider--dragging');
+            sliderWrapper.style.cursor = 'grab';
+            // После драга мышью тоже делаем snap
+            snapToNearest();
         }
     });
     
-    // Кнопки навигации для десктопа
+    // ========== КНОПКИ НАВИГАЦИИ ==========
     prevBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
         if (!track) return;
         const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        // Находим текущую видимую карточку
         let currentIndex = 0;
         const containerRect = sliderWrapper.getBoundingClientRect();
         const centerX = containerRect.left + containerRect.width / 2;
@@ -3838,7 +3835,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        // Находим текущую видимую карточку
         let currentIndex = 0;
         const containerRect = sliderWrapper.getBoundingClientRect();
         const centerX = containerRect.left + containerRect.width / 2;
