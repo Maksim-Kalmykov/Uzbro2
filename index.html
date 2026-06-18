@@ -3624,144 +3624,235 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР С ПРАВИЛЬНОЙ ОБРАБОТКОЙ СВАЙПОВ НА МОБИЛЬНЫХ ⬇️
+// ⬇️ СЛАЙДЕР С ПОДДЕРЖКОЙ БЫСТРЫХ СВАЙПОВ ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    let isDragging = false;
-    let startX = 0;
-    let startScrollLeft = 0;
+    let touchStartX = 0;
     let touchStartY = 0;
-    let moveDirection = null; // 'horizontal' или 'vertical'
+    let touchStartScrollLeft = 0;
+    let isSwiping = false;
+    let moveDirection = null;
+    let startTime = 0;
+    let lastTouchX = 0;
+    let velocity = 0;
+    let momentumId = null;
     
+    // Плавная прокрутка с инерцией
+    function applyMomentum(velocity) {
+        if (Math.abs(velocity) < 0.5) return;
+        
+        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        const step = velocity * 2.5;
+        let newScroll = sliderWrapper.scrollLeft + step;
+        
+        // Ограничиваем
+        if (newScroll < 0) newScroll = 0;
+        if (newScroll > maxScroll) newScroll = maxScroll;
+        
+        sliderWrapper.scrollLeft = newScroll;
+        
+        // Затухание
+        velocity *= 0.92;
+        
+        if (Math.abs(velocity) > 0.5 && newScroll > 0 && newScroll < maxScroll) {
+            momentumId = requestAnimationFrame(() => applyMomentum(velocity));
+        } else {
+            // Snap к ближайшей карточке
+            snapToNearest();
+        }
+    }
+    
+    function snapToNearest() {
+        const track = document.querySelector('.features-slider__track');
+        if (!track) return;
+        const cards = track.querySelectorAll('.feature-card');
+        if (!cards.length) return;
+        
+        let minDistance = Infinity;
+        let closestIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = index;
+            }
+        });
+        
+        cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+    
+    // Touch события
     sliderWrapper.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 768) return;
         const touch = e.touches[0];
-        startX = touch.clientX;
+        touchStartX = touch.clientX;
         touchStartY = touch.clientY;
-        startScrollLeft = sliderWrapper.scrollLeft;
-        isDragging = true;
+        touchStartScrollLeft = sliderWrapper.scrollLeft;
+        lastTouchX = touchStartX;
+        startTime = Date.now();
+        isSwiping = false;
         moveDirection = null;
+        velocity = 0;
+        
+        if (momentumId) {
+            cancelAnimationFrame(momentumId);
+            momentumId = null;
+        }
+        
         sliderWrapper.classList.add('features-slider--dragging');
     }, { passive: true });
     
     sliderWrapper.addEventListener('touchmove', function(e) {
-        if (!isDragging || window.innerWidth > 768) return;
-        
+        if (window.innerWidth > 768) return;
         const touch = e.touches[0];
-        const deltaX = touch.clientX - startX;
+        const deltaX = touch.clientX - touchStartX;
         const deltaY = Math.abs(touch.clientY - touchStartY);
         const absDeltaX = Math.abs(deltaX);
         
-        // Если направление ещё не определено
-        if (moveDirection === null) {
-            // Ждём пока движение станет явным (более 5px)
-            if (absDeltaX > 5 || deltaY > 5) {
-                if (absDeltaX > deltaY) {
-                    moveDirection = 'horizontal';
-                } else {
-                    moveDirection = 'vertical';
-                }
+        // Определяем направление при быстром движении (порог 10px)
+        if (moveDirection === null && (absDeltaX > 10 || deltaY > 10)) {
+            if (absDeltaX > deltaY) {
+                moveDirection = 'horizontal';
+                isSwiping = true;
+            } else {
+                moveDirection = 'vertical';
+                isSwiping = false;
             }
         }
         
-        // Если определили вертикальное движение - ничего не делаем, даём странице скроллиться
+        // Если вертикальное движение - отдаём странице
         if (moveDirection === 'vertical') {
             return;
         }
         
-        // Если горизонтальное движение - листаем слайдер
+        // Горизонтальное движение - листаем слайдер
         if (moveDirection === 'horizontal') {
             e.preventDefault();
-            sliderWrapper.scrollLeft = startScrollLeft - deltaX;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            let newScroll = touchStartScrollLeft - deltaX;
+            if (newScroll < 0) newScroll = 0;
+            if (newScroll > maxScroll) newScroll = maxScroll;
+            sliderWrapper.scrollLeft = newScroll;
+            
+            // Вычисляем скорость для инерции
+            const timeDelta = Date.now() - startTime;
+            if (timeDelta > 30) {
+                const delta = lastTouchX - touch.clientX;
+                velocity = delta / timeDelta * 12;
+                lastTouchX = touch.clientX;
+                startTime = Date.now();
+            }
         }
     }, { passive: false });
     
     sliderWrapper.addEventListener('touchend', function(e) {
         if (window.innerWidth > 768) return;
-        isDragging = false;
         sliderWrapper.classList.remove('features-slider--dragging');
         
-        // Если был горизонтальный свайп - делаем snap
-        if (moveDirection === 'horizontal') {
-            const track = document.querySelector('.features-slider__track');
-            if (track) {
-                const cards = track.querySelectorAll('.feature-card');
-                let minDistance = Infinity;
-                let closestIndex = 0;
-                const containerRect = sliderWrapper.getBoundingClientRect();
-                
-                cards.forEach((card, index) => {
-                    const cardRect = card.getBoundingClientRect();
-                    const distance = Math.abs(cardRect.left + cardRect.width / 2 - containerRect.left - containerRect.width / 2);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        closestIndex = index;
-                    }
-                });
-                
-                if (cards[closestIndex]) {
-                    cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                }
+        if (moveDirection === 'horizontal' && isSwiping) {
+            // Если скорость достаточная - применяем инерцию
+            if (Math.abs(velocity) > 1.5) {
+                if (momentumId) cancelAnimationFrame(momentumId);
+                momentumId = requestAnimationFrame(() => applyMomentum(velocity));
+            } else {
+                // Иначе просто snap
+                snapToNearest();
             }
         }
         
+        isSwiping = false;
         moveDirection = null;
+        velocity = 0;
     }, { passive: true });
     
     // Обработчики для мыши (десктоп)
-    const onDragStart = function(e) {
+    let mouseStartX = 0;
+    let mouseStartScrollLeft = 0;
+    let isMouseDragging = false;
+    
+    sliderWrapper.addEventListener('mousedown', function(e) {
         if (window.innerWidth > 768) {
-            isDragging = true;
+            isMouseDragging = true;
             sliderWrapper.classList.add('features-slider--dragging');
-            startX = e.clientX;
-            startScrollLeft = sliderWrapper.scrollLeft;
+            mouseStartX = e.clientX;
+            mouseStartScrollLeft = sliderWrapper.scrollLeft;
+            e.preventDefault();
         }
-    };
+    });
     
-    const onDragMove = function(e) {
-        if (!isDragging || window.innerWidth > 768) return;
-        sliderWrapper.scrollLeft = startScrollLeft - (e.clientX - startX);
-    };
+    window.addEventListener('mousemove', function(e) {
+        if (!isMouseDragging || window.innerWidth > 768) return;
+        const deltaX = mouseStartX - e.clientX;
+        sliderWrapper.scrollLeft = mouseStartScrollLeft + deltaX;
+    });
     
-    const onDragEnd = function() {
-        if (window.innerWidth > 768) {
-            isDragging = false;
+    window.addEventListener('mouseup', function() {
+        if (window.innerWidth > 768 && isMouseDragging) {
+            isMouseDragging = false;
             sliderWrapper.classList.remove('features-slider--dragging');
         }
-    };
-    
-    sliderWrapper.addEventListener('mousedown', onDragStart);
-    window.addEventListener('mousemove', onDragMove);
-    window.addEventListener('mouseup', onDragEnd);
+    });
     
     // Кнопки навигации для десктопа
     prevBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
         if (!track) return;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
-        const currentScroll = sliderWrapper.scrollLeft;
-        sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
+        const cards = track.querySelectorAll('.feature-card');
+        if (!cards.length) return;
+        
+        // Находим текущую видимую карточку
+        let currentIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        let minDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
+            if (distance < minDistance) {
+                minDistance = distance;
+                currentIndex = index;
+            }
+        });
+        
+        const prevIndex = Math.max(0, currentIndex - 1);
+        cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     });
     
     nextBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
         if (!track) return;
-        const firstCard = track.querySelector('.feature-card');
-        if (!firstCard) return;
-        const cardWidth = firstCard.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-        const step = cardWidth + gap;
-        const currentScroll = sliderWrapper.scrollLeft;
-        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
+        const cards = track.querySelectorAll('.feature-card');
+        if (!cards.length) return;
+        
+        // Находим текущую видимую карточку
+        let currentIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        let minDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
+            if (distance < minDistance) {
+                minDistance = distance;
+                currentIndex = index;
+            }
+        });
+        
+        const nextIndex = Math.min(cards.length - 1, currentIndex + 1);
+        cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     });
 }
 
