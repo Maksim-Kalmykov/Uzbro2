@@ -3671,10 +3671,12 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const centerX = containerRect.left + containerWidth / 2;
+        
         let minDistance = Infinity;
         let closestIndex = 0;
-        const containerRect = sliderWrapper.getBoundingClientRect();
-        const centerX = containerRect.left + containerRect.width / 2;
         
         cards.forEach((card, index) => {
             const cardRect = card.getBoundingClientRect();
@@ -3686,7 +3688,32 @@ if (sliderWrapper && prevBtn && nextBtn) {
             }
         });
         
-        cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        // Получаем первую и последнюю карточку
+        const firstCard = cards[0];
+        const lastCard = cards[cards.length - 1];
+        const firstCardRect = firstCard.getBoundingClientRect();
+        const lastCardRect = lastCard.getBoundingClientRect();
+        
+        // Если последняя карточка выходит за правый край
+        if (lastCardRect.right > containerRect.right + 20) {
+            lastCard.scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
+            return;
+        }
+        
+        // Если первая карточка выходит за левый край
+        if (firstCardRect.left < containerRect.left - 20) {
+            firstCard.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            return;
+        }
+        
+        // Для последнего слайда используем end, для первого start, для остальных center
+        if (closestIndex === cards.length - 1) {
+            lastCard.scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
+        } else if (closestIndex === 0) {
+            firstCard.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        } else {
+            cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
     }
     
     // ========== TOUCH СОБЫТИЯ (МОБИЛЬНЫЕ) ==========
@@ -3717,7 +3744,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const deltaY = Math.abs(touch.clientY - touchStartY);
         const absDeltaX = Math.abs(deltaX);
         
-        // Определяем направление (порог 5px для большей чувствительности)
         if (moveDirection === null && (absDeltaX > 5 || deltaY > 5)) {
             if (absDeltaX > deltaY) {
                 moveDirection = 'horizontal';
@@ -3774,7 +3800,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let isMouseDragging = false;
     
     sliderWrapper.addEventListener('mousedown', function(e) {
-        // Работает на всех размерах экрана
         isMouseDragging = true;
         sliderWrapper.classList.add('features-slider--dragging');
         mouseStartX = e.clientX;
@@ -3798,7 +3823,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
             isMouseDragging = false;
             sliderWrapper.classList.remove('features-slider--dragging');
             sliderWrapper.style.cursor = 'grab';
-            // После драга мышью тоже делаем snap
             snapToNearest();
         }
     });
@@ -3826,7 +3850,11 @@ if (sliderWrapper && prevBtn && nextBtn) {
         });
         
         const prevIndex = Math.max(0, currentIndex - 1);
-        cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        if (prevIndex === 0) {
+            cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        } else {
+            cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
     });
     
     nextBtn.addEventListener('click', function() {
@@ -3851,7 +3879,11 @@ if (sliderWrapper && prevBtn && nextBtn) {
         });
         
         const nextIndex = Math.min(cards.length - 1, currentIndex + 1);
-        cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        if (nextIndex === cards.length - 1) {
+            cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
+        } else {
+            cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
     });
 }
 
