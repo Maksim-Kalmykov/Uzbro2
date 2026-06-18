@@ -99,7 +99,6 @@
             background-color: #f0f2f5;
         }
         
-        /* ⬇️ СКРЫВАЕМ PWA БАННЕР НА ДЕСКТОПЕ ⬇️ */
         @media (min-width: 769px) {
             .pwa-top-banner {
                 display: none !important;
@@ -108,7 +107,6 @@
     </style>
 
     <style>
-        /* ----- RESET & BASE ----- */
         *,
         *::before,
         *::after {
@@ -136,7 +134,6 @@
             max-width: 100%;
         }
 
-        /* ----- FONTS ----- */
         @font-face {
             font-family: 'Inter';
             src: url('fonts/Inter-Regular.woff2') format('woff2'),
@@ -251,7 +248,6 @@
             font-display: swap;
         }
 
-        /* ----- ICONS ----- */
         .fas,
         .fa-solid {
             font-family: 'Font Awesome 6 Free';
@@ -316,7 +312,6 @@
         .fa-flask:before { content: "\f0c3"; }
         .fa-temperature-low:before { content: "\f76b"; }
 
-        /* ----- CSS VARIABLES ----- */
         :root {
             --bg-color: #000000;
             --bg-secondary: #0a0a0a;
@@ -392,7 +387,6 @@
             --focus-glow: #1a1a2e;
         }
 
-        /* ----- CONTAINER ----- */
         .container {
             max-width: 80rem;
             margin: 0 auto;
@@ -402,7 +396,6 @@
             width: 100%;
         }
 
-        /* ----- VISUALLY HIDDEN ----- */
         .visually-hidden {
             position: absolute;
             width: 0.0625rem;
@@ -415,7 +408,6 @@
             white-space: nowrap;
         }
 
-        /* ----- USER SELECT ----- */
         html,
         body {
             -webkit-user-select: none;
@@ -503,7 +495,6 @@
             transition: transform 0.05s ease;
         }
 
-        /* ----- TRANSITIONS ----- */
         body,
         body *,
         body::before,
@@ -578,7 +569,6 @@
                         box-shadow 0.3s ease;
         }
 
-        /* ----- HOVER & ACTIVE STATES ----- */
         @media (hover: none) and (pointer: coarse) {
             .btn--primary:active {
                 background: var(--btn-primary-hover-bg);
@@ -587,13 +577,11 @@
                 box-shadow: 0 0 0.9375rem var(--shadow-color);
                 transform: scale(0.96);
             }
-
             .btn--outline-light:active {
                 background: var(--accent-color);
                 color: var(--bg-color);
                 transform: scale(0.96);
             }
-
             .btn--header:active {
                 background: var(--btn-primary-hover-bg);
                 color: var(--btn-primary-hover-color);
@@ -601,42 +589,35 @@
                 box-shadow: 0 0 0.75rem var(--shadow-color);
                 transform: scale(0.96);
             }
-
             .service-card:active {
                 border-color: var(--accent-color);
                 background: var(--bg-secondary);
                 box-shadow: 0 1.5625rem 2.5rem -0.9375rem var(--shadow-color);
                 transform: scale(0.98);
             }
-
             .social-link:active {
                 border-color: var(--accent-color);
                 background: var(--bg-secondary);
                 transform: translateY(-0.125rem) scale(0.97);
             }
-
             .nav-link:active {
                 color: var(--accent-color);
                 transform: scale(0.98);
             }
-
             .scroll-to-top:active {
                 background: var(--accent-color);
                 color: var(--bg-color);
                 transform: scale(0.95);
             }
-
             .feature-card:active {
                 background: var(--bg-secondary);
                 transform: translateY(-0.1875rem) scale(0.98);
             }
-
             .stat-item:active {
                 border-color: var(--accent-color);
                 transform: translateY(-0.1875rem) scale(0.98);
                 background: var(--bg-secondary);
             }
-
             .mobile-menu-btn:active {
                 transform: scale(0.95);
             }
@@ -649,23 +630,19 @@
                 border-color: var(--accent-color);
                 box-shadow: 0 0 0.9375rem var(--shadow-color);
             }
-
             .service-card:hover {
                 border-color: var(--accent-color);
                 background: var(--bg-secondary);
                 box-shadow: 0 1.5625rem 2.5rem -0.9375rem var(--shadow-color);
             }
-
             .social-link:hover {
                 border-color: var(--accent-color);
                 background: var(--bg-secondary);
                 transform: translateY(-0.125rem);
             }
-
             .nav-link:hover {
                 color: var(--accent-color);
             }
-
             .btn--header:hover {
                 background: var(--btn-primary-hover-bg);
                 color: var(--btn-primary-hover-color);
@@ -673,29 +650,24 @@
                 box-shadow: 0 0 0.75rem var(--shadow-color);
                 transform: translateY(-2px);
             }
-
             .scroll-to-top:hover {
                 background: var(--accent-color);
                 color: var(--bg-color);
                 transform: scale(1.05);
             }
-
             .feature-card:hover {
                 background: var(--bg-secondary);
                 transform: translateY(-0.1875rem);
             }
-
             .stat-item:hover {
                 border-color: var(--accent-color);
                 transform: translateY(-0.1875rem);
                 background: var(--bg-secondary);
             }
-
             .gallery-item:hover .gallery-item__img {
                 filter: grayscale(0%);
                 transform: scale(1.02);
             }
-
             .btn--outline-light:hover {
                 background: var(--accent-color);
                 color: var(--bg-color);
@@ -704,7 +676,6 @@
             }
         }
 
-        /* ----- FOCUS STATES ----- */
         a:focus-visible,
         button:focus-visible:not(.scroll-to-top):not(.theme-switch-icon),
         .service-card:focus-visible,
@@ -738,7 +709,6 @@
             background: rgba(26, 26, 46, 0.05);
         }
 
-        /* ----- SCROLL TO TOP ----- */
         .scroll-to-top {
             position: fixed;
             bottom: 2.25rem;
@@ -825,14 +795,12 @@
                 background: var(--accent-color);
                 transform: scale(1.05);
             }
-
             .scroll-to-top:hover .scroll-to-top__icon {
                 color: var(--bg-color);
                 transform: translateY(-2px);
             }
         }
 
-        /* ----- THEME SWITCH ----- */
         .theme-switch-icon {
             background: transparent;
             border: none;
@@ -900,7 +868,6 @@
             background: radial-gradient(circle at 20% 30%, rgba(26, 26, 46, 0.03) 0%, transparent 50%);
         }
 
-        /* ----- STARS ----- */
         .theme__star {
             position: fixed;
             background: #1a1a2e;
@@ -927,7 +894,6 @@
             }
         }
 
-        /* ----- HEADER ----- */
         .page-header {
             background: var(--header-bg);
             border-bottom: 0.0625rem solid var(--border-color);
@@ -1120,7 +1086,6 @@
             padding-top: 70px;
         }
 
-       /* ----- HERO ----- */
         .hero {
             position: relative;
             overflow: hidden;
@@ -1203,72 +1168,7 @@
             min-height: 50px;
             transition: all 0.3s ease;
         }
-        
-        @media (min-width: 480px) {
-            .hero__title {
-                font-size: 3.75rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero__content {
-                align-items: center;
-                justify-content: flex-start;
-            }
-            .hero__content > div {
-                max-width: 100%;
-                padding-right: 0;
-            }
-            .hero__title {
-                font-size: 2.75rem;
-            }
-            .hero__tagline {
-                font-size: 0.9rem;
-                min-height: 3.5rem;
-            }
-            .hero__buttons {
-                flex-wrap: wrap;
-                white-space: normal;
-            }
-        }
-        
-        @media (max-width: 500px) {
-            .hero__buttons {
-                flex-direction: column;
-            }
-            .hero__title {
-                font-size: 2.5rem;
-            }
-            .hero__tagline {
-                font-size: 0.85rem;
-                min-height: 3rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero__title {
-                font-size: 2.4rem;
-            }
-            .hero__badge {
-                font-size: 0.6rem;
-            }
-            .hero__buttons .btn {
-                font-size: 0.7rem;
-                padding: 0.5rem 0.75rem;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .hero__title {
-                font-size: 1.75rem;
-            }
-            .hero__tagline {
-                font-size: 0.75rem;
-                min-height: 2.8rem;
-            }
-        }
 
-        /* ----- TICKER ----- */
         .hero-ticker {
             position: absolute;
             bottom: 0;
@@ -1320,7 +1220,6 @@
             animation-play-state: paused;
         }
 
-        /* ----- SECTIONS ----- */
         section {
             padding: 3rem 0;
         }
@@ -1335,7 +1234,6 @@
             text-transform: uppercase;
         }
 
-        /* ----- PARALLAX ----- */
         .section--parallax {
             position: relative;
             overflow: hidden;
@@ -1358,7 +1256,6 @@
             will-change: transform;
         }
 
-        /* ----- SERVICES ----- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
@@ -1457,7 +1354,6 @@
             margin-top: 3rem;
         }
 
-        /* ----- STATS ----- */
         .container-stats {
             margin-top: 0;
             padding-top: 2rem;
@@ -1492,7 +1388,6 @@
             margin-bottom: 0.375rem;
         }
 
-        /* ----- FEATURES SLIDER ----- */
         .slider-grid {
             display: grid;
             grid-template-columns: auto 1fr auto;
@@ -1611,7 +1506,6 @@
             }
         }
 
-        /* ----- GALLERY ----- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1660,7 +1554,6 @@
             }
         }
 
-        /* ----- CONTACTS ----- */
         .contacts-top-row {
             display: flex;
             flex-wrap: wrap;
@@ -1827,7 +1720,6 @@
             margin-top: 1rem;
         }
 
-        /* ----- REVIEWS ----- */
         .reviews-grid {
             display: flex;
             flex-wrap: wrap;
@@ -1924,7 +1816,6 @@
             margin: 1.25rem 0;
         }
 
-        /* ----- BOOKING ----- */
         .booking-section {
             background: var(--booking-bg);
             border: 0.0625rem solid var(--border-color);
@@ -1988,67 +1879,32 @@
         .booking-wrapper {
             padding-bottom: 3.75rem;
         }
-        
-        /* АДАПТИВ ДЛЯ QR-КОДА НА МОБИЛЬНЫХ */
+
         @media (max-width: 768px) {
             .booking-grid {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
-            
             .booking-content {
                 padding: 1.875rem 1.25rem;
             }
-            
             .booking-content__title {
                 font-size: 1.5rem;
             }
-            
             .booking-qr {
                 border-left: none;
                 border-top: 0.0625rem solid var(--border-color);
                 padding: 1.875rem 1.25rem;
             }
-            
             .booking-qr__img {
                 max-width: 8.75rem;
                 width: auto;
             }
-            
             .booking-footer {
                 padding: 1.25rem;
             }
         }
-        
-        @media (max-width: 480px) {
-            .booking-qr {
-                padding: 1.25rem;
-            }
-            
-            .booking-qr__img {
-                max-width: 7rem;
-            }
-            
-            .booking-content {
-                padding: 1.25rem;
-            }
-            
-            .booking-content__title {
-                font-size: 1.3rem;
-            }
-            
-            .booking-content__text {
-                font-size: 0.9rem;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .booking-qr__img {
-                max-width: 6rem;
-            }
-        }
 
-        /* ----- BUTTONS ----- */
         .btn {
             display: inline-block;
             font-weight: 700;
@@ -2123,7 +1979,6 @@
             width: auto;
         }
 
-        /* ----- LINKS ----- */
         .contacts-link {
             color: var(--accent-color);
             text-decoration: none;
@@ -2146,7 +2001,6 @@
             margin-right: 0.75rem;
         }
 
-        /* ----- DIVIDER ----- */
         .brutal-divider {
             height: 0.125rem;
             background: linear-gradient(90deg, var(--accent-color), var(--border-color), var(--bg-color));
@@ -2158,7 +2012,6 @@
             margin: 0 0 0.9375rem 0;
         }
 
-        /* ----- FOOTER ----- */
         .footer {
             background: var(--footer-bg);
             border-top: 0.0625rem solid var(--border-color);
@@ -2178,7 +2031,6 @@
             padding: 0.3125rem;
         }
 
-        /* ----- FLOATING OBJECTS ----- */
         .floating-object {
             position: absolute;
             z-index: 0;
@@ -2229,7 +2081,6 @@
         .floating-object:nth-child(11) { top: 40%; left: 60%; animation: floatPath2 72s ease-in-out infinite; }
         .floating-object:nth-child(12) { top: 75%; left: 50%; animation: floatPath3 81s ease-in-out infinite; }
 
-        /* ----- ANIMATIONS ----- */
         .fade-on-scroll {
             transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
                         transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
@@ -2296,7 +2147,6 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* ----- PARTICLES ----- */
         #particles-js {
             position: fixed;
             top: 0;
@@ -2311,7 +2161,6 @@
             scroll-margin-top: 3rem;
         }
 
-        /* ----- PWA БАННЕР ПОД ШАПКОЙ ----- */
         .pwa-top-banner {
             position: fixed;
             top: 70px;
@@ -2426,7 +2275,6 @@
             }
         }
         
-        /* Бургер кнопка на max-width 992px */
         @media (max-width: 992px) {
             .nav-links {
                 display: none;
@@ -2481,8 +2329,7 @@
             }
         }
 
-        /* ⬇️ ДОБАВЛЯЕМ CSS ДЛЯ БЫСТРОГО СВАЙПА НА МОБИЛЬНЫХ ⬇️ */
-       @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .features-slider {
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x mandatory;
@@ -2526,7 +2373,6 @@
                 max-width: 90vw;
                 padding: 1rem;
             }
-
             .features-slider__track {
                 gap: 0.75rem;
                 padding: 2rem 0;
@@ -2539,7 +2385,6 @@
                 max-width: 94vw;
                 padding: 0.875rem;
             }
-
             .features-slider__track {
                 gap: 0.5rem;
                 padding: 1.5rem 0;
@@ -2579,7 +2424,6 @@
         }
     </script>
 
-    <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <script>
         (function() {
             var hero = document.getElementById('heroSection');
@@ -3061,9 +2905,6 @@ if (typeof particlesJS !== 'undefined') {
     });
 }
 
-// ============================================
-// ДОБАВЛЯЕМ ФОН HERO ТОЛЬКО ПОСЛЕ ПОЛНОЙ ЗАГРУЗКИ (чтобы не было скачка)
-// ============================================
 (function() {
     var heroBg = document.getElementById('heroBg');
     if (heroBg) {
@@ -3073,9 +2914,6 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// PWA БАННЕР ПОД ШАПКОЙ - ПОЯВЛЯЕТСЯ ТОЛЬКО КОГДА БРАУЗЕР ГОТОВ
-// ============================================
 (function() {
     const banner = document.getElementById('pwaTopBanner');
     const installBtn = document.getElementById('pwaInstallBtn');
@@ -3173,9 +3011,6 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// ФИКС ДЕРГАНЬЯ КОНТЕНТА НА МОБИЛЬНЫХ УСТРОЙСТВАХ
-// ============================================
 (function() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
@@ -3211,9 +3046,6 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// ФИКСАЦИЯ ВЫСОТЫ HERO-СЕКЦИИ (БЕЗ СКАЧКОВ)
-// ============================================
 (function() {
     const hero = document.getElementById('heroSection');
     if (!hero) return;
@@ -3252,9 +3084,6 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
-// ============================================
-// ПАРАЛЛАКС ЭФФЕКТ ЧЕРЕЗ JS
-// ============================================
 (function() {
     const heroBg = document.querySelector('.hero__bg');
     const parallaxBg = document.querySelector('.section__bg');
@@ -3324,9 +3153,6 @@ if (typeof particlesJS !== 'undefined') {
     setTimeout(applyParallax, 100);
 })();
 
-// ============================================
-// ОСТАЛЬНОЙ JS КОД (тема, меню, кнопка вверх, счетчики, услуги)
-// ============================================
 (function() {
     let isReady = false;
     let readyTimeout = null;
@@ -3616,15 +3442,11 @@ const counterObserver = new IntersectionObserver(function(entries) {
 const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
-// ============================================================
-// ⬇️ СЛАЙДЕР - ДЛЯ МОБИЛЬНЫХ С ИНЕРЦИЕЙ, ДЛЯ ДЕСКТОПА - СКРОЛЛ + ДРАГ ЛКМ ⬇️
-// ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    // ========== ПЕРЕМЕННЫЕ ДЛЯ МОБИЛЬНЫХ ==========
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartScrollLeft = 0;
@@ -3635,7 +3457,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let velocity = 0;
     let momentumId = null;
     
-    // ========== ПЕРЕМЕННЫЕ ДЛЯ ДЕСКТОПА (ДРАГ ЛКМ) ==========
     let mouseStartX = 0;
     let mouseStartScrollLeft = 0;
     let isMouseDragging = false;
@@ -3700,7 +3521,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
         }
     }
     
-    // ========== TOUCH СОБЫТИЯ (ТОЛЬКО МОБИЛЬНЫЕ) ==========
     sliderWrapper.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 768) return;
         const touch = e.touches[0];
@@ -3769,9 +3589,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         velocity = 0;
     }, { passive: true });
     
-    // ========== MOUSE СОБЫТИЯ ДЛЯ ДЕСКТОПА (ДРАГ ЛКМ) ==========
     sliderWrapper.addEventListener('mousedown', function(e) {
-        // Работает на всех размерах, но на мобилке не мешает
         isMouseDragging = true;
         sliderWrapper.classList.add('features-slider--dragging');
         mouseStartX = e.clientX;
@@ -3795,19 +3613,15 @@ if (sliderWrapper && prevBtn && nextBtn) {
             isMouseDragging = false;
             sliderWrapper.classList.remove('features-slider--dragging');
             sliderWrapper.style.cursor = 'grab';
-            // На десктопе после драга не делаем принудительный snap
-            // Пользователь сам решает где остановиться
         }
     });
     
-    // ========== КНОПКИ НАВИГАЦИИ (работают везде) ==========
     prevBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
         if (!track) return;
         const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        // На десктопе просто скроллим на шаг
         if (window.innerWidth > 768) {
             const firstCard = cards[0];
             const cardWidth = firstCard.offsetWidth;
@@ -3818,7 +3632,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
             return;
         }
         
-        // На мобилке - с анимацией к карточке
         let currentIndex = 0;
         const containerRect = sliderWrapper.getBoundingClientRect();
         const centerX = containerRect.left + containerRect.width / 2;
@@ -3846,7 +3659,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
         const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        // На десктопе просто скроллим на шаг
         if (window.innerWidth > 768) {
             const firstCard = cards[0];
             const cardWidth = firstCard.offsetWidth;
@@ -3858,7 +3670,6 @@ if (sliderWrapper && prevBtn && nextBtn) {
             return;
         }
         
-        // На мобилке - с анимацией к карточке
         let currentIndex = 0;
         const containerRect = sliderWrapper.getBoundingClientRect();
         const centerX = containerRect.left + containerRect.width / 2;
@@ -3990,10 +3801,219 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./js/sw.js').catch(error => console.log('SW registration failed: ', error));
     });
 }
+
+// ============================================================
+// COOKIE БАННЕР
+// ============================================================
+(function() {
+    'use strict';
+
+    const COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
+    const COOKIE_EXPIRY_DAYS = 365;
+
+    const banner = document.getElementById('cookieBanner');
+    const settingsModal = document.getElementById('cookieSettings');
+    const acceptBtn = document.getElementById('cookieAcceptBtn');
+    const declineBtn = document.getElementById('cookieDeclineBtn');
+    const settingsBtn = document.getElementById('cookieSettingsBtn');
+    const settingsClose = document.getElementById('cookieSettingsClose');
+    const settingsSave = document.getElementById('cookieSettingsSave');
+
+    const analyticsCheckbox = document.getElementById('cookieAnalytics');
+    const marketingCheckbox = document.getElementById('cookieMarketing');
+    const functionalCheckbox = document.getElementById('cookieFunctional');
+
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/; SameSite=Lax';
+    }
+
+    function deleteCookie(name) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    }
+
+    function hasConsent() {
+        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
+        if (saved) {
+            try {
+                const data = JSON.parse(saved);
+                return data.consent === true;
+            } catch (e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    function getConsentSettings() {
+        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
+        if (saved) {
+            try {
+                return JSON.parse(saved);
+            } catch (e) {}
+        }
+        return null;
+    }
+
+    function saveConsent(settings) {
+        const consentData = {
+            consent: true,
+            analytics: settings.analytics || false,
+            marketing: settings.marketing || false,
+            functional: settings.functional || false,
+            timestamp: Date.now()
+        };
+        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
+        setCookie('cookie_consent', JSON.stringify(consentData), COOKIE_EXPIRY_DAYS);
+        applyConsent(consentData);
+    }
+
+    function removeConsent() {
+        localStorage.removeItem(COOKIE_CONSENT_KEY);
+        deleteCookie('cookie_consent');
+        deleteCookie('theme');
+        localStorage.removeItem('theme');
+        applyConsent({ consent: false, analytics: false, marketing: false, functional: false });
+    }
+
+    function applyConsent(consentData) {
+        if (!consentData || !consentData.consent) {
+            localStorage.removeItem('theme');
+            deleteCookie('theme');
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+            if (document.querySelector('.theme__star')) {
+                document.querySelectorAll('.theme__star').forEach(el => el.remove());
+            }
+            return;
+        }
+
+        if (consentData.functional) {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        } else {
+            localStorage.removeItem('theme');
+            deleteCookie('theme');
+            document.body.classList.remove('light-theme');
+        }
+    }
+
+    function hideBanner() {
+        banner.classList.remove('show');
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 500);
+    }
+
+    function openSettings() {
+        const saved = getConsentSettings();
+        if (saved) {
+            analyticsCheckbox.checked = saved.analytics !== undefined ? saved.analytics : true;
+            marketingCheckbox.checked = saved.marketing !== undefined ? saved.marketing : true;
+            functionalCheckbox.checked = saved.functional !== undefined ? saved.functional : true;
+        } else {
+            analyticsCheckbox.checked = true;
+            marketingCheckbox.checked = true;
+            functionalCheckbox.checked = true;
+        }
+        settingsModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSettings() {
+        settingsModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function acceptAll() {
+        const settings = {
+            analytics: true,
+            marketing: true,
+            functional: true
+        };
+        saveConsent(settings);
+        hideBanner();
+        closeSettings();
+    }
+
+    function declineAll() {
+        removeConsent();
+        hideBanner();
+        closeSettings();
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+        document.querySelectorAll('.theme__star').forEach(el => el.remove());
+    }
+
+    function saveSettings() {
+        const settings = {
+            analytics: analyticsCheckbox.checked,
+            marketing: marketingCheckbox.checked,
+            functional: functionalCheckbox.checked
+        };
+        saveConsent(settings);
+        hideBanner();
+        closeSettings();
+    }
+
+    if (hasConsent()) {
+        const settings = getConsentSettings();
+        applyConsent(settings);
+        banner.style.display = 'none';
+        return;
+    }
+
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+    localStorage.removeItem('theme');
+    deleteCookie('theme');
+
+    setTimeout(function() {
+        banner.classList.add('show');
+    }, 1000);
+
+    acceptBtn.addEventListener('click', acceptAll);
+    declineBtn.addEventListener('click', declineAll);
+    settingsBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openSettings();
+    });
+    settingsClose.addEventListener('click', closeSettings);
+    settingsModal.addEventListener('click', function(e) {
+        if (e.target === settingsModal) {
+            closeSettings();
+        }
+    });
+    settingsSave.addEventListener('click', saveSettings);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (settingsModal.classList.contains('open')) {
+                closeSettings();
+            }
+        }
+    });
+
+    const originalThemeToggle = window.handleThemeChange;
+    window.handleThemeChange = function() {
+        if (!hasConsent()) {
+            alert('Пожалуйста, примите использование функциональных cookie в настройках, чтобы сохранить тему.');
+            return;
+        }
+        if (originalThemeToggle) {
+            originalThemeToggle();
+        }
+    };
+
+    console.log('🍪 Cookie-баннер инициализирован');
+})();
 </script>
-    <!-- ============================================ -->
-<!-- ⬇️ COOKIE БАННЕР ДЛЯ СОГЛАСИЯ НА ФАЙЛЫ COOKIE ⬇️ -->
-<!-- ============================================ -->
+
 <style>
     .cookie-banner {
         position: fixed;
@@ -4008,6 +4028,7 @@ if ('serviceWorker' in navigator) {
         transform: translateY(100%);
         transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         font-family: 'Inter', sans-serif;
+        display: block !important;
     }
 
     .cookie-banner.show {
@@ -4097,7 +4118,6 @@ if ('serviceWorker' in navigator) {
         color: var(--accent-color);
     }
 
-    /* Стили для модального окна настроек */
     .cookie-settings {
         display: none;
         position: fixed;
@@ -4168,7 +4188,6 @@ if ('serviceWorker' in navigator) {
         margin-top: 4px;
     }
 
-    /* Toggle switch */
     .toggle {
         position: relative;
         width: 48px;
@@ -4262,32 +4281,26 @@ if ('serviceWorker' in navigator) {
         color: var(--accent-color);
     }
 
-    /* Адаптив для мобильных */
     @media (max-width: 768px) {
         .cookie-banner__container {
             flex-direction: column;
             text-align: center;
         }
-
         .cookie-banner__buttons {
             width: 100%;
             justify-content: center;
         }
-
         .cookie-banner__btn {
             padding: 8px 16px;
             font-size: 0.75rem;
         }
-
         .cookie-settings__modal {
             padding: 20px;
             margin: 10px;
         }
-
         .cookie-settings__option {
             flex-wrap: wrap;
         }
-
         .cookie-settings__actions {
             flex-direction: column;
         }
@@ -4297,414 +4310,9 @@ if ('serviceWorker' in navigator) {
         .cookie-banner {
             padding: 12px 16px;
         }
-
         .cookie-banner__text {
             font-size: 0.8rem;
         }
-
-        .cookie-banner__btn {
-            padding: 6px 12px;
-            font-size: 0.7rem;
-        }
-    }
-</style>
-
-<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Настройки cookie" aria-modal="true">
-    <div class="cookie-banner__container">
-        <div class="cookie-banner__text">
-            🍪 Мы используем файлы cookie для улучшения работы сайта. 
-            Продолжая использовать сайт, вы соглашаетесь с нашей 
-            <a href="#" id="cookiePolicyLink">политикой обработки cookie</a>.
-        </div>
-        <div class="cookie-banner__buttons">
-            <button class="cookie-banner__btn cookie-banner__btn--settings" id="cookieSettingsBtn">
-                ⚙️ Настройки
-            </button>
-            <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDeclineBtn">
-                ❌ Отказаться
-            </button>
-            <button class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAcceptBtn">
-                ✅ Принять всё
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно настроек cookie -->
-<div class="cookie-settings" id="cookieSettings">
-    <div class="cookie-settings__modal">
-        <h3 class="cookie-settings__title">⚙️ Настройки файлов cookie</h3>
-        <p class="cookie-settings__desc">
-            Выберите, какие типы файлов cookie разрешить. Обязательные cookie всегда включены.
-        </p>
-
-        <div class="cookie-settings__option">
-            <div>
-                <div class="cookie-settings__option-label">🔒 Обязательные</div>
-                <div class="cookie-settings__option-desc">Необходимы для работы сайта</div>
-            </div>
-            <label class="toggle">
-                <input type="checkbox" checked disabled>
-                <span class="toggle__slider"></span>
-            </label>
-        </div>
-
-        <div class="cookie-settings__option">
-            <div>
-                <div class="cookie-settings__option-label">📊 Аналитические</div>
-                <div class="cookie-settings__option-desc">Сбор статистики для улучшения сайта</div>
-            </div>
-            <label class="toggle">
-                <input type="checkbox" id="cookieAnalytics" checked>
-                <span class="toggle__slider"></span>
-            </label>
-        </div>
-
-        <div class="cookie-settings__option">
-            <div>
-                <div class="cookie-settings__option-label">🎯 Маркетинговые</div>
-                <div class="cookie-settings__option-desc">Персонализированная реклама</div>
-            </div>
-            <label class="toggle">
-                <input type="checkbox" id="cookieMarketing" checked>
-                <span class="toggle__slider"></span>
-            </label>
-        </div>
-
-        <div class="cookie-settings__option">
-            <div>
-                <div class="cookie-settings__option-label">⚡ Функциональные</div>
-                <div class="cookie-settings__option-desc">Запоминание ваших предпочтений</div>
-            </div>
-            <label class="toggle">
-                <input type="checkbox" id="cookieFunctional" checked>
-                <span class="toggle__slider"></span>
-            </label>
-        </div>
-
-        <div class="cookie-settings__actions">
-            <button class="cookie-settings__btn cookie-settings__btn--close" id="cookieSettingsClose">
-                ✕ Закрыть
-            </button>
-            <button class="cookie-settings__btn cookie-settings__btn--save" id="cookieSettingsSave">
-                💾 Сохранить настройки
-            </button>
-        </div>
-    </div>
-</div>
-
-<script>
-<!-- ============================================ -->
-<!-- ⬇️ COOKIE БАННЕР С ПРАВИЛЬНОЙ РАБОТОЙ ⬇️ -->
-<!-- ============================================ -->
-<style>
-    .cookie-banner {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 9999;
-        background: var(--bg-color);
-        border-top: 2px solid var(--accent-color);
-        padding: 16px 20px;
-        box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
-        transform: translateY(100%);
-        transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        font-family: 'Inter', sans-serif;
-    }
-
-    .cookie-banner.show {
-        transform: translateY(0);
-    }
-
-    .cookie-banner__container {
-        max-width: 80rem;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-    }
-
-    .cookie-banner__text {
-        flex: 1;
-        min-width: 200px;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        color: var(--text-color);
-    }
-
-    .cookie-banner__text a {
-        color: var(--accent-color);
-        text-decoration: underline;
-        font-weight: 600;
-    }
-
-    .cookie-banner__text a:hover {
-        color: var(--accent-hover);
-    }
-
-    .cookie-banner__buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        flex-shrink: 0;
-    }
-
-    .cookie-banner__btn {
-        padding: 10px 24px;
-        border: 2px solid var(--accent-color);
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: transparent;
-        color: var(--accent-color);
-        font-family: 'Inter', sans-serif;
-        white-space: nowrap;
-    }
-
-    .cookie-banner__btn--accept {
-        background: var(--accent-color);
-        color: var(--bg-color);
-    }
-
-    .cookie-banner__btn--accept:hover {
-        background: var(--accent-hover);
-        transform: scale(1.02);
-    }
-
-    .cookie-banner__btn--decline {
-        background: transparent;
-        color: var(--text-secondary);
-        border-color: var(--border-color);
-    }
-
-    .cookie-banner__btn--decline:hover {
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
-
-    .cookie-banner__btn--settings {
-        background: transparent;
-        color: var(--text-secondary);
-        border-color: var(--border-color);
-    }
-
-    .cookie-banner__btn--settings:hover {
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
-
-    /* Стили для модального окна настроек */
-    .cookie-settings {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(8px);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .cookie-settings.open {
-        display: flex;
-    }
-
-    .cookie-settings__modal {
-        background: var(--bg-secondary);
-        border: 2px solid var(--border-color);
-        border-radius: 16px;
-        padding: 32px;
-        max-width: 500px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-    }
-
-    .cookie-settings__title {
-        font-size: 1.4rem;
-        font-weight: 800;
-        color: var(--accent-color);
-        margin-bottom: 16px;
-    }
-
-    .cookie-settings__desc {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-
-    .cookie-settings__option {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-color);
-        gap: 16px;
-    }
-
-    .cookie-settings__option:last-child {
-        border-bottom: none;
-    }
-
-    .cookie-settings__option-label {
-        font-weight: 600;
-        color: var(--text-color);
-        font-size: 0.95rem;
-    }
-
-    .cookie-settings__option-desc {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-top: 4px;
-    }
-
-    /* Toggle switch */
-    .toggle {
-        position: relative;
-        width: 48px;
-        height: 26px;
-        flex-shrink: 0;
-        cursor: pointer;
-    }
-
-    .toggle input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .toggle__slider {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--border-color);
-        border-radius: 26px;
-        transition: all 0.3s ease;
-    }
-
-    .toggle__slider::before {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 3px;
-        bottom: 3px;
-        background: white;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-    }
-
-    .toggle input:checked + .toggle__slider {
-        background: var(--accent-color);
-    }
-
-    .toggle input:checked + .toggle__slider::before {
-        transform: translateX(22px);
-    }
-
-    .toggle input:disabled + .toggle__slider {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .cookie-settings__actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-        flex-wrap: wrap;
-    }
-
-    .cookie-settings__btn {
-        padding: 10px 24px;
-        border: 2px solid var(--accent-color);
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-family: 'Inter', sans-serif;
-        flex: 1;
-        min-width: 120px;
-    }
-
-    .cookie-settings__btn--save {
-        background: var(--accent-color);
-        color: var(--bg-color);
-    }
-
-    .cookie-settings__btn--save:hover {
-        background: var(--accent-hover);
-        transform: scale(1.02);
-    }
-
-    .cookie-settings__btn--close {
-        background: transparent;
-        color: var(--text-secondary);
-        border-color: var(--border-color);
-    }
-
-    .cookie-settings__btn--close:hover {
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
-
-    /* Адаптив для мобильных */
-    @media (max-width: 768px) {
-        .cookie-banner__container {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .cookie-banner__buttons {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .cookie-banner__btn {
-            padding: 8px 16px;
-            font-size: 0.75rem;
-        }
-
-        .cookie-settings__modal {
-            padding: 20px;
-            margin: 10px;
-        }
-
-        .cookie-settings__option {
-            flex-wrap: wrap;
-        }
-
-        .cookie-settings__actions {
-            flex-direction: column;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .cookie-banner {
-            padding: 12px 16px;
-        }
-
-        .cookie-banner__text {
-            font-size: 0.8rem;
-        }
-
         .cookie-banner__btn {
             padding: 6px 12px;
             font-size: 0.7rem;
@@ -4733,7 +4341,6 @@ if ('serviceWorker' in navigator) {
     </div>
 </div>
 
-<!-- Модальное окно настроек cookie -->
 <div class="cookie-settings" id="cookieSettings">
     <div class="cookie-settings__modal">
         <h3 class="cookie-settings__title">⚙️ Настройки файлов cookie</h3>
@@ -4796,279 +4403,5 @@ if ('serviceWorker' in navigator) {
     </div>
 </div>
 
-<script>
-// ============================================
-// COOKIE БАННЕР - ПРАВИЛЬНАЯ РАБОТА
-// ============================================
-(function() {
-    'use strict';
-
-    const COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
-    const THEME_KEY = 'theme';
-    const COOKIE_EXPIRY_DAYS = 365;
-
-    // DOM элементы
-    const banner = document.getElementById('cookieBanner');
-    const settingsModal = document.getElementById('cookieSettings');
-    const acceptBtn = document.getElementById('cookieAcceptBtn');
-    const declineBtn = document.getElementById('cookieDeclineBtn');
-    const settingsBtn = document.getElementById('cookieSettingsBtn');
-    const settingsClose = document.getElementById('cookieSettingsClose');
-    const settingsSave = document.getElementById('cookieSettingsSave');
-    const policyLink = document.getElementById('cookiePolicyLink');
-
-    const analyticsCheckbox = document.getElementById('cookieAnalytics');
-    const marketingCheckbox = document.getElementById('cookieMarketing');
-    const functionalCheckbox = document.getElementById('cookieFunctional');
-
-    // Функции работы с cookie
-    function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/; SameSite=Lax';
-    }
-
-    function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        if (match) return match[2];
-        return null;
-    }
-
-    function deleteCookie(name) {
-        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    }
-
-    // Проверка согласия
-    function hasConsent() {
-        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                return data.consent === true;
-            } catch (e) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    // Получить настройки
-    function getConsentSettings() {
-        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
-        if (saved) {
-            try {
-                return JSON.parse(saved);
-            } catch (e) {}
-        }
-        return null;
-    }
-
-    // Сохранение согласия
-    function saveConsent(settings) {
-        const consentData = {
-            consent: true,
-            analytics: settings.analytics || false,
-            marketing: settings.marketing || false,
-            functional: settings.functional || false,
-            timestamp: Date.now()
-        };
-        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
-        setCookie('cookie_consent', JSON.stringify(consentData), COOKIE_EXPIRY_DAYS);
-        applyConsent(consentData);
-    }
-
-    // Удалить согласие (отказ)
-    function removeConsent() {
-        localStorage.removeItem(COOKIE_CONSENT_KEY);
-        deleteCookie('cookie_consent');
-        // Удаляем все НЕобязательные данные
-        deleteCookie('theme');
-        localStorage.removeItem('theme');
-        applyConsent({ consent: false, analytics: false, marketing: false, functional: false });
-    }
-
-    // Применение настроек
-    function applyConsent(consentData) {
-        if (!consentData || !consentData.consent) {
-            // Если согласия нет - всё отключаем
-            console.log('❌ Согласие НЕ получено. Все необязательные функции отключены');
-            // Принудительно удаляем тему
-            localStorage.removeItem('theme');
-            deleteCookie('theme');
-            // Удаляем тему из DOM
-            document.body.classList.remove('light-theme');
-            document.body.classList.add('dark-theme');
-            if (document.querySelector('.theme__star')) {
-                document.querySelectorAll('.theme__star').forEach(el => el.remove());
-            }
-            return;
-        }
-
-        // Применяем настройки
-        if (consentData.functional) {
-            console.log('⚡ Функциональные cookie включены');
-            // Восстанавливаем тему, если она была сохранена
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-            } else {
-                document.body.classList.remove('light-theme');
-            }
-        } else {
-            console.log('⚡ Функциональные cookie отключены');
-            // Удаляем тему
-            localStorage.removeItem('theme');
-            deleteCookie('theme');
-            document.body.classList.remove('light-theme');
-        }
-
-        if (consentData.analytics) {
-            console.log('📊 Аналитика включена');
-        } else {
-            console.log('📊 Аналитика отключена');
-        }
-
-        if (consentData.marketing) {
-            console.log('🎯 Маркетинг включён');
-        } else {
-            console.log('🎯 Маркетинг отключён');
-        }
-    }
-
-    // Закрыть баннер
-    function hideBanner() {
-        banner.classList.remove('show');
-        setTimeout(() => {
-            banner.style.display = 'none';
-        }, 500);
-    }
-
-    // Открыть настройки
-    function openSettings() {
-        const saved = getConsentSettings();
-        if (saved) {
-            analyticsCheckbox.checked = saved.analytics !== undefined ? saved.analytics : true;
-            marketingCheckbox.checked = saved.marketing !== undefined ? saved.marketing : true;
-            functionalCheckbox.checked = saved.functional !== undefined ? saved.functional : true;
-        } else {
-            analyticsCheckbox.checked = true;
-            marketingCheckbox.checked = true;
-            functionalCheckbox.checked = true;
-        }
-        settingsModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeSettings() {
-        settingsModal.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    // Принять все
-    function acceptAll() {
-        const settings = {
-            analytics: true,
-            marketing: true,
-            functional: true
-        };
-        saveConsent(settings);
-        hideBanner();
-        closeSettings();
-    }
-
-    // Отказаться от всех необязательных
-    function declineAll() {
-        removeConsent();
-        hideBanner();
-        closeSettings();
-        // Перезагружаем тему в тёмный режим
-        document.body.classList.remove('light-theme');
-        document.body.classList.add('dark-theme');
-        // Удаляем звёзды
-        document.querySelectorAll('.theme__star').forEach(el => el.remove());
-    }
-
-    // Сохранить выбранные настройки
-    function saveSettings() {
-        const settings = {
-            analytics: analyticsCheckbox.checked,
-            marketing: marketingCheckbox.checked,
-            functional: functionalCheckbox.checked
-        };
-        saveConsent(settings);
-        hideBanner();
-        closeSettings();
-    }
-
-    // ========== ИНИЦИАЛИЗАЦИЯ ==========
-    
-    // Проверяем согласие
-    if (hasConsent()) {
-        const settings = getConsentSettings();
-        applyConsent(settings);
-        banner.style.display = 'none';
-        return;
-    }
-
-    // Если нет согласия - всё в тёмную тему
-    document.body.classList.remove('light-theme');
-    document.body.classList.add('dark-theme');
-    localStorage.removeItem('theme');
-    deleteCookie('theme');
-
-    // Показываем баннер
-    setTimeout(() => {
-        banner.classList.add('show');
-    }, 500);
-
-    // ========== ОБРАБОТЧИКИ ==========
-
-    acceptBtn.addEventListener('click', acceptAll);
-    declineBtn.addEventListener('click', declineAll);
-
-    settingsBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openSettings();
-    });
-
-    settingsClose.addEventListener('click', closeSettings);
-
-    settingsModal.addEventListener('click', function(e) {
-        if (e.target === settingsModal) {
-            closeSettings();
-        }
-    });
-
-    settingsSave.addEventListener('click', saveSettings);
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (settingsModal.classList.contains('open')) {
-                closeSettings();
-            }
-        }
-    });
-
-    // ПЕРЕХВАТЫВАЕМ ИЗМЕНЕНИЕ ТЕМЫ - если нет согласия
-    const originalThemeToggle = window.handleThemeChange;
-    window.handleThemeChange = function() {
-        if (!hasConsent()) {
-            alert('Пожалуйста, примите использование функциональных cookie в настройках, чтобы сохранить тему.');
-            return;
-        }
-        if (originalThemeToggle) {
-            originalThemeToggle();
-        }
-    };
-
-    console.log('🍪 Cookie-баннер инициализирован');
-})();
-</script>
-
-<!-- ============================================ -->
-<!-- ⬇️ КОНЕЦ COOKIE БАННЕРА ⬇️ -->
-<!-- ============================================ -->
-</body>
-</html>
 </body>
 </html>
