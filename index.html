@@ -3624,7 +3624,7 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР - ОСТАВЛЯЕМ ДЛЯ ДЕСКТОПА (кнопки + перетаскивание) ⬇️
+// ⬇️ СЛАЙДЕР С УЛУЧШЕННОЙ ОБРАБОТКОЙ СВАЙПОВ НА МОБИЛЬНЫХ ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
@@ -3634,34 +3634,106 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let isDragging = false;
     let startX = 0;
     let startScrollLeft = 0;
+    let isSwipingHorizontally = false;
+    let touchStartY = 0;
     
-    const onDragStart = function(e) {
-        // Если ширина <= 768px - не мешаем CSS scroll-snap
-        if (window.innerWidth <= 768) return;
+    // Отключаем стандартное поведение браузера для слайдера
+    sliderWrapper.addEventListener('touchstart', function(e) {
+        if (window.innerWidth <= 768) {
+            // Запоминаем начальную позицию пальца
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            touchStartY = touch.clientY;
+            isSwipingHorizontally = false;
+            startScrollLeft = sliderWrapper.scrollLeft;
+            isDragging = true;
+            sliderWrapper.classList.add('features-slider--dragging');
+        }
+    }, { passive: true });
+    
+    sliderWrapper.addEventListener('touchmove', function(e) {
+        if (!isDragging || window.innerWidth > 768) return;
         
-        isDragging = true;
-        sliderWrapper.classList.add('features-slider--dragging');
-        startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-        startScrollLeft = sliderWrapper.scrollLeft;
+        const touch = e.touches[0];
+        const deltaX = startX - touch.clientX;
+        const deltaY = Math.abs(touchStartY - touch.clientY);
+        
+        // Если вертикальное смещение больше горизонтального - передаём управление скроллу страницы
+        if (deltaY > Math.abs(deltaX) && deltaY > 15) {
+            isSwipingHorizontally = false;
+            return;
+        }
+        
+        // Определяем направление свайпа как горизонтальный
+        if (Math.abs(deltaX) > 15) {
+            isSwipingHorizontally = true;
+            // Предотвращаем прокрутку страницы при горизонтальном свайпе
+            e.preventDefault();
+            sliderWrapper.scrollLeft = startScrollLeft + deltaX;
+        }
+    }, { passive: false });
+    
+    sliderWrapper.addEventListener('touchend', function(e) {
+        if (window.innerWidth <= 768) {
+            isDragging = false;
+            sliderWrapper.classList.remove('features-slider--dragging');
+            
+            // Если был горизонтальный свайп, применяем snap эффект
+            if (isSwipingHorizontally) {
+                // Находим ближайшую карточку для snap
+                const track = document.querySelector('.features-slider__track');
+                if (track) {
+                    const cards = track.querySelectorAll('.feature-card');
+                    let minDistance = Infinity;
+                    let closestIndex = 0;
+                    
+                    cards.forEach((card, index) => {
+                        const cardRect = card.getBoundingClientRect();
+                        const containerRect = sliderWrapper.getBoundingClientRect();
+                        const distance = Math.abs(cardRect.left - containerRect.left);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+                    
+                    if (cards[closestIndex]) {
+                        cards[closestIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }
+                }
+            }
+            
+            isSwipingHorizontally = false;
+        }
+    }, { passive: true });
+    
+    // Обработчики для мыши (десктоп)
+    const onDragStart = function(e) {
+        if (window.innerWidth > 768) {
+            isDragging = true;
+            sliderWrapper.classList.add('features-slider--dragging');
+            startX = e.clientX;
+            startScrollLeft = sliderWrapper.scrollLeft;
+        }
     };
+    
     const onDragMove = function(e) {
-        if (!isDragging || window.innerWidth <= 768) return;
-        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-        sliderWrapper.scrollLeft = startScrollLeft - (clientX - startX);
+        if (!isDragging || window.innerWidth > 768) return;
+        sliderWrapper.scrollLeft = startScrollLeft - (e.clientX - startX);
     };
+    
     const onDragEnd = function() {
-        if (window.innerWidth <= 768) return;
-        isDragging = false;
-        sliderWrapper.classList.remove('features-slider--dragging');
+        if (window.innerWidth > 768) {
+            isDragging = false;
+            sliderWrapper.classList.remove('features-slider--dragging');
+        }
     };
     
     sliderWrapper.addEventListener('mousedown', onDragStart);
     window.addEventListener('mousemove', onDragMove);
     window.addEventListener('mouseup', onDragEnd);
-    sliderWrapper.addEventListener('touchstart', onDragStart, { passive: true });
-    window.addEventListener('touchmove', onDragMove, { passive: true });
-    window.addEventListener('touchend', onDragEnd);
     
+    // Кнопки навигации для десктопа
     prevBtn.addEventListener('click', function() {
         const track = document.querySelector('.features-slider__track');
         if (!track) return;
