@@ -3610,14 +3610,14 @@ const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ============================================================
-// ⬇️ СЛАЙДЕР - ДЛЯ МОБИЛЬНЫХ С ИНЕРЦИЕЙ, ДЛЯ ДЕСКТОПА ОБЫЧНЫЙ СКРОЛЛ ⬇️
+// ⬇️ СЛАЙДЕР - ДЛЯ МОБИЛЬНЫХ С ИНЕРЦИЕЙ, ДЛЯ ДЕСКТОПА - СКРОЛЛ + ДРАГ ЛКМ ⬇️
 // ============================================================
 const sliderWrapper = document.getElementById('featuresSlider');
 const prevBtn = document.getElementById('sliderPrevBtn');
 const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    // ========== ТОЛЬКО ДЛЯ МОБИЛЬНЫХ (ширина <= 768px) ==========
+    // ========== ПЕРЕМЕННЫЕ ДЛЯ МОБИЛЬНЫХ ==========
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartScrollLeft = 0;
@@ -3627,6 +3627,11 @@ if (sliderWrapper && prevBtn && nextBtn) {
     let lastTouchX = 0;
     let velocity = 0;
     let momentumId = null;
+    
+    // ========== ПЕРЕМЕННЫЕ ДЛЯ ДЕСКТОПА (ДРАГ ЛКМ) ==========
+    let mouseStartX = 0;
+    let mouseStartScrollLeft = 0;
+    let isMouseDragging = false;
     
     function snapToNearestMobile() {
         const track = document.querySelector('.features-slider__track');
@@ -3688,7 +3693,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         }
     }
     
-    // Touch-события ТОЛЬКО для мобильных
+    // ========== TOUCH СОБЫТИЯ (ТОЛЬКО МОБИЛЬНЫЕ) ==========
     sliderWrapper.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 768) return;
         const touch = e.touches[0];
@@ -3757,9 +3762,36 @@ if (sliderWrapper && prevBtn && nextBtn) {
         velocity = 0;
     }, { passive: true });
     
-    // ========== ДЛЯ ДЕСКТОПА - ОБЫЧНЫЙ СКРОЛЛ ==========
-    // Никаких дополнительных обработчиков! Просто скроллим как обычно.
-    // На десктопе слайдер скроллится стандартным скроллом мыши или тачпадом.
+    // ========== MOUSE СОБЫТИЯ ДЛЯ ДЕСКТОПА (ДРАГ ЛКМ) ==========
+    sliderWrapper.addEventListener('mousedown', function(e) {
+        // Работает на всех размерах, но на мобилке не мешает
+        isMouseDragging = true;
+        sliderWrapper.classList.add('features-slider--dragging');
+        mouseStartX = e.clientX;
+        mouseStartScrollLeft = sliderWrapper.scrollLeft;
+        sliderWrapper.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+    
+    window.addEventListener('mousemove', function(e) {
+        if (!isMouseDragging) return;
+        const deltaX = mouseStartX - e.clientX;
+        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        let newScroll = mouseStartScrollLeft + deltaX;
+        if (newScroll < 0) newScroll = 0;
+        if (newScroll > maxScroll) newScroll = maxScroll;
+        sliderWrapper.scrollLeft = newScroll;
+    });
+    
+    window.addEventListener('mouseup', function() {
+        if (isMouseDragging) {
+            isMouseDragging = false;
+            sliderWrapper.classList.remove('features-slider--dragging');
+            sliderWrapper.style.cursor = 'grab';
+            // На десктопе после драга не делаем принудительный snap
+            // Пользователь сам решает где остановиться
+        }
+    });
     
     // ========== КНОПКИ НАВИГАЦИИ (работают везде) ==========
     prevBtn.addEventListener('click', function() {
