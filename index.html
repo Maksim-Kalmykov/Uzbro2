@@ -1465,11 +1465,11 @@
             margin-top: 3rem;
         }
 
-        /* ===== БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ ===== */
+        /* ===== БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ (ОБНОВЛЁННЫЙ) ===== */
         .services-summary {
             display: none;
             margin: 0.5rem 0 1.5rem 0;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.5rem;
             background: var(--bg-secondary);
             border: 2px solid var(--accent-color);
             border-radius: var(--border-radius-card);
@@ -1538,37 +1538,53 @@
             transition: all 0.2s ease;
             text-decoration: underline;
             font-family: 'Inter', sans-serif;
-            margin-left: 0.5rem;
         }
 
         .services-summary__clear:hover {
             color: var(--accent-color);
         }
 
+        /* АДАПТИВ: до 500px — количество и итого на одной строке, "очистить всё" на следующей */
         @media (max-width: 500px) {
             .services-summary {
-                padding: 0.75rem 1rem;
+                padding: 0.6rem 0.75rem;
             }
             .services-summary__text {
-                font-size: 0.9rem;
-                gap: 0.25rem 0.75rem;
+                font-size: 0.95rem;
+                gap: 0.25rem 0.5rem;
+                flex-wrap: wrap;
+            }
+            .services-summary__text .count,
+            .services-summary__text .total {
+                font-size: 1.1rem;
+            }
+            .services-summary__text .label {
+                font-size: 0.85rem;
+            }
+            .services-summary__clear {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.5rem;
+                width: 100%;
+                text-align: center;
+                margin-top: 0.25rem;
+            }
+            /* Убираем разделитель на мобильных для компактности */
+            .services-summary__text .divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .services-summary__text {
+                font-size: 0.85rem;
+                gap: 0.15rem 0.3rem;
             }
             .services-summary__text .count,
             .services-summary__text .total {
                 font-size: 1rem;
             }
-            .services-summary__clear {
-                font-size: 0.65rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .services-summary__text {
-                flex-direction: column;
-                gap: 0.25rem;
-            }
-            .services-summary__text .divider {
-                display: none;
+            .services-summary {
+                padding: 0.5rem 0.5rem;
             }
         }
 
