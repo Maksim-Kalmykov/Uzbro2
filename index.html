@@ -1685,7 +1685,6 @@
             min-width: 18.75rem;
         }
 
-        /* ===== АДАПТИВ КОНТАКТОВ: ПОЭТАПНЫЙ ПЕРЕХОД ===== */
         .contacts-bottom-row {
             display: flex;
             flex-wrap: wrap;
@@ -1705,32 +1704,18 @@
             box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
         }
 
-        /* 1-й этап: при < 895px — "Режим работы" и "Способы оплаты" в одну строку, "Мы в сетях" на след. строку */
+        /* АДАПТИВ ДЛЯ .contacts-bottom-row — переход на новую строку при < 895px */
         @media (max-width: 894px) {
             .contacts-bottom-row {
-                flex-wrap: wrap;
+                flex-direction: column;
                 gap: 1.5rem;
             }
-            .contacts-worktime,
-            .contacts-payment {
-                flex: 1 1 calc(50% - 0.75rem);
-                min-width: 0;
-            }
-            .contacts-social {
-                flex: 1 1 100%;
-                min-width: 0;
-                width: 100%;
-            }
-        }
-
-        /* 2-й этап: при < 600px — все три карточки в колонку */
-        @media (max-width: 599px) {
             .contacts-worktime,
             .contacts-payment,
             .contacts-social {
                 flex: 1 1 100%;
-                width: 100%;
                 min-width: 0;
+                width: 100%;
             }
         }
 
@@ -1959,6 +1944,70 @@
 
         .reviews-divider {
             margin: 1.25rem 0;
+        }
+
+        /* ===== АДАПТИВ СЕКЦИИ ОТЗЫВОВ (767px и менее) ===== */
+        @media (max-width: 767px) {
+            .reviews-grid {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .reviews-links-col {
+                order: 0;
+                width: 100%;
+                min-width: 0;
+            }
+            
+            .reviews-content-col {
+                order: 1;
+                border-left: none;
+                padding-left: 0;
+                width: 100%;
+                min-width: 0;
+                border-top: 0.0625rem solid var(--border-color);
+                padding-top: 1.5rem;
+            }
+            
+            .master-photo {
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+            }
+            
+            .reviews-links-grid {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+            
+            .review-link {
+                flex: 1;
+                min-width: 140px;
+            }
+            
+            .review-link .btn {
+                font-size: 0.7rem;
+                padding: 0.5rem 0.75rem;
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .reviews-grid {
+                gap: 1rem;
+            }
+            
+            .reviews-content-col {
+                padding-top: 1rem;
+            }
+            
+            .review-link {
+                min-width: 100%;
+            }
+            
+            .reviews-text {
+                font-size: 0.85rem;
+            }
         }
 
         /* ----- BOOKING ----- */
@@ -2687,23 +2736,6 @@
             color: var(--accent-color);
         }
 
-        /* Кнопка "Настройки" — всегда с иконкой, текст скрывается на адаптиве */
-        .cookie-banner__btn--settings .btn-icon {
-            display: inline;
-        }
-        .cookie-banner__btn--settings .btn-text {
-            display: inline;
-        }
-
-        @media (max-width: 500px) {
-            .cookie-banner__btn--settings .btn-text {
-                display: none;
-            }
-            .cookie-banner__btn--settings .btn-icon {
-                display: inline;
-            }
-        }
-
         /* АДАПТИВ ДЛЯ COOKIE БАННЕРА */
         @media (max-width: 1090px) {
             .cookie-banner__container {
@@ -2748,6 +2780,7 @@
                 letter-spacing: 0.03em;
                 border-width: 1.5px;
             }
+            /* Кнопка "Настройки" — только иконка */
             .cookie-banner__btn--settings {
                 padding: 6px 10px;
                 font-size: 0.85rem;
@@ -2758,11 +2791,34 @@
                 align-items: center;
                 justify-content: center;
             }
+            .cookie-banner__btn--settings .btn-text {
+                display: none;
+            }
+            .cookie-banner__btn--settings .btn-icon {
+                display: inline;
+            }
             .cookie-banner__btn--accept,
             .cookie-banner__btn--decline {
                 font-size: 0.6rem;
                 padding: 6px 10px;
                 flex: 1;
+            }
+        }
+
+        /* Иконка для кнопки настроек */
+        .cookie-banner__btn--settings .btn-icon {
+            display: none;
+        }
+        .cookie-banner__btn--settings .btn-text {
+            display: inline;
+        }
+
+        @media (max-width: 500px) {
+            .cookie-banner__btn--settings .btn-icon {
+                display: inline;
+            }
+            .cookie-banner__btn--settings .btn-text {
+                display: none;
             }
         }
 
@@ -3288,15 +3344,15 @@
     <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <script>
         (function() {
-            const hero = document.getElementById('heroSection');
-            const header = document.querySelector('.page-header');
-            const ticker = document.querySelector('.hero-ticker');
+            var hero = document.getElementById('heroSection');
+            var header = document.querySelector('.page-header');
+            var ticker = document.querySelector('.hero-ticker');
             
             function setHeroHeight() {
                 if (!hero) return;
-                const headerHeight = header ? header.offsetHeight : 70;
-                const tickerHeight = ticker ? ticker.offsetHeight : 0;
-                const heroHeight = Math.max(window.innerHeight - headerHeight - tickerHeight, 300);
+                var headerHeight = header ? header.offsetHeight : 70;
+                var tickerHeight = ticker ? ticker.offsetHeight : 0;
+                var heroHeight = Math.max(window.innerHeight - headerHeight - tickerHeight, 300);
                 hero.style.minHeight = heroHeight + 'px';
                 hero.style.height = heroHeight + 'px';
             }
@@ -3420,7 +3476,7 @@
         <div class="container">
             <h2 id="services-heading" class="section__title fade-on-scroll fade-right">ПРЕМИУМ УСЛУГИ</h2>
             <div class="services-grid" role="group" aria-label="Список услуг">
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340001" tabindex="0" role="button" aria-label="Мужская стрижка, цена 1900 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340001" data-price="1900" tabindex="0" role="button" aria-label="Мужская стрижка, цена 1900 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-cut service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3428,7 +3484,7 @@
                     <div class="service-card__price">1 900 ₽</div>
                     <p class="service-card__desc">Машинки и ножницы, мытьё головы до и после, укладка профессиональной косметикой.</p>
                 </div>
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340043" tabindex="0" role="button" aria-label="Стрижка машинкой, цена 1400 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340043" data-price="1400" tabindex="0" role="button" aria-label="Стрижка машинкой, цена 1400 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-crop-alt service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3436,7 +3492,7 @@
                     <div class="service-card__price">1 400 ₽</div>
                     <p class="service-card__desc">Две насадки, мытьё головы до и после, профессиональный уход.</p>
                 </div>
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340082" tabindex="0" role="button" aria-label="Моделирование бороды и бритьё, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340082" data-price="1600" tabindex="0" role="button" aria-label="Моделирование бороды и бритьё, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-hand-sparkles service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3444,7 +3500,7 @@
                     <div class="service-card__price">1 600 ₽</div>
                     <p class="service-card__desc">Создание формы, ножницы, машинка, шейвер, шаветт. Распаривание, массаж лица, компресс.</p>
                 </div>
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340124" tabindex="0" role="button" aria-label="Бритье с опасным лезвием, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340124" data-price="1600" tabindex="0" role="button" aria-label="Бритье с опасным лезвием, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-hand-holding-heart service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3452,7 +3508,7 @@
                     <div class="service-card__price">1 600 ₽</div>
                     <p class="service-card__desc">Чистовое бритьё с распариванием, шаветкой, холодный компресс, профессиональная косметика.</p>
                 </div>
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340154" tabindex="0" role="button" aria-label="Коррекция воском, цена 400 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340154" data-price="400" tabindex="0" role="button" aria-label="Коррекция воском, цена 400 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-fire service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3460,7 +3516,7 @@
                     <div class="service-card__price">400 ₽</div>
                     <p class="service-card__desc">Удаление волос теплым воском премиум брендов. Нос / уши.</p>
                 </div>
-                <div class="service-card fade-on-scroll fade-up" data-service="s28340217" tabindex="0" role="button" aria-label="Камуфляж седины, цена 1500 рублей. Нажмите Пробел или Enter для выбора.">
+                <div class="service-card fade-on-scroll fade-up" data-service="s28340217" data-price="1500" tabindex="0" role="button" aria-label="Камуфляж седины, цена 1500 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
                         <span class="fas fa-palette service-card__icon" aria-hidden="true"></span>
                     </div>
@@ -3471,7 +3527,7 @@
             </div>
             <div class="services-footer">
                 <a href="https://n2133024.yclients.com/" target="_blank" id="bookingLink" class="btn btn--primary btn--pulse booking-link" rel="noopener noreferrer">
-                    <span class="fas fa-cut" aria-hidden="true"></span> ЗАПИСАТЬСЯ
+                    <span class="fas fa-cut" aria-hidden="true"></span> ЗАПИСАТЬСЯ <span id="bookingCounter" class="booking-counter"></span>
                 </a>
                 <span class="visually-hidden">Ссылка для записи на выбранные услуги</span>
             </div>
@@ -3932,10 +3988,9 @@
 
 <script>
 // ============================================================
-// ПОЛНЫЙ JS КОД — ИСПОЛЬЗУЕТ let И const (БЕЗ var)
+// ПОЛНЫЙ JS КОД — С ПОДДЕРЖКОЙ СЧЁТЧИКА УСЛУГ И СУММЫ
 // ============================================================
 
-// ----- ПРОВЕРКА particlesJS -----
 if (typeof particlesJS !== 'undefined') {
     particlesJS('particles-js', {
         particles: {
@@ -3956,7 +4011,7 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- HERO BG -----
 (function() {
-    const heroBg = document.getElementById('heroBg');
+    var heroBg = document.getElementById('heroBg');
     if (heroBg) {
         window.addEventListener('load', function() {
             heroBg.style.backgroundImage = "url('images/1-1.jpg')";
@@ -3966,13 +4021,13 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- PWA BANNER -----
 (function() {
-    const banner = document.getElementById('pwaTopBanner');
-    const installBtn = document.getElementById('pwaInstallBtn');
-    const closeBtn = document.getElementById('pwaCloseBanner');
+    var banner = document.getElementById('pwaTopBanner');
+    var installBtn = document.getElementById('pwaInstallBtn');
+    var closeBtn = document.getElementById('pwaCloseBanner');
     
-    let deferredPrompt = null;
-    let bannerTimeout = null;
-    let bannerVisible = false;
+    var deferredPrompt = null;
+    var bannerTimeout = null;
+    var bannerVisible = false;
     
     function isAppInstalled() {
         return window.matchMedia('(display-mode: standalone)').matches || 
@@ -4045,7 +4100,7 @@ if (typeof particlesJS !== 'undefined') {
     });
     
     if (window.matchMedia) {
-        const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+        var displayModeQuery = window.matchMedia('(display-mode: standalone)');
         displayModeQuery.addEventListener('change', function(e) {
             if (e.matches) {
                 hideBanner();
@@ -4064,14 +4119,14 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- VH FIX -----
 (function() {
-    let vh = window.innerHeight * 0.01;
+    var vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
     
-    let ticking = false;
-    let lastVh = vh;
+    var ticking = false;
+    var lastVh = vh;
     
     function updateVh() {
-        const newVh = window.innerHeight * 0.01;
+        var newVh = window.innerHeight * 0.01;
         if (Math.abs(newVh - lastVh) > 0.05) {
             lastVh = newVh;
             document.documentElement.style.setProperty('--vh', newVh + 'px');
@@ -4100,16 +4155,16 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- HERO HEIGHT FIX -----
 (function() {
-    const hero = document.getElementById('heroSection');
+    var hero = document.getElementById('heroSection');
     if (!hero) return;
     
-    let heroFixedHeight = null;
-    let resizeTimer = null;
+    var heroFixedHeight = null;
+    var resizeTimer = null;
     
     function fixHeroHeight() {
-        const viewportHeight = window.innerHeight;
-        const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
-        const desiredHeight = Math.max(viewportHeight - headerHeight, 450);
+        var viewportHeight = window.innerHeight;
+        var headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+        var desiredHeight = Math.max(viewportHeight - headerHeight, 450);
         
         if (heroFixedHeight === null || Math.abs(hero.offsetHeight - desiredHeight) > 50) {
             heroFixedHeight = desiredHeight;
@@ -4139,25 +4194,25 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- PARALLAX -----
 (function() {
-    const heroBg = document.querySelector('.hero__bg');
-    const parallaxBg = document.querySelector('.section__bg');
+    var heroBg = document.querySelector('.hero__bg');
+    var parallaxBg = document.querySelector('.section__bg');
     
     if (!heroBg && !parallaxBg) return;
     
-    let ticking = false;
+    var ticking = false;
     
     function applyParallax() {
-        const scrollY = window.scrollY;
+        var scrollY = window.scrollY;
         
         if (heroBg) {
-            const heroSection = document.getElementById('heroSection');
+            var heroSection = document.getElementById('heroSection');
             if (heroSection) {
-                const rect = heroSection.getBoundingClientRect();
-                const heroTop = rect.top + scrollY;
-                const heroBottom = heroTop + rect.height;
+                var rect = heroSection.getBoundingClientRect();
+                var heroTop = rect.top + scrollY;
+                var heroBottom = heroTop + rect.height;
                 
                 if (scrollY + window.innerHeight > heroTop && scrollY < heroBottom) {
-                    const offset = (scrollY - heroTop) * 0.3;
+                    var offset = (scrollY - heroTop) * 0.3;
                     heroBg.style.transform = 'translateY(' + offset + 'px)';
                 } else if (scrollY < heroTop) {
                     heroBg.style.transform = 'translateY(0px)';
@@ -4166,14 +4221,14 @@ if (typeof particlesJS !== 'undefined') {
         }
         
         if (parallaxBg) {
-            const parallaxSection = document.getElementById('parallax-combined');
+            var parallaxSection = document.getElementById('parallax-combined');
             if (parallaxSection) {
-                const rect = parallaxSection.getBoundingClientRect();
-                const sectionTop = rect.top + scrollY;
-                const sectionBottom = sectionTop + rect.height;
+                var rect = parallaxSection.getBoundingClientRect();
+                var sectionTop = rect.top + scrollY;
+                var sectionBottom = sectionTop + rect.height;
                 
                 if (scrollY + window.innerHeight > sectionTop && scrollY < sectionBottom) {
-                    const offset = (scrollY - sectionTop) * 0.4;
+                    var offset = (scrollY - sectionTop) * 0.4;
                     parallaxBg.style.transform = 'translateY(' + offset + 'px)';
                 } else if (scrollY < sectionTop) {
                     parallaxBg.style.transform = 'translateY(0px)';
@@ -4191,7 +4246,7 @@ if (typeof particlesJS !== 'undefined') {
         }
     }
     
-    let resizeTimeout;
+    var resizeTimeout;
     function onResize() {
         if (resizeTimeout) clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(function() {
@@ -4209,8 +4264,8 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- READY -----
 (function() {
-    let isReady = false;
-    let readyTimeout = null;
+    var isReady = false;
+    var readyTimeout = null;
     
     function showContent() {
         if (isReady) return;
@@ -4237,10 +4292,10 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- LAZY IMAGES -----
 (function() {
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    var lazyImages = document.querySelectorAll('img[loading="lazy"]');
     if (!lazyImages.length) return;
     
-    let rafQueue = [];
+    var rafQueue = [];
     
     function batchAddClass(images) {
         if (rafQueue.length) return;
@@ -4252,8 +4307,8 @@ if (typeof particlesJS !== 'undefined') {
     }
     
     if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver(function(entries) {
-            const toLoad = [];
+        var imageObserver = new IntersectionObserver(function(entries) {
+            var toLoad = [];
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     toLoad.push(entry.target);
@@ -4278,8 +4333,8 @@ if (typeof particlesJS !== 'undefined') {
 
 // ----- CONTEXT MENU -----
 document.addEventListener('contextmenu', function(e) {
-    const isFooter = e.target.closest('.footer');
-    const isContacts = e.target.closest('#info');
+    var isFooter = e.target.closest('.footer');
+    var isContacts = e.target.closest('#info');
     if (!isFooter && !isContacts) {
         e.preventDefault();
         return false;
@@ -4289,12 +4344,13 @@ document.addEventListener('contextmenu', function(e) {
 // ============================================================
 // ТЕМА: ОСНОВНАЯ ЛОГИКА — БЕЗ СОХРАНЕНИЯ ПРИ ОТСУТСТВИИ СОГЛАСИЯ
 // ============================================================
-const themeIcon = document.getElementById('theme-toggle-icon');
-const mobileThemeIcon = document.getElementById('mobile-theme-icon');
-const themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
-const mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
+var themeIcon = document.getElementById('theme-toggle-icon');
+var mobileThemeIcon = document.getElementById('mobile-theme-icon');
+var themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
+var mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
 
-let currentThemeIsLight = false;
+// Флаг — хранит текущую тему (true = светлая, false = тёмная)
+var currentThemeIsLight = false;
 
 function updateThemeIcons(isLight) {
     if (themeIconSpan) themeIconSpan.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
@@ -4303,8 +4359,8 @@ function updateThemeIcons(isLight) {
 
 function addLightThemeStars() {
     if (document.querySelector('.theme__star')) return;
-    for (let i = 0; i < 60; i++) {
-        const star = document.createElement('div');
+    for (var i = 0; i < 60; i++) {
+        var star = document.createElement('div');
         star.className = 'theme__star';
         star.style.cssText = 'position:fixed; width:' + (Math.random() * 3 + 1) + 'px; height:' + (Math.random() * 3 + 1) + 'px; left:' + (Math.random() * 100) + '%; top:' + (Math.random() * 100) + '%; animation-delay:' + (Math.random() * 8) + 's; animation-duration:' + (Math.random() * 10 + 6) + 's; opacity:0';
         document.body.appendChild(star);
@@ -4312,15 +4368,16 @@ function addLightThemeStars() {
 }
 
 function removeLightThemeStars() {
-    const stars = document.querySelectorAll('.theme__star');
+    var stars = document.querySelectorAll('.theme__star');
     stars.forEach(function(star) { star.remove(); });
 }
 
+// Функция проверки наличия согласия на функциональные cookie
 function hasFunctionalConsent() {
-    const saved = localStorage.getItem('uzbro_cookie_consent');
+    var saved = localStorage.getItem('uzbro_cookie_consent');
     if (saved) {
         try {
-            const data = JSON.parse(saved);
+            var data = JSON.parse(saved);
             return data.consent === true && data.functional === true;
         } catch (e) {
             return false;
@@ -4329,9 +4386,10 @@ function hasFunctionalConsent() {
     return false;
 }
 
+// Применяем тему при загрузке
 function applySavedTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const hasFunctional = hasFunctionalConsent();
+    var savedTheme = localStorage.getItem('theme');
+    var hasFunctional = hasFunctionalConsent();
     
     if (savedTheme === 'light' && hasFunctional) {
         document.body.classList.add('light-theme');
@@ -4351,26 +4409,32 @@ function applySavedTheme() {
 
 applySavedTheme();
 
+// Переключение темы — БЕЗ СОХРАНЕНИЯ ЕСЛИ НЕТ СОГЛАСИЯ
 function handleThemeChange() {
-    const hasFunctional = hasFunctionalConsent();
-    const isLight = document.body.classList.contains('light-theme');
+    var hasFunctional = hasFunctionalConsent();
+    var isLight = document.body.classList.contains('light-theme');
     
     if (isLight) {
+        // Переключаем на тёмную
         document.body.classList.remove('light-theme');
         currentThemeIsLight = false;
         updateThemeIcons(false);
         removeLightThemeStars();
+        // Если есть согласие — сохраняем
         if (hasFunctional) {
             localStorage.setItem('theme', 'dark');
         }
     } else {
+        // Переключаем на светлую
         document.body.classList.add('light-theme');
         currentThemeIsLight = true;
         updateThemeIcons(true);
         addLightThemeStars();
+        // Если есть согласие — сохраняем
         if (hasFunctional) {
             localStorage.setItem('theme', 'light');
         }
+        // Если нет согласия — не сохраняем, но тема меняется (временная)
     }
 }
 
@@ -4378,8 +4442,8 @@ if (themeIcon) themeIcon.addEventListener('click', handleThemeChange);
 if (mobileThemeIcon) mobileThemeIcon.addEventListener('click', handleThemeChange);
 
 // ----- MOBILE MENU -----
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileNav = document.getElementById('mobileNav');
+var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+var mobileNav = document.getElementById('mobileNav');
 
 function closeMobileMenu() {
     mobileNav.classList.remove('open');
@@ -4390,7 +4454,7 @@ function closeMobileMenu() {
 if (mobileMenuBtn && mobileNav) {
     mobileMenuBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        const isOpen = mobileNav.classList.contains('open');
+        var isOpen = mobileNav.classList.contains('open');
         if (isOpen) {
             closeMobileMenu();
         } else {
@@ -4400,7 +4464,7 @@ if (mobileMenuBtn && mobileNav) {
         }
     });
     
-    const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+    var mobileLinks = mobileNav.querySelectorAll('.nav-link');
     mobileLinks.forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
     
     document.addEventListener('click', function(e) {
@@ -4412,14 +4476,14 @@ if (mobileMenuBtn && mobileNav) {
 
 // ----- HEADER VISIBLE -----
 setTimeout(function() {
-    const header = document.querySelector('.page-header');
+    var header = document.querySelector('.page-header');
     if (header) header.classList.add('page-header--visible');
 }, 100);
 
 // ----- SCROLL TO TOP -----
-const scrollBtn = document.getElementById('scrollToTopBtn');
-const progressCircle = document.querySelector('.scroll-progress-ring__circle');
-const CIRCUMFERENCE = 2 * Math.PI * 26;
+var scrollBtn = document.getElementById('scrollToTopBtn');
+var progressCircle = document.querySelector('.scroll-progress-ring__circle');
+var CIRCUMFERENCE = 2 * Math.PI * 26;
 
 if (progressCircle) {
     progressCircle.style.strokeDasharray = CIRCUMFERENCE;
@@ -4428,14 +4492,14 @@ if (progressCircle) {
 
 function updateProgressRing() {
     if (!progressCircle) return;
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
     progressCircle.style.strokeDashoffset = CIRCUMFERENCE * (1 - scrollPercent);
 }
 
-let tickingScroll = false;
-let tickingResize = false;
+var tickingScroll = false;
+var tickingResize = false;
 
 function onScroll() {
     if (!tickingScroll) {
@@ -4471,9 +4535,9 @@ if (scrollBtn) {
 }
 
 // ----- TYPEWRITER -----
-const typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
-let i = 0;
-const typewriterElement = document.getElementById('typewriter-text');
+var typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
+var i = 0;
+var typewriterElement = document.getElementById('typewriter-text');
 
 function typeWriter() {
     if (i < typewriterText.length && typewriterElement) {
@@ -4488,12 +4552,12 @@ setTimeout(typeWriter, 500);
 
 // ----- SERVICE CARDS -----
 (function() {
-    const cards = document.querySelectorAll('.service-card');
+    var cards = document.querySelectorAll('.service-card');
     if (!cards.length) return;
     
     cards.forEach(function(card) {
-        let cardRect = null;
-        let rafId = null;
+        var cardRect = null;
+        var rafId = null;
         
         function updateCardRect() { cardRect = card.getBoundingClientRect(); }
         
@@ -4504,12 +4568,12 @@ setTimeout(typeWriter, 500);
             if (!cardRect) return;
             if (rafId) cancelAnimationFrame(rafId);
             rafId = requestAnimationFrame(function() {
-                const x = e.clientX - cardRect.left;
-                const y = e.clientY - cardRect.top;
-                const centerX = cardRect.width / 2;
-                const centerY = cardRect.height / 2;
-                const rotateX = (y - centerY) / 25;
-                const rotateY = (centerX - x) / 25;
+                var x = e.clientX - cardRect.left;
+                var y = e.clientY - cardRect.top;
+                var centerX = cardRect.width / 2;
+                var centerY = cardRect.height / 2;
+                var rotateX = (y - centerY) / 25;
+                var rotateY = (centerX - x) / 25;
                 card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-5px)';
                 rafId = null;
             });
@@ -4521,21 +4585,21 @@ setTimeout(typeWriter, 500);
 
 // ----- COUNTERS -----
 function animateCounter(id, target, duration) {
-    let current = 0;
-    const elem = document.getElementById(id);
+    var current = 0;
+    var elem = document.getElementById(id);
     if (!elem) return;
-    const stepTime = 16;
-    const steps = duration / stepTime;
-    const increment = target / steps;
-    const timer = setInterval(function() {
+    var stepTime = 16;
+    var steps = duration / stepTime;
+    var increment = target / steps;
+    var timer = setInterval(function() {
         current += increment;
         if (current >= target) { elem.innerText = target; clearInterval(timer); }
         else { elem.innerText = Math.floor(current); }
     }, stepTime);
 }
 
-let countersStarted = false;
-const counterObserver = new IntersectionObserver(function(entries) {
+var countersStarted = false;
+var counterObserver = new IntersectionObserver(function(entries) {
     if (entries[0].isIntersecting && !countersStarted) {
         countersStarted = true;
         animateCounter('expCounter', 10, 1600);
@@ -4543,54 +4607,54 @@ const counterObserver = new IntersectionObserver(function(entries) {
         animateCounter('servicesCounter', 6, 1300);
     }
 }, { threshold: 0.4 });
-const statSection = document.querySelector('.stats-grid');
+var statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ----- SLIDER -----
-const sliderWrapper = document.getElementById('featuresSlider');
-const prevBtn = document.getElementById('sliderPrevBtn');
-const nextBtn = document.getElementById('sliderNextBtn');
+var sliderWrapper = document.getElementById('featuresSlider');
+var prevBtn = document.getElementById('sliderPrevBtn');
+var nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchStartScrollLeft = 0;
-    let isSwiping = false;
-    let moveDirection = null;
-    let startTime = 0;
-    let lastTouchX = 0;
-    let velocity = 0;
-    let momentumId = null;
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchStartScrollLeft = 0;
+    var isSwiping = false;
+    var moveDirection = null;
+    var startTime = 0;
+    var lastTouchX = 0;
+    var velocity = 0;
+    var momentumId = null;
     
-    let mouseStartX = 0;
-    let mouseStartScrollLeft = 0;
-    let isMouseDragging = false;
+    var mouseStartX = 0;
+    var mouseStartScrollLeft = 0;
+    var isMouseDragging = false;
     
     function snapToNearestMobile() {
-        const track = document.querySelector('.features-slider__track');
+        var track = document.querySelector('.features-slider__track');
         if (!track) return;
-        const cards = track.querySelectorAll('.feature-card');
+        var cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        const containerRect = sliderWrapper.getBoundingClientRect();
-        const centerX = containerRect.left + containerRect.width / 2;
-        let minDistance = Infinity;
-        let closestIndex = 0;
+        var containerRect = sliderWrapper.getBoundingClientRect();
+        var centerX = containerRect.left + containerRect.width / 2;
+        var minDistance = Infinity;
+        var closestIndex = 0;
         
         cards.forEach(function(card, index) {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const distance = Math.abs(cardCenter - centerX);
+            var cardRect = card.getBoundingClientRect();
+            var cardCenter = cardRect.left + cardRect.width / 2;
+            var distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 closestIndex = index;
             }
         });
         
-        const firstCard = cards[0];
-        const lastCard = cards[cards.length - 1];
-        const firstCardRect = firstCard.getBoundingClientRect();
-        const lastCardRect = lastCard.getBoundingClientRect();
+        var firstCard = cards[0];
+        var lastCard = cards[cards.length - 1];
+        var firstCardRect = firstCard.getBoundingClientRect();
+        var lastCardRect = lastCard.getBoundingClientRect();
         
         if (lastCardRect.right > containerRect.right + 20) {
             lastCard.scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
@@ -4612,9 +4676,9 @@ if (sliderWrapper && prevBtn && nextBtn) {
     
     function applyMomentumMobile(velocity) {
         if (Math.abs(velocity) < 0.5) return;
-        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        const step = velocity * 2.5;
-        let newScroll = sliderWrapper.scrollLeft + step;
+        var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        var step = velocity * 2.5;
+        var newScroll = sliderWrapper.scrollLeft + step;
         if (newScroll < 0) newScroll = 0;
         if (newScroll > maxScroll) newScroll = maxScroll;
         sliderWrapper.scrollLeft = newScroll;
@@ -4628,7 +4692,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
     
     sliderWrapper.addEventListener('touchstart', function(e) {
         if (window.innerWidth > 768) return;
-        const touch = e.touches[0];
+        var touch = e.touches[0];
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         touchStartScrollLeft = sliderWrapper.scrollLeft;
@@ -4646,10 +4710,10 @@ if (sliderWrapper && prevBtn && nextBtn) {
     
     sliderWrapper.addEventListener('touchmove', function(e) {
         if (window.innerWidth > 768) return;
-        const touch = e.touches[0];
-        const deltaX = touch.clientX - touchStartX;
-        const deltaY = Math.abs(touch.clientY - touchStartY);
-        const absDeltaX = Math.abs(deltaX);
+        var touch = e.touches[0];
+        var deltaX = touch.clientX - touchStartX;
+        var deltaY = Math.abs(touch.clientY - touchStartY);
+        var absDeltaX = Math.abs(deltaX);
         
         if (moveDirection === null && (absDeltaX > 5 || deltaY > 5)) {
             if (absDeltaX > deltaY) {
@@ -4663,14 +4727,14 @@ if (sliderWrapper && prevBtn && nextBtn) {
         if (moveDirection === 'vertical') return;
         if (moveDirection === 'horizontal') {
             e.preventDefault();
-            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-            let newScroll = touchStartScrollLeft - deltaX;
+            var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            var newScroll = touchStartScrollLeft - deltaX;
             if (newScroll < 0) newScroll = 0;
             if (newScroll > maxScroll) newScroll = maxScroll;
             sliderWrapper.scrollLeft = newScroll;
-            const timeDelta = Date.now() - startTime;
+            var timeDelta = Date.now() - startTime;
             if (timeDelta > 30) {
-                const delta = lastTouchX - touch.clientX;
+                var delta = lastTouchX - touch.clientX;
                 velocity = delta / timeDelta * 12;
                 lastTouchX = touch.clientX;
                 startTime = Date.now();
@@ -4705,9 +4769,9 @@ if (sliderWrapper && prevBtn && nextBtn) {
     
     window.addEventListener('mousemove', function(e) {
         if (!isMouseDragging) return;
-        const deltaX = mouseStartX - e.clientX;
-        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        let newScroll = mouseStartScrollLeft + deltaX;
+        var deltaX = mouseStartX - e.clientX;
+        var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        var newScroll = mouseStartScrollLeft + deltaX;
         if (newScroll < 0) newScroll = 0;
         if (newScroll > maxScroll) newScroll = maxScroll;
         sliderWrapper.scrollLeft = newScroll;
@@ -4722,35 +4786,35 @@ if (sliderWrapper && prevBtn && nextBtn) {
     });
     
     prevBtn.addEventListener('click', function() {
-        const track = document.querySelector('.features-slider__track');
+        var track = document.querySelector('.features-slider__track');
         if (!track) return;
-        const cards = track.querySelectorAll('.feature-card');
+        var cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
         if (window.innerWidth > 768) {
-            const firstCard = cards[0];
-            const cardWidth = firstCard.offsetWidth;
-            const gap = parseFloat(getComputedStyle(track).gap) || 0;
-            const step = cardWidth + gap;
-            const currentScroll = sliderWrapper.scrollLeft;
+            var firstCard = cards[0];
+            var cardWidth = firstCard.offsetWidth;
+            var gap = parseFloat(getComputedStyle(track).gap) || 0;
+            var step = cardWidth + gap;
+            var currentScroll = sliderWrapper.scrollLeft;
             sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
             return;
         }
         
-        let currentIndex = 0;
-        const containerRect = sliderWrapper.getBoundingClientRect();
-        const centerX = containerRect.left + containerRect.width / 2;
-        let minDistance = Infinity;
+        var currentIndex = 0;
+        var containerRect = sliderWrapper.getBoundingClientRect();
+        var centerX = containerRect.left + containerRect.width / 2;
+        var minDistance = Infinity;
         cards.forEach(function(card, index) {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const distance = Math.abs(cardCenter - centerX);
+            var cardRect = card.getBoundingClientRect();
+            var cardCenter = cardRect.left + cardRect.width / 2;
+            var distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 currentIndex = index;
             }
         });
-        const prevIndex = Math.max(0, currentIndex - 1);
+        var prevIndex = Math.max(0, currentIndex - 1);
         if (prevIndex === 0) {
             cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
         } else {
@@ -4759,36 +4823,36 @@ if (sliderWrapper && prevBtn && nextBtn) {
     });
     
     nextBtn.addEventListener('click', function() {
-        const track = document.querySelector('.features-slider__track');
+        var track = document.querySelector('.features-slider__track');
         if (!track) return;
-        const cards = track.querySelectorAll('.feature-card');
+        var cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
         if (window.innerWidth > 768) {
-            const firstCard = cards[0];
-            const cardWidth = firstCard.offsetWidth;
-            const gap = parseFloat(getComputedStyle(track).gap) || 0;
-            const step = cardWidth + gap;
-            const currentScroll = sliderWrapper.scrollLeft;
-            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            var firstCard = cards[0];
+            var cardWidth = firstCard.offsetWidth;
+            var gap = parseFloat(getComputedStyle(track).gap) || 0;
+            var step = cardWidth + gap;
+            var currentScroll = sliderWrapper.scrollLeft;
+            var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
             sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
             return;
         }
         
-        let currentIndex = 0;
-        const containerRect = sliderWrapper.getBoundingClientRect();
-        const centerX = containerRect.left + containerRect.width / 2;
-        let minDistance = Infinity;
+        var currentIndex = 0;
+        var containerRect = sliderWrapper.getBoundingClientRect();
+        var centerX = containerRect.left + containerRect.width / 2;
+        var minDistance = Infinity;
         cards.forEach(function(card, index) {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const distance = Math.abs(cardCenter - centerX);
+            var cardRect = card.getBoundingClientRect();
+            var cardCenter = cardRect.left + cardRect.width / 2;
+            var distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 currentIndex = index;
             }
         });
-        const nextIndex = Math.min(cards.length - 1, currentIndex + 1);
+        var nextIndex = Math.min(cards.length - 1, currentIndex + 1);
         if (nextIndex === cards.length - 1) {
             cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
         } else {
@@ -4798,8 +4862,8 @@ if (sliderWrapper && prevBtn && nextBtn) {
 }
 
 // ----- FADE ON SCROLL -----
-const fadeElements = document.querySelectorAll('.fade-on-scroll');
-const fadeObserver = new IntersectionObserver(function(entries) {
+var fadeElements = document.querySelectorAll('.fade-on-scroll');
+var fadeObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
         if (entry.isIntersecting) entry.target.classList.add('visible');
         else entry.target.classList.remove('visible');
@@ -4807,15 +4871,46 @@ const fadeObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1 });
 fadeElements.forEach(function(el) { fadeObserver.observe(el); });
 
-// ----- BOOKING -----
-const serviceCards = document.querySelectorAll('.service-card[data-service]');
-const bookingLink = document.getElementById('bookingLink');
-const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
-let selectedServices = [];
+// ============================================================
+// BOOKING — СЧЁТЧИК ВЫБРАННЫХ УСЛУГ И СУММА
+// ============================================================
+var serviceCards = document.querySelectorAll('.service-card[data-service]');
+var bookingLink = document.getElementById('bookingLink');
+var bookingCounter = document.getElementById('bookingCounter');
+var baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
+var selectedServices = [];
+
+// Карта для хранения цен услуг
+var servicePrices = {};
+
+// Собираем цены
+serviceCards.forEach(function(card) {
+    var serviceId = card.getAttribute('data-service');
+    var price = parseInt(card.getAttribute('data-price')) || 0;
+    servicePrices[serviceId] = price;
+});
 
 function updateBookingLink() {
-    bookingLink.href = selectedServices.length === 0 ? baseUrl : baseUrl + selectedServices.join('');
-    bookingLink.setAttribute('aria-label', 'Записаться на выбранные услуги (' + selectedServices.length + ' выбрано)');
+    var count = selectedServices.length;
+    var total = 0;
+    
+    // Считаем сумму
+    selectedServices.forEach(function(id) {
+        total += servicePrices[id] || 0;
+    });
+    
+    // Формируем ссылку
+    bookingLink.href = count === 0 ? baseUrl : baseUrl + selectedServices.join('');
+    
+    // Обновляем счётчик на кнопке
+    if (count === 0) {
+        bookingCounter.textContent = '';
+        bookingLink.setAttribute('aria-label', 'Записаться на услуги');
+    } else {
+        var totalStr = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        bookingCounter.textContent = ' (' + count + ' услуги, ' + totalStr + ' ₽)';
+        bookingLink.setAttribute('aria-label', 'Записаться на ' + count + ' услуг на сумму ' + totalStr + ' рублей');
+    }
 }
 
 function toggleService(card, serviceId) {
@@ -4823,13 +4918,13 @@ function toggleService(card, serviceId) {
         card.classList.remove('service-card--selected');
         selectedServices = selectedServices.filter(function(id) { return id !== serviceId; });
         card.setAttribute('aria-pressed', 'false');
-        let label = card.getAttribute('aria-label') || '';
+        var label = card.getAttribute('aria-label') || '';
         card.setAttribute('aria-label', label.replace(' (выбрано)', ''));
     } else {
         card.classList.add('service-card--selected');
         selectedServices.push(serviceId);
         card.setAttribute('aria-pressed', 'true');
-        let label = card.getAttribute('aria-label') || '';
+        var label = card.getAttribute('aria-label') || '';
         if (!label.includes('(выбрано)')) card.setAttribute('aria-label', label + ' (выбрано)');
     }
     updateBookingLink();
@@ -4853,17 +4948,17 @@ function removeHashFromUrl() {
 
 function smoothScrollToElement(targetElement) {
     if (!targetElement) return;
-    const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
-    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    var headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+    var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({ top: Math.max(0, targetPosition - headerHeight - 1), behavior: 'smooth' });
     removeHashFromUrl();
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
+        var href = this.getAttribute('href');
         if (href === '#' || href === '' || href === '#/') return;
-        const target = document.querySelector(href);
+        var target = document.querySelector(href);
         if (target) {
             e.preventDefault();
             if (mobileNav && mobileNav.classList.contains('open')) closeMobileMenu();
@@ -4874,18 +4969,18 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 
 if (window.location.hash) {
     setTimeout(function() {
-        const target = document.querySelector(window.location.hash);
+        var target = document.querySelector(window.location.hash);
         if (target) smoothScrollToElement(target);
     }, 200);
 }
 
 // ----- TICKER PAUSE -----
 (function() {
-    const tickerElement = document.querySelector('.ticker');
-    const tickerWrap = document.querySelector('.ticker-wrap');
+    var tickerElement = document.querySelector('.ticker');
+    var tickerWrap = document.querySelector('.ticker-wrap');
     
     if (tickerElement && tickerWrap) {
-        let isPaused = false;
+        var isPaused = false;
         
         function updateAriaLabel() {
             tickerWrap.setAttribute('aria-label', isPaused ? 'Бегущая строка на паузе. Нажмите для воспроизведения' : 'Бегущая строка с преимуществами. Нажмите для паузы');
@@ -4913,42 +5008,42 @@ if ('serviceWorker' in navigator) {
 }
 
 // ============================================================
-// COOKIE БАННЕР — ПОЛНАЯ ЛОГИКА
+// COOKIE БАННЕР — ОБНОВЛЁННАЯ ЛОГИКА
 // ============================================================
 (function() {
     'use strict';
 
-    const COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
-    const COOKIE_EXPIRY_DAYS = 365;
+    var COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
+    var COOKIE_EXPIRY_DAYS = 365;
 
-    const banner = document.getElementById('cookieBanner');
-    const settingsModal = document.getElementById('cookieSettings');
-    const acceptBtn = document.getElementById('cookieAcceptBtn');
-    const declineBtn = document.getElementById('cookieDeclineBtn');
-    const settingsBtn = document.getElementById('cookieSettingsBtn');
-    const settingsClose = document.getElementById('cookieSettingsClose');
-    const settingsSave = document.getElementById('cookieSettingsSave');
+    var banner = document.getElementById('cookieBanner');
+    var settingsModal = document.getElementById('cookieSettings');
+    var acceptBtn = document.getElementById('cookieAcceptBtn');
+    var declineBtn = document.getElementById('cookieDeclineBtn');
+    var settingsBtn = document.getElementById('cookieSettingsBtn');
+    var settingsClose = document.getElementById('cookieSettingsClose');
+    var settingsSave = document.getElementById('cookieSettingsSave');
 
-    const analyticsCheckbox = document.getElementById('cookieAnalytics');
-    const marketingCheckbox = document.getElementById('cookieMarketing');
-    const functionalCheckbox = document.getElementById('cookieFunctional');
+    var analyticsCheckbox = document.getElementById('cookieAnalytics');
+    var marketingCheckbox = document.getElementById('cookieMarketing');
+    var functionalCheckbox = document.getElementById('cookieFunctional');
 
     // Элементы модального окна данных
-    const dataModal = document.getElementById('dataModal');
-    const dataControlBtn = document.getElementById('dataControlBtn');
-    const dataModalClose = document.getElementById('dataModalClose');
-    const dataModalDelete = document.getElementById('dataModalDelete');
-    const dataModalReset = document.getElementById('dataModalReset');
+    var dataModal = document.getElementById('dataModal');
+    var dataControlBtn = document.getElementById('dataControlBtn');
+    var dataModalClose = document.getElementById('dataModalClose');
+    var dataModalDelete = document.getElementById('dataModalDelete');
+    var dataModalReset = document.getElementById('dataModalReset');
     
     // Бейджи
-    const themeBadge = document.getElementById('themeBadge');
-    const consentBadge = document.getElementById('consentBadge');
-    const analyticsBadge = document.getElementById('analyticsBadge');
-    const marketingBadge = document.getElementById('marketingBadge');
-    const functionalBadge = document.getElementById('functionalBadge');
+    var themeBadge = document.getElementById('themeBadge');
+    var consentBadge = document.getElementById('consentBadge');
+    var analyticsBadge = document.getElementById('analyticsBadge');
+    var marketingBadge = document.getElementById('marketingBadge');
+    var functionalBadge = document.getElementById('functionalBadge');
 
     function setCookie(name, value, days) {
-        const date = new Date();
+        var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/; SameSite=Lax';
     }
@@ -4958,7 +5053,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function getConsentSettings() {
-        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
+        var saved = localStorage.getItem(COOKIE_CONSENT_KEY);
         if (saved) {
             try {
                 return JSON.parse(saved);
@@ -4968,17 +5063,17 @@ if ('serviceWorker' in navigator) {
     }
 
     function hasConsent() {
-        const saved = getConsentSettings();
+        var saved = getConsentSettings();
         return saved && saved.consent === true;
     }
 
     function hasFunctionalConsent() {
-        const saved = getConsentSettings();
+        var saved = getConsentSettings();
         return saved && saved.consent === true && saved.functional === true;
     }
 
     function saveConsent(settings) {
-        const consentData = {
+        var consentData = {
             consent: true,
             analytics: settings.analytics || false,
             marketing: settings.marketing || false,
@@ -4989,6 +5084,7 @@ if ('serviceWorker' in navigator) {
         setCookie('cookie_consent', JSON.stringify(consentData), COOKIE_EXPIRY_DAYS);
         applyConsent(consentData);
         updateBadges();
+        // Переприменяем тему с сохранением
         applySavedTheme();
     }
 
@@ -5016,7 +5112,7 @@ if ('serviceWorker' in navigator) {
         }
 
         if (consentData.functional) {
-            const savedTheme = localStorage.getItem('theme');
+            var savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-theme');
                 updateThemeIcons(true);
@@ -5036,34 +5132,39 @@ if ('serviceWorker' in navigator) {
     }
 
     function updateBadges() {
-        const settings = getConsentSettings();
+        var settings = getConsentSettings();
         
+        // Тема
         if (themeBadge) {
-            const isLight = document.body.classList.contains('light-theme');
+            var isLight = document.body.classList.contains('light-theme');
             themeBadge.textContent = isLight ? 'светлая' : 'тёмная';
             themeBadge.className = 'badge active';
         }
         
+        // Согласие
         if (consentBadge) {
-            const has = hasConsent();
+            var has = hasConsent();
             consentBadge.textContent = has ? 'принято' : 'не принято';
             consentBadge.className = 'badge ' + (has ? 'active' : 'inactive');
         }
         
+        // Аналитика
         if (analyticsBadge) {
-            const analytics = settings && settings.analytics;
+            var analytics = settings && settings.analytics;
             analyticsBadge.textContent = analytics ? 'активно' : 'не активно';
             analyticsBadge.className = 'badge ' + (analytics ? 'active' : 'inactive');
         }
         
+        // Маркетинг
         if (marketingBadge) {
-            const marketing = settings && settings.marketing;
+            var marketing = settings && settings.marketing;
             marketingBadge.textContent = marketing ? 'активно' : 'не активно';
             marketingBadge.className = 'badge ' + (marketing ? 'active' : 'inactive');
         }
         
+        // Функциональные
         if (functionalBadge) {
-            const functional = settings && settings.functional;
+            var functional = settings && settings.functional;
             functionalBadge.textContent = functional ? 'активно' : 'не активно';
             functionalBadge.className = 'badge ' + (functional ? 'active' : 'inactive');
         }
@@ -5077,7 +5178,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function openSettings() {
-        const saved = getConsentSettings();
+        var saved = getConsentSettings();
         if (saved) {
             analyticsCheckbox.checked = saved.analytics !== undefined ? saved.analytics : true;
             marketingCheckbox.checked = saved.marketing !== undefined ? saved.marketing : true;
@@ -5108,7 +5209,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function acceptAll() {
-        const settings = {
+        var settings = {
             analytics: true,
             marketing: true,
             functional: true
@@ -5133,7 +5234,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function saveSettings() {
-        const settings = {
+        var settings = {
             analytics: analyticsCheckbox.checked,
             marketing: marketingCheckbox.checked,
             functional: functionalCheckbox.checked
@@ -5179,7 +5280,7 @@ if ('serviceWorker' in navigator) {
 
     // Проверяем согласие
     if (hasConsent()) {
-        const settings = getConsentSettings();
+        var settings = getConsentSettings();
         applyConsent(settings);
         banner.style.display = 'none';
         updateBadges();
