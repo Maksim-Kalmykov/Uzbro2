@@ -321,6 +321,7 @@
         .fa-times-circle:before { content: "\f057"; }
         .fa-eye:before { content: "\f06e"; }
         .fa-user-secret:before { content: "\f21b"; }
+        .fa-cog:before { content: "\f013"; }
 
         /* ----- CSS VARIABLES ----- */
         :root {
@@ -1703,6 +1704,21 @@
             box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
         }
 
+        /* АДАПТИВ ДЛЯ .contacts-bottom-row — переход на новую строку при < 895px */
+        @media (max-width: 894px) {
+            .contacts-bottom-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .contacts-worktime,
+            .contacts-payment,
+            .contacts-social {
+                flex: 1 1 100%;
+                min-width: 0;
+                width: 100%;
+            }
+        }
+
         .icon-wrapper {
             width: 2.5rem;
             height: 2.5rem;
@@ -2552,7 +2568,7 @@
             }
         }
         
-        /* ⬇️ СТИЛИ ДЛЯ COOKIE БАННЕРА ⬇️ */
+        /* ⬇️ СТИЛИ ДЛЯ COOKIE БАННЕРА (ОБНОВЛЁННЫЕ) ⬇️ */
         .cookie-banner {
             position: fixed;
             bottom: 0;
@@ -2654,6 +2670,92 @@
         .cookie-banner__btn--settings:hover {
             border-color: var(--accent-color);
             color: var(--accent-color);
+        }
+
+        /* АДАПТИВ ДЛЯ COOKIE БАННЕРА */
+        @media (max-width: 1090px) {
+            .cookie-banner__container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .cookie-banner__text {
+                text-align: center;
+                min-width: 0;
+                font-size: 0.85rem;
+            }
+            .cookie-banner__buttons {
+                justify-content: center;
+                width: 100%;
+            }
+            .cookie-banner__btn {
+                flex: 1;
+                min-width: 0;
+                padding: 8px 12px;
+                font-size: 0.75rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cookie-banner {
+                padding: 10px 12px;
+            }
+            .cookie-banner__text {
+                font-size: 0.75rem;
+                text-align: center;
+            }
+            .cookie-banner__buttons {
+                gap: 6px;
+            }
+            .cookie-banner__btn {
+                padding: 6px 8px;
+                font-size: 0.65rem;
+                flex: 1;
+                min-width: 0;
+                letter-spacing: 0.03em;
+                border-width: 1.5px;
+            }
+            /* Кнопка "Настройки" — только иконка */
+            .cookie-banner__btn--settings {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+                flex: 0 0 auto;
+                min-width: 36px;
+                width: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .cookie-banner__btn--settings .btn-text {
+                display: none;
+            }
+            .cookie-banner__btn--settings .btn-icon {
+                display: inline;
+            }
+            .cookie-banner__btn--accept,
+            .cookie-banner__btn--decline {
+                font-size: 0.6rem;
+                padding: 6px 10px;
+                flex: 1;
+            }
+        }
+
+        /* Иконка для кнопки настроек */
+        .cookie-banner__btn--settings .btn-icon {
+            display: none;
+        }
+        .cookie-banner__btn--settings .btn-text {
+            display: inline;
+        }
+
+        @media (max-width: 500px) {
+            .cookie-banner__btn--settings .btn-icon {
+                display: inline;
+            }
+            .cookie-banner__btn--settings .btn-text {
+                display: none;
+            }
         }
 
         .cookie-settings {
@@ -2819,7 +2921,7 @@
             color: var(--accent-color);
         }
 
-        /* ----- КНОПКА УПРАВЛЕНИЯ ДАННЫМИ (НОВАЯ) ----- */
+        /* ----- КНОПКА УПРАВЛЕНИЯ ДАННЫМИ ----- */
         .data-control-btn {
             background: transparent;
             color: var(--text-muted);
@@ -2841,7 +2943,7 @@
             color: var(--accent-color);
         }
 
-        /* ----- МОДАЛЬНОЕ ОКНО ДАННЫХ (НОВОЕ) ----- */
+        /* ----- МОДАЛЬНОЕ ОКНО ДАННЫХ ----- */
         .data-modal {
             display: none;
             position: fixed;
@@ -2902,7 +3004,7 @@
             margin-bottom: 12px;
         }
 
-        /* ----- СПИСОК ДЛЯ "ВАШИ ПРАВА" (ОБНОВЛЁННЫЙ) ----- */
+        /* ----- СПИСОК ДЛЯ "ВАШИ ПРАВА" ----- */
         .rights-list {
             display: flex;
             flex-direction: column;
@@ -2963,7 +3065,7 @@
             color: var(--accent-hover);
         }
 
-        /* ----- СПИСОК ДЛЯ ДАННЫХ (ОБНОВЛЁННЫЙ) ----- */
+        /* ----- СПИСОК ДЛЯ ДАННЫХ ----- */
         .data-list {
             display: flex;
             flex-direction: column;
@@ -3076,18 +3178,6 @@
 
         /* ----- АДАПТИВ ДЛЯ МОДАЛЬНОГО ОКНА ДАННЫХ ----- */
         @media (max-width: 768px) {
-            .cookie-banner__container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .cookie-banner__buttons {
-                width: 100%;
-                justify-content: center;
-            }
-            .cookie-banner__btn {
-                padding: 8px 16px;
-                font-size: 0.75rem;
-            }
             .cookie-settings__modal {
                 padding: 20px;
                 margin: 10px;
@@ -3127,16 +3217,6 @@
         }
 
         @media (max-width: 480px) {
-            .cookie-banner {
-                padding: 12px 16px;
-            }
-            .cookie-banner__text {
-                font-size: 0.8rem;
-            }
-            .cookie-banner__btn {
-                padding: 6px 12px;
-                font-size: 0.7rem;
-            }
             .data-modal__content {
                 padding: 16px;
             }
@@ -3676,7 +3756,8 @@
         </div>
         <div class="cookie-banner__buttons">
             <button class="cookie-banner__btn cookie-banner__btn--settings" id="cookieSettingsBtn">
-                ⚙️ Настройки
+                <span class="btn-icon">⚙️</span>
+                <span class="btn-text">Настройки</span>
             </button>
             <button class="cookie-banner__btn cookie-banner__btn--decline" id="cookieDeclineBtn">
                 ❌ Отказаться
@@ -3751,7 +3832,7 @@
     </div>
 </div>
 
-<!-- ⬇️ МОДАЛЬНОЕ ОКНО УПРАВЛЕНИЯ ДАННЫМИ (ОБНОВЛЁННОЕ) ⬇️ -->
+<!-- ⬇️ МОДАЛЬНОЕ ОКНО УПРАВЛЕНИЯ ДАННЫМИ ⬇️ -->
 <div class="data-modal" id="dataModal">
     <div class="data-modal__content">
         <div class="data-modal__title">
