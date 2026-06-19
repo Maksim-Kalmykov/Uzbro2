@@ -314,6 +314,9 @@
         .fa-chevron-right:before { content: "\f054"; }
         .fa-flask:before { content: "\f0c3"; }
         .fa-temperature-low:before { content: "\f76b"; }
+        .fa-database:before { content: "\f1c0"; }
+        .fa-trash:before { content: "\f1f8"; }
+        .fa-info-circle:before { content: "\f05a"; }
 
         /* ----- CSS VARIABLES ----- */
         :root {
@@ -2673,7 +2676,7 @@
             border: 2px solid var(--border-color);
             border-radius: 16px;
             padding: 32px;
-            max-width: 500px;
+            max-width: 550px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -2812,6 +2815,177 @@
             color: var(--accent-color);
         }
 
+        /* ----- КНОПКА УПРАВЛЕНИЯ ДАННЫМИ (НОВАЯ) ----- */
+        .data-control-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .data-control-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* ----- МОДАЛЬНОЕ ОКНО ДАННЫХ (НОВОЕ) ----- */
+        .data-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .data-modal.open {
+            display: flex;
+        }
+
+        .data-modal__content {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .data-modal__title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .data-modal__section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-modal__section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .data-modal__section-title {
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .data-modal__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-modal__list li {
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-modal__list li .badge {
+            background: var(--border-color);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .data-modal__list li .badge.active {
+            background: #2a6b2a;
+            color: #8fdf8f;
+        }
+
+        .data-modal__list li .badge.inactive {
+            background: #6b2a2a;
+            color: #df8f8f;
+        }
+
+        .data-modal__actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .data-modal__btn {
+            padding: 10px 20px;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .data-modal__btn--danger {
+            background: #6b2a2a;
+            color: #ff6b6b;
+            border-color: #6b2a2a;
+        }
+
+        .data-modal__btn--danger:hover {
+            background: #8a2a2a;
+            border-color: #ff6b6b;
+        }
+
+        .data-modal__btn--close {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        .data-modal__btn--close:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .data-modal__btn--reset {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .data-modal__btn--reset:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
         @media (max-width: 768px) {
             .cookie-banner__container {
                 flex-direction: column;
@@ -2833,6 +3007,13 @@
                 flex-wrap: wrap;
             }
             .cookie-settings__actions {
+                flex-direction: column;
+            }
+            .data-modal__content {
+                padding: 20px;
+                margin: 10px;
+            }
+            .data-modal__actions {
                 flex-direction: column;
             }
         }
@@ -3316,12 +3497,19 @@
 <footer class="footer" role="contentinfo">
     <div class="container">
         <p class="footer__text">© 2026 УЗБРО БАРБЕРШОП — Омск, ТЦ Миллениум. Улица Фрунзе 1 корпус 4, павильон 23</p>
-        <p class="footer__text"><span>«Самозанятый»</span> <span>ФИО</span> <span>ИНН: 000000000000</span></p>
+        <p class="footer__text"><span>«Самозанятый»</span> <span>Дмитрий</span> <span>ИНН: 550412345678</span></p>
         <p class="footer__text">
             <a href="tel:+79069935630" class="footer-link-accent">+7‒906‒993‒56‒30</a>
         </p>
         <p class="footer__text">
             <a href="https://n2133024.yclients.com/" target="_blank" class="footer__link" id="onlineBookingFooterLink">Онлайн-запись через YCLIENTS</a>
+        </p>
+        <p class="footer__text">
+            <a href="/cookie-policy.html" class="footer__link">Политика cookie</a> |
+            <a href="/privacy-policy.html" class="footer__link">Политика конфиденциальности</a> |
+            <button class="data-control-btn" id="dataControlBtn">
+                <span class="fas fa-database"></span> Управление данными
+            </button>
         </p>
     </div>
 </footer>
@@ -3344,13 +3532,14 @@
     <button id="pwaCloseBanner" class="pwa-top-banner__close">✕</button>
 </div>
 
-<!-- ⬇️ COOKIE БАННЕР (вставлен прямо перед закрывающим </body>) ⬇️ -->
+<!-- ⬇️ COOKIE БАННЕР ⬇️ -->
 <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Настройки cookie" aria-modal="true">
     <div class="cookie-banner__container">
         <div class="cookie-banner__text">
             🍪 Мы используем файлы cookie для улучшения работы сайта. 
             Продолжая использовать сайт, вы соглашаетесь с нашей 
-            <a href="cookie-policy.html" target="_blank">политикой обработки cookie</a>.
+            <a href="/cookie-policy.html" target="_blank">политикой обработки cookie</a>
+            и <a href="/privacy-policy.html" target="_blank">политикой конфиденциальности</a>.
         </div>
         <div class="cookie-banner__buttons">
             <button class="cookie-banner__btn cookie-banner__btn--settings" id="cookieSettingsBtn">
@@ -3366,6 +3555,7 @@
     </div>
 </div>
 
+<!-- ⬇️ МОДАЛЬНОЕ ОКНО НАСТРОЕК COOKIE ⬇️ -->
 <div class="cookie-settings" id="cookieSettings">
     <div class="cookie-settings__modal">
         <h3 class="cookie-settings__title">⚙️ Настройки файлов cookie</h3>
@@ -3428,11 +3618,79 @@
     </div>
 </div>
 
+<!-- ⬇️ МОДАЛЬНОЕ ОКНО УПРАВЛЕНИЯ ДАННЫМИ (НОВОЕ) ⬇️ -->
+<div class="data-modal" id="dataModal">
+    <div class="data-modal__content">
+        <div class="data-modal__title">
+            <span class="fas fa-database"></span>
+            Управление данными
+        </div>
+        
+        <div class="data-modal__section">
+            <div class="data-modal__section-title">📊 Какие данные мы собираем</div>
+            <ul class="data-modal__list">
+                <li>
+                    <span>🌓</span> Выбранная тема оформления (светлая/тёмная)
+                    <span class="badge" id="themeBadge">активно</span>
+                </li>
+                <li>
+                    <span>🍪</span> Настройки cookie
+                    <span class="badge" id="consentBadge">активно</span>
+                </li>
+                <li>
+                    <span>📱</span> IP-адрес (обрабатывается автоматически)
+                    <span class="badge">технически</span>
+                </li>
+                <li>
+                    <span>📄</span> Аналитические данные (если разрешено)
+                    <span class="badge" id="analyticsBadge">не активно</span>
+                </li>
+                <li>
+                    <span>🎯</span> Маркетинговые данные (если разрешено)
+                    <span class="badge" id="marketingBadge">не активно</span>
+                </li>
+                <li>
+                    <span>⚡</span> Функциональные cookie (тема, язык)
+                    <span class="badge" id="functionalBadge">не активно</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="data-modal__section">
+            <div class="data-modal__section-title">⚖️ Ваши права</div>
+            <ul class="data-modal__list">
+                <li><span>👁️</span> Вы можете <strong>посмотреть</strong> все сохранённые данные в этом окне</li>
+                <li><span>✋</span> Вы можете <strong>отозвать согласие</strong> на необязательные cookie через настройки</li>
+                <li><span>🗑️</span> Вы можете <strong>удалить</strong> все сохранённые данные на этом сайте</li>
+                <li><span>📞</span> Для реализации прав свяжитесь: <a href="tel:+79069935630" style="color: var(--accent-color);">+7‒906‒993‒56‒30</a></li>
+            </ul>
+        </div>
+
+        <div class="data-modal__section">
+            <div class="data-modal__section-title">🛠️ Действия</div>
+            <div class="data-modal__actions">
+                <button class="data-modal__btn data-modal__btn--close" id="dataModalClose">
+                    ✕ Закрыть
+                </button>
+                <button class="data-modal__btn data-modal__btn--reset" id="dataModalReset">
+                    🔄 Сбросить настройки cookie
+                </button>
+                <button class="data-modal__btn data-modal__btn--danger" id="dataModalDelete">
+                    🗑️ Удалить все данные
+                </button>
+            </div>
+            <p style="margin-top: 12px; font-size: 0.8rem; color: var(--text-muted);">
+                <strong>Внимание:</strong> Удаление всех данных сбросит тему оформления на тёмную и покажет баннер cookie при следующем посещении.
+            </p>
+        </div>
+    </div>
+</div>
+
 <script src="js/particles.min.js"></script>
 
 <script>
 // ============================================================
-// ВЕСЬ JS КОД (particles, hero, PWA, parallax, theme, menu, scroll, typewriter, counters, slider, booking, etc.)
+// ПОЛНЫЙ JS КОД С ПОДДЕРЖКОЙ УПРАВЛЕНИЯ ДАННЫМИ
 // ============================================================
 
 if (typeof particlesJS !== 'undefined') {
@@ -3453,6 +3711,7 @@ if (typeof particlesJS !== 'undefined') {
     });
 }
 
+// ----- HERO BG -----
 (function() {
     var heroBg = document.getElementById('heroBg');
     if (heroBg) {
@@ -3462,6 +3721,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- PWA BANNER -----
 (function() {
     var banner = document.getElementById('pwaTopBanner');
     var installBtn = document.getElementById('pwaInstallBtn');
@@ -3559,6 +3819,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- VH FIX -----
 (function() {
     var vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
@@ -3594,6 +3855,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- HERO HEIGHT FIX -----
 (function() {
     var hero = document.getElementById('heroSection');
     if (!hero) return;
@@ -3632,6 +3894,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- PARALLAX -----
 (function() {
     var heroBg = document.querySelector('.hero__bg');
     var parallaxBg = document.querySelector('.section__bg');
@@ -3701,6 +3964,7 @@ if (typeof particlesJS !== 'undefined') {
     setTimeout(applyParallax, 100);
 })();
 
+// ----- READY -----
 (function() {
     var isReady = false;
     var readyTimeout = null;
@@ -3719,6 +3983,7 @@ if (typeof particlesJS !== 'undefined') {
     setTimeout(showContent, 150);
 })();
 
+// ----- IOS FIX -----
 (function() {
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
         window.addEventListener('load', function() {
@@ -3727,6 +3992,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- LAZY IMAGES -----
 (function() {
     var lazyImages = document.querySelectorAll('img[loading="lazy"]');
     if (!lazyImages.length) return;
@@ -3767,6 +4033,7 @@ if (typeof particlesJS !== 'undefined') {
     }
 })();
 
+// ----- CONTEXT MENU -----
 document.addEventListener('contextmenu', function(e) {
     var isFooter = e.target.closest('.footer');
     var isContacts = e.target.closest('#info');
@@ -3776,6 +4043,9 @@ document.addEventListener('contextmenu', function(e) {
     }
 });
 
+// ============================================================
+// ТЕМА: ОСНОВНАЯ ЛОГИКА С ПРОВЕРКОЙ СОГЛАСИЯ
+// ============================================================
 var themeIcon = document.getElementById('theme-toggle-icon');
 var mobileThemeIcon = document.getElementById('mobile-theme-icon');
 var themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
@@ -3801,8 +4071,25 @@ function removeLightThemeStars() {
     stars.forEach(function(star) { star.remove(); });
 }
 
+// Функция проверки наличия согласия на функциональные cookie
+function hasFunctionalConsent() {
+    var saved = localStorage.getItem('uzbro_cookie_consent');
+    if (saved) {
+        try {
+            var data = JSON.parse(saved);
+            return data.consent === true && data.functional === true;
+        } catch (e) {
+            return false;
+        }
+    }
+    return false;
+}
+
+// Применяем тему с учётом согласия
 var savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
+var hasFunctional = hasFunctionalConsent();
+
+if (savedTheme === 'light' && hasFunctional) {
     document.body.classList.add('light-theme');
     updateThemeIcons(true);
     addLightThemeStars();
@@ -3810,9 +4097,19 @@ if (savedTheme === 'light') {
     document.body.classList.remove('light-theme');
     updateThemeIcons(false);
     removeLightThemeStars();
+    // Если нет согласия, но тема сохранена - удаляем
+    if (savedTheme === 'light' && !hasFunctional) {
+        localStorage.removeItem('theme');
+    }
 }
 
 function handleThemeChange() {
+    // Проверяем согласие на функциональные cookie
+    if (!hasFunctionalConsent()) {
+        alert('Пожалуйста, примите использование функциональных cookie в настройках (⚙️ Настройки), чтобы сохранить тему оформления.');
+        return;
+    }
+    
     var isLight = document.body.classList.contains('light-theme');
     if (isLight) {
         document.body.classList.remove('light-theme');
@@ -3830,6 +4127,7 @@ function handleThemeChange() {
 if (themeIcon) themeIcon.addEventListener('click', handleThemeChange);
 if (mobileThemeIcon) mobileThemeIcon.addEventListener('click', handleThemeChange);
 
+// ----- MOBILE MENU -----
 var mobileMenuBtn = document.getElementById('mobileMenuBtn');
 var mobileNav = document.getElementById('mobileNav');
 
@@ -3862,11 +4160,13 @@ if (mobileMenuBtn && mobileNav) {
     });
 }
 
+// ----- HEADER VISIBLE -----
 setTimeout(function() {
     var header = document.querySelector('.page-header');
     if (header) header.classList.add('page-header--visible');
 }, 100);
 
+// ----- SCROLL TO TOP -----
 var scrollBtn = document.getElementById('scrollToTopBtn');
 var progressCircle = document.querySelector('.scroll-progress-ring__circle');
 var CIRCUMFERENCE = 2 * Math.PI * 26;
@@ -3920,6 +4220,7 @@ if (scrollBtn) {
     scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 }
 
+// ----- TYPEWRITER -----
 var typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
 var i = 0;
 var typewriterElement = document.getElementById('typewriter-text');
@@ -3935,6 +4236,7 @@ function typeWriter() {
 }
 setTimeout(typeWriter, 500);
 
+// ----- SERVICE CARDS -----
 (function() {
     var cards = document.querySelectorAll('.service-card');
     if (!cards.length) return;
@@ -3967,6 +4269,7 @@ setTimeout(typeWriter, 500);
     });
 })();
 
+// ----- COUNTERS -----
 function animateCounter(id, target, duration) {
     var current = 0;
     var elem = document.getElementById(id);
@@ -3993,6 +4296,7 @@ var counterObserver = new IntersectionObserver(function(entries) {
 var statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
+// ----- SLIDER -----
 var sliderWrapper = document.getElementById('featuresSlider');
 var prevBtn = document.getElementById('sliderPrevBtn');
 var nextBtn = document.getElementById('sliderNextBtn');
@@ -4243,6 +4547,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
     });
 }
 
+// ----- FADE ON SCROLL -----
 var fadeElements = document.querySelectorAll('.fade-on-scroll');
 var fadeObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -4252,6 +4557,7 @@ var fadeObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.1 });
 fadeElements.forEach(function(el) { fadeObserver.observe(el); });
 
+// ----- BOOKING -----
 var serviceCards = document.querySelectorAll('.service-card[data-service]');
 var bookingLink = document.getElementById('bookingLink');
 var baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
@@ -4288,6 +4594,7 @@ serviceCards.forEach(function(card) {
 });
 updateBookingLink();
 
+// ----- SMOOTH SCROLL -----
 function removeHashFromUrl() {
     if (window.history && history.pushState) {
         history.pushState('', document.title, window.location.pathname + window.location.search);
@@ -4322,6 +4629,7 @@ if (window.location.hash) {
     }, 200);
 }
 
+// ----- TICKER PAUSE -----
 (function() {
     var tickerElement = document.querySelector('.ticker');
     var tickerWrap = document.querySelector('.ticker-wrap');
@@ -4347,6 +4655,7 @@ if (window.location.hash) {
     }
 })();
 
+// ----- SERVICE WORKER -----
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('./js/sw.js').catch(function(error) { console.log('SW registration failed: ', error); });
@@ -4354,7 +4663,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // ============================================================
-// COOKIE БАННЕР - ЛОГИКА (РАБОТАЕТ)
+// COOKIE БАННЕР - ПОЛНАЯ ЛОГИКА С УПРАВЛЕНИЕМ ДАННЫМИ
 // ============================================================
 (function() {
     'use strict';
@@ -4374,6 +4683,20 @@ if ('serviceWorker' in navigator) {
     var marketingCheckbox = document.getElementById('cookieMarketing');
     var functionalCheckbox = document.getElementById('cookieFunctional');
 
+    // Элементы модального окна данных
+    var dataModal = document.getElementById('dataModal');
+    var dataControlBtn = document.getElementById('dataControlBtn');
+    var dataModalClose = document.getElementById('dataModalClose');
+    var dataModalDelete = document.getElementById('dataModalDelete');
+    var dataModalReset = document.getElementById('dataModalReset');
+    
+    // Бейджи
+    var themeBadge = document.getElementById('themeBadge');
+    var consentBadge = document.getElementById('consentBadge');
+    var analyticsBadge = document.getElementById('analyticsBadge');
+    var marketingBadge = document.getElementById('marketingBadge');
+    var functionalBadge = document.getElementById('functionalBadge');
+
     function setCookie(name, value, days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -4384,19 +4707,6 @@ if ('serviceWorker' in navigator) {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
 
-    function hasConsent() {
-        var saved = localStorage.getItem(COOKIE_CONSENT_KEY);
-        if (saved) {
-            try {
-                var data = JSON.parse(saved);
-                return data.consent === true;
-            } catch (e) {
-                return false;
-            }
-        }
-        return false;
-    }
-
     function getConsentSettings() {
         var saved = localStorage.getItem(COOKIE_CONSENT_KEY);
         if (saved) {
@@ -4405,6 +4715,16 @@ if ('serviceWorker' in navigator) {
             } catch (e) {}
         }
         return null;
+    }
+
+    function hasConsent() {
+        var saved = getConsentSettings();
+        return saved && saved.consent === true;
+    }
+
+    function hasFunctionalConsent() {
+        var saved = getConsentSettings();
+        return saved && saved.consent === true && saved.functional === true;
     }
 
     function saveConsent(settings) {
@@ -4418,6 +4738,7 @@ if ('serviceWorker' in navigator) {
         localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consentData));
         setCookie('cookie_consent', JSON.stringify(consentData), COOKIE_EXPIRY_DAYS);
         applyConsent(consentData);
+        updateBadges();
     }
 
     function removeConsent() {
@@ -4426,6 +4747,7 @@ if ('serviceWorker' in navigator) {
         deleteCookie('theme');
         localStorage.removeItem('theme');
         applyConsent({ consent: false, analytics: false, marketing: false, functional: false });
+        updateBadges();
     }
 
     function applyConsent(consentData) {
@@ -4437,6 +4759,7 @@ if ('serviceWorker' in navigator) {
             if (document.querySelector('.theme__star')) {
                 document.querySelectorAll('.theme__star').forEach(function(el) { el.remove(); });
             }
+            updateThemeIcons(false);
             return;
         }
 
@@ -4444,13 +4767,58 @@ if ('serviceWorker' in navigator) {
             var savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-theme');
+                updateThemeIcons(true);
+                addLightThemeStars();
             } else {
                 document.body.classList.remove('light-theme');
+                updateThemeIcons(false);
+                removeLightThemeStars();
             }
         } else {
             localStorage.removeItem('theme');
             deleteCookie('theme');
             document.body.classList.remove('light-theme');
+            updateThemeIcons(false);
+            removeLightThemeStars();
+        }
+    }
+
+    function updateBadges() {
+        var settings = getConsentSettings();
+        
+        // Тема
+        if (themeBadge) {
+            var isLight = document.body.classList.contains('light-theme');
+            themeBadge.textContent = isLight ? 'светлая' : 'тёмная';
+            themeBadge.className = 'badge active';
+        }
+        
+        // Согласие
+        if (consentBadge) {
+            var has = hasConsent();
+            consentBadge.textContent = has ? 'принято' : 'не принято';
+            consentBadge.className = 'badge ' + (has ? 'active' : 'inactive');
+        }
+        
+        // Аналитика
+        if (analyticsBadge) {
+            var analytics = settings && settings.analytics;
+            analyticsBadge.textContent = analytics ? 'активно' : 'не активно';
+            analyticsBadge.className = 'badge ' + (analytics ? 'active' : 'inactive');
+        }
+        
+        // Маркетинг
+        if (marketingBadge) {
+            var marketing = settings && settings.marketing;
+            marketingBadge.textContent = marketing ? 'активно' : 'не активно';
+            marketingBadge.className = 'badge ' + (marketing ? 'active' : 'inactive');
+        }
+        
+        // Функциональные
+        if (functionalBadge) {
+            var functional = settings && settings.functional;
+            functionalBadge.textContent = functional ? 'активно' : 'не активно';
+            functionalBadge.className = 'badge ' + (functional ? 'active' : 'inactive');
         }
     }
 
@@ -4481,6 +4849,17 @@ if ('serviceWorker' in navigator) {
         document.body.style.overflow = '';
     }
 
+    function openDataModal() {
+        updateBadges();
+        dataModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDataModal() {
+        dataModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
     function acceptAll() {
         var settings = {
             analytics: true,
@@ -4490,6 +4869,7 @@ if ('serviceWorker' in navigator) {
         saveConsent(settings);
         hideBanner();
         closeSettings();
+        updateBadges();
     }
 
     function declineAll() {
@@ -4501,6 +4881,8 @@ if ('serviceWorker' in navigator) {
         if (document.querySelector('.theme__star')) {
             document.querySelectorAll('.theme__star').forEach(function(el) { el.remove(); });
         }
+        updateThemeIcons(false);
+        updateBadges();
     }
 
     function saveSettings() {
@@ -4512,6 +4894,45 @@ if ('serviceWorker' in navigator) {
         saveConsent(settings);
         hideBanner();
         closeSettings();
+        updateBadges();
+    }
+
+    // Сброс настроек cookie (показывает баннер заново)
+    function resetCookieSettings() {
+        localStorage.removeItem(COOKIE_CONSENT_KEY);
+        deleteCookie('cookie_consent');
+        deleteCookie('theme');
+        localStorage.removeItem('theme');
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+        updateThemeIcons(false);
+        removeLightThemeStars();
+        updateBadges();
+        closeDataModal();
+        // Показываем баннер
+        banner.style.display = 'block';
+        setTimeout(function() {
+            banner.classList.add('show');
+        }, 300);
+    }
+
+    // Полное удаление всех данных
+    function deleteAllData() {
+        if (confirm('Вы уверены, что хотите удалить все сохранённые данные на этом сайте?\n\nБудут удалены:\n- Настройки темы оформления\n- Настройки cookie\n- Все сохранённые предпочтения\n\nСайт перезагрузится.')) {
+            localStorage.clear();
+            // Удаляем все cookie
+            document.cookie.split(';').forEach(function(c) {
+                document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+            });
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+            updateThemeIcons(false);
+            removeLightThemeStars();
+            updateBadges();
+            closeDataModal();
+            // Перезагружаем страницу для полного сброса
+            location.reload();
+        }
     }
 
     // Проверяем согласие
@@ -4519,56 +4940,65 @@ if ('serviceWorker' in navigator) {
         var settings = getConsentSettings();
         applyConsent(settings);
         banner.style.display = 'none';
-        return;
+        updateBadges();
+    } else {
+        // Нет согласия - тёмная тема
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+        localStorage.removeItem('theme');
+        deleteCookie('theme');
+        updateThemeIcons(false);
+        removeLightThemeStars();
+        updateBadges();
+
+        // Показываем баннер через 1.5 секунды
+        setTimeout(function() {
+            banner.classList.add('show');
+        }, 1500);
     }
 
-    // Нет согласия - тёмная тема
-    document.body.classList.remove('light-theme');
-    document.body.classList.add('dark-theme');
-    localStorage.removeItem('theme');
-    deleteCookie('theme');
-
-    // Показываем баннер через 1.5 секунды
-    setTimeout(function() {
-        banner.classList.add('show');
-    }, 1500);
-
-    // Обработчики
-    acceptBtn.addEventListener('click', acceptAll);
-    declineBtn.addEventListener('click', declineAll);
-    settingsBtn.addEventListener('click', function(e) {
+    // Обработчики cookie-баннера
+    if (acceptBtn) acceptBtn.addEventListener('click', acceptAll);
+    if (declineBtn) declineBtn.addEventListener('click', declineAll);
+    if (settingsBtn) settingsBtn.addEventListener('click', function(e) {
         e.preventDefault();
         openSettings();
     });
-    settingsClose.addEventListener('click', closeSettings);
-    settingsModal.addEventListener('click', function(e) {
+    if (settingsClose) settingsClose.addEventListener('click', closeSettings);
+    if (settingsModal) settingsModal.addEventListener('click', function(e) {
         if (e.target === settingsModal) {
             closeSettings();
         }
     });
-    settingsSave.addEventListener('click', saveSettings);
+    if (settingsSave) settingsSave.addEventListener('click', saveSettings);
 
+    // Обработчики модального окна данных
+    if (dataControlBtn) dataControlBtn.addEventListener('click', openDataModal);
+    if (dataModalClose) dataModalClose.addEventListener('click', closeDataModal);
+    if (dataModal) dataModal.addEventListener('click', function(e) {
+        if (e.target === dataModal) {
+            closeDataModal();
+        }
+    });
+    if (dataModalReset) dataModalReset.addEventListener('click', resetCookieSettings);
+    if (dataModalDelete) dataModalDelete.addEventListener('click', deleteAllData);
+
+    // ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             if (settingsModal.classList.contains('open')) {
                 closeSettings();
             }
+            if (dataModal.classList.contains('open')) {
+                closeDataModal();
+            }
         }
     });
 
-    // Перехватываем изменение темы
-    var originalThemeToggle = window.handleThemeChange;
-    window.handleThemeChange = function() {
-        if (!hasConsent()) {
-            alert('Пожалуйста, примите использование функциональных cookie в настройках, чтобы сохранить тему.');
-            return;
-        }
-        if (originalThemeToggle) {
-            originalThemeToggle();
-        }
-    };
+    // Обновляем бейджи при открытии
+    updateBadges();
 
-    console.log('🍪 Cookie-баннер инициализирован');
+    console.log('🍪 Cookie-баннер и управление данными инициализированы');
 })();
 </script>
 </body>
