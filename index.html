@@ -317,6 +317,10 @@
         .fa-database:before { content: "\f1c0"; }
         .fa-trash:before { content: "\f1f8"; }
         .fa-info-circle:before { content: "\f05a"; }
+        .fa-check-circle:before { content: "\f058"; }
+        .fa-times-circle:before { content: "\f057"; }
+        .fa-eye:before { content: "\f06e"; }
+        .fa-user-secret:before { content: "\f21b"; }
 
         /* ----- CSS VARIABLES ----- */
         :root {
@@ -2895,41 +2899,125 @@
             font-weight: 700;
             color: var(--text-color);
             font-size: 1.05rem;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
-        .data-modal__list {
-            list-style: none;
+        /* ----- СПИСОК ДЛЯ "ВАШИ ПРАВА" (ОБНОВЛЁННЫЙ) ----- */
+        .rights-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             padding: 0;
             margin: 0;
+            list-style: none;
         }
 
-        .data-modal__list li {
-            padding: 6px 0;
+        .rights-list__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+            font-size: 0.92rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .rights-list__item:hover {
+            border-color: var(--accent-color);
+            background: var(--bg-secondary);
+        }
+
+        .rights-list__icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-top: 2px;
         }
 
-        .data-modal__list li .badge {
-            background: var(--border-color);
-            padding: 2px 10px;
+        .rights-list__text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .rights-list__text strong {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .rights-list__text .highlight-link {
+            color: var(--accent-color);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .rights-list__text .highlight-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* ----- СПИСОК ДЛЯ ДАННЫХ (ОБНОВЛЁННЫЙ) ----- */
+        .data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .data-list__item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .data-list__item .label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .data-list__item .badge {
+            padding: 2px 12px;
             border-radius: 12px;
             font-size: 0.7rem;
             font-weight: 600;
+            background: var(--border-color);
             color: var(--text-muted);
+            flex-shrink: 0;
         }
 
-        .data-modal__list li .badge.active {
+        .data-list__item .badge.active {
             background: #2a6b2a;
             color: #8fdf8f;
         }
 
-        .data-modal__list li .badge.inactive {
+        .data-list__item .badge.inactive {
             background: #6b2a2a;
             color: #df8f8f;
+        }
+
+        .data-list__item .badge.technical {
+            background: #2a4a6b;
+            color: #8fc8df;
         }
 
         .data-modal__actions {
@@ -2986,6 +3074,7 @@
             transform: scale(1.02);
         }
 
+        /* ----- АДАПТИВ ДЛЯ МОДАЛЬНОГО ОКНА ДАННЫХ ----- */
         @media (max-width: 768px) {
             .cookie-banner__container {
                 flex-direction: column;
@@ -3016,6 +3105,25 @@
             .data-modal__actions {
                 flex-direction: column;
             }
+            .data-modal__title {
+                font-size: 1.2rem;
+            }
+            .rights-list__item {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            .rights-list__icon {
+                width: 24px;
+                height: 24px;
+                font-size: 0.95rem;
+            }
+            .data-list__item {
+                padding: 6px 10px;
+                font-size: 0.82rem;
+            }
+            .data-list__item .label {
+                min-width: 80px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -3028,6 +3136,31 @@
             .cookie-banner__btn {
                 padding: 6px 12px;
                 font-size: 0.7rem;
+            }
+            .data-modal__content {
+                padding: 16px;
+            }
+            .rights-list__item {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                gap: 8px;
+            }
+            .rights-list__icon {
+                width: 20px;
+                height: 20px;
+                font-size: 0.85rem;
+            }
+            .data-list__item {
+                padding: 5px 8px;
+                font-size: 0.75rem;
+            }
+            .data-list__item .label {
+                min-width: 60px;
+            }
+            .data-modal__btn {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+                min-width: 80px;
             }
         }
     </style>
@@ -3618,7 +3751,7 @@
     </div>
 </div>
 
-<!-- ⬇️ МОДАЛЬНОЕ ОКНО УПРАВЛЕНИЯ ДАННЫМИ (НОВОЕ) ⬇️ -->
+<!-- ⬇️ МОДАЛЬНОЕ ОКНО УПРАВЛЕНИЯ ДАННЫМИ (ОБНОВЛЁННОЕ) ⬇️ -->
 <div class="data-modal" id="dataModal">
     <div class="data-modal__content">
         <div class="data-modal__title">
@@ -3628,29 +3761,29 @@
         
         <div class="data-modal__section">
             <div class="data-modal__section-title">📊 Какие данные мы собираем</div>
-            <ul class="data-modal__list">
-                <li>
-                    <span>🌓</span> Выбранная тема оформления (светлая/тёмная)
-                    <span class="badge" id="themeBadge">активно</span>
+            <ul class="data-list">
+                <li class="data-list__item">
+                    <span class="label"><span>🌓</span> Тема оформления</span>
+                    <span class="badge" id="themeBadge">тёмная</span>
                 </li>
-                <li>
-                    <span>🍪</span> Настройки cookie
-                    <span class="badge" id="consentBadge">активно</span>
+                <li class="data-list__item">
+                    <span class="label"><span>🍪</span> Настройки cookie</span>
+                    <span class="badge" id="consentBadge">не принято</span>
                 </li>
-                <li>
-                    <span>📱</span> IP-адрес (обрабатывается автоматически)
-                    <span class="badge">технически</span>
+                <li class="data-list__item">
+                    <span class="label"><span>📱</span> IP-адрес</span>
+                    <span class="badge technical">обрабатывается</span>
                 </li>
-                <li>
-                    <span>📄</span> Аналитические данные (если разрешено)
+                <li class="data-list__item">
+                    <span class="label"><span>📄</span> Аналитические данные</span>
                     <span class="badge" id="analyticsBadge">не активно</span>
                 </li>
-                <li>
-                    <span>🎯</span> Маркетинговые данные (если разрешено)
+                <li class="data-list__item">
+                    <span class="label"><span>🎯</span> Маркетинговые данные</span>
                     <span class="badge" id="marketingBadge">не активно</span>
                 </li>
-                <li>
-                    <span>⚡</span> Функциональные cookie (тема, язык)
+                <li class="data-list__item">
+                    <span class="label"><span>⚡</span> Функциональные cookie</span>
                     <span class="badge" id="functionalBadge">не активно</span>
                 </li>
             </ul>
@@ -3658,11 +3791,31 @@
 
         <div class="data-modal__section">
             <div class="data-modal__section-title">⚖️ Ваши права</div>
-            <ul class="data-modal__list">
-                <li><span>👁️</span> Вы можете <strong>посмотреть</strong> все сохранённые данные в этом окне</li>
-                <li><span>✋</span> Вы можете <strong>отозвать согласие</strong> на необязательные cookie через настройки</li>
-                <li><span>🗑️</span> Вы можете <strong>удалить</strong> все сохранённые данные на этом сайте</li>
-                <li><span>📞</span> Для реализации прав свяжитесь: <a href="tel:+79069935630" style="color: var(--accent-color);">+7‒906‒993‒56‒30</a></li>
+            <ul class="rights-list">
+                <li class="rights-list__item">
+                    <span class="rights-list__icon">👁️</span>
+                    <span class="rights-list__text">
+                        <strong>Знать</strong> — все собираемые данные перечислены выше в этом окне
+                    </span>
+                </li>
+                <li class="rights-list__item">
+                    <span class="rights-list__icon">✋</span>
+                    <span class="rights-list__text">
+                        <strong>Отозвать согласие</strong> — через кнопку <span class="highlight-link">«Настройки»</span> в cookie-баннере
+                    </span>
+                </li>
+                <li class="rights-list__item">
+                    <span class="rights-list__icon">🗑️</span>
+                    <span class="rights-list__text">
+                        <strong>Удалить данные</strong> — нажмите кнопку <span class="highlight-link">«Удалить все данные»</span> ниже
+                    </span>
+                </li>
+                <li class="rights-list__item">
+                    <span class="rights-list__icon">📞</span>
+                    <span class="rights-list__text">
+                        <strong>Связаться</strong> — по телефону <a href="tel:+79069935630" class="highlight-link">+7‒906‒993‒56‒30</a>
+                    </span>
+                </li>
             </ul>
         </div>
 
@@ -3690,7 +3843,7 @@
 
 <script>
 // ============================================================
-// ПОЛНЫЙ JS КОД С ПОДДЕРЖКОЙ УПРАВЛЕНИЯ ДАННЫМИ
+// ПОЛНЫЙ JS КОД — ОБНОВЛЁННАЯ ЛОГИКА ТЕМЫ БЕЗ СОХРАНЕНИЯ ПРИ ОТСУТСТВИИ СОГЛАСИЯ
 // ============================================================
 
 if (typeof particlesJS !== 'undefined') {
@@ -4044,12 +4197,15 @@ document.addEventListener('contextmenu', function(e) {
 });
 
 // ============================================================
-// ТЕМА: ОСНОВНАЯ ЛОГИКА С ПРОВЕРКОЙ СОГЛАСИЯ
+// ТЕМА: ОСНОВНАЯ ЛОГИКА — БЕЗ СОХРАНЕНИЯ ПРИ ОТСУТСТВИИ СОГЛАСИЯ
 // ============================================================
 var themeIcon = document.getElementById('theme-toggle-icon');
 var mobileThemeIcon = document.getElementById('mobile-theme-icon');
 var themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
 var mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
+
+// Флаг — хранит текущую тему (true = светлая, false = тёмная)
+var currentThemeIsLight = false;
 
 function updateThemeIcons(isLight) {
     if (themeIconSpan) themeIconSpan.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
@@ -4085,42 +4241,55 @@ function hasFunctionalConsent() {
     return false;
 }
 
-// Применяем тему с учётом согласия
-var savedTheme = localStorage.getItem('theme');
-var hasFunctional = hasFunctionalConsent();
-
-if (savedTheme === 'light' && hasFunctional) {
-    document.body.classList.add('light-theme');
-    updateThemeIcons(true);
-    addLightThemeStars();
-} else {
-    document.body.classList.remove('light-theme');
-    updateThemeIcons(false);
-    removeLightThemeStars();
-    // Если нет согласия, но тема сохранена - удаляем
-    if (savedTheme === 'light' && !hasFunctional) {
-        localStorage.removeItem('theme');
+// Применяем тему при загрузке
+function applySavedTheme() {
+    var savedTheme = localStorage.getItem('theme');
+    var hasFunctional = hasFunctionalConsent();
+    
+    if (savedTheme === 'light' && hasFunctional) {
+        document.body.classList.add('light-theme');
+        currentThemeIsLight = true;
+        updateThemeIcons(true);
+        addLightThemeStars();
+    } else {
+        document.body.classList.remove('light-theme');
+        currentThemeIsLight = false;
+        updateThemeIcons(false);
+        removeLightThemeStars();
+        if (savedTheme === 'light' && !hasFunctional) {
+            localStorage.removeItem('theme');
+        }
     }
 }
 
+applySavedTheme();
+
+// Переключение темы — БЕЗ СОХРАНЕНИЯ ЕСЛИ НЕТ СОГЛАСИЯ
 function handleThemeChange() {
-    // Проверяем согласие на функциональные cookie
-    if (!hasFunctionalConsent()) {
-        alert('Пожалуйста, примите использование функциональных cookie в настройках (⚙️ Настройки), чтобы сохранить тему оформления.');
-        return;
-    }
-    
+    var hasFunctional = hasFunctionalConsent();
     var isLight = document.body.classList.contains('light-theme');
+    
     if (isLight) {
+        // Переключаем на тёмную
         document.body.classList.remove('light-theme');
-        localStorage.setItem('theme', 'dark');
+        currentThemeIsLight = false;
         updateThemeIcons(false);
         removeLightThemeStars();
+        // Если есть согласие — сохраняем
+        if (hasFunctional) {
+            localStorage.setItem('theme', 'dark');
+        }
     } else {
+        // Переключаем на светлую
         document.body.classList.add('light-theme');
-        localStorage.setItem('theme', 'light');
+        currentThemeIsLight = true;
         updateThemeIcons(true);
         addLightThemeStars();
+        // Если есть согласие — сохраняем
+        if (hasFunctional) {
+            localStorage.setItem('theme', 'light');
+        }
+        // Если нет согласия — не сохраняем, но тема меняется (временная)
     }
 }
 
@@ -4663,7 +4832,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // ============================================================
-// COOKIE БАННЕР - ПОЛНАЯ ЛОГИКА С УПРАВЛЕНИЕМ ДАННЫМИ
+// COOKIE БАННЕР — ОБНОВЛЁННАЯ ЛОГИКА
 // ============================================================
 (function() {
     'use strict';
@@ -4739,6 +4908,8 @@ if ('serviceWorker' in navigator) {
         setCookie('cookie_consent', JSON.stringify(consentData), COOKIE_EXPIRY_DAYS);
         applyConsent(consentData);
         updateBadges();
+        // Переприменяем тему с сохранением
+        applySavedTheme();
     }
 
     function removeConsent() {
@@ -4748,6 +4919,7 @@ if ('serviceWorker' in navigator) {
         localStorage.removeItem('theme');
         applyConsent({ consent: false, analytics: false, marketing: false, functional: false });
         updateBadges();
+        applySavedTheme();
     }
 
     function applyConsent(consentData) {
@@ -4897,7 +5069,6 @@ if ('serviceWorker' in navigator) {
         updateBadges();
     }
 
-    // Сброс настроек cookie (показывает баннер заново)
     function resetCookieSettings() {
         localStorage.removeItem(COOKIE_CONSENT_KEY);
         deleteCookie('cookie_consent');
@@ -4909,18 +5080,15 @@ if ('serviceWorker' in navigator) {
         removeLightThemeStars();
         updateBadges();
         closeDataModal();
-        // Показываем баннер
         banner.style.display = 'block';
         setTimeout(function() {
             banner.classList.add('show');
         }, 300);
     }
 
-    // Полное удаление всех данных
     function deleteAllData() {
         if (confirm('Вы уверены, что хотите удалить все сохранённые данные на этом сайте?\n\nБудут удалены:\n- Настройки темы оформления\n- Настройки cookie\n- Все сохранённые предпочтения\n\nСайт перезагрузится.')) {
             localStorage.clear();
-            // Удаляем все cookie
             document.cookie.split(';').forEach(function(c) {
                 document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
             });
@@ -4930,7 +5098,6 @@ if ('serviceWorker' in navigator) {
             removeLightThemeStars();
             updateBadges();
             closeDataModal();
-            // Перезагружаем страницу для полного сброса
             location.reload();
         }
     }
@@ -4942,7 +5109,6 @@ if ('serviceWorker' in navigator) {
         banner.style.display = 'none';
         updateBadges();
     } else {
-        // Нет согласия - тёмная тема
         document.body.classList.remove('light-theme');
         document.body.classList.add('dark-theme');
         localStorage.removeItem('theme');
@@ -4951,7 +5117,6 @@ if ('serviceWorker' in navigator) {
         removeLightThemeStars();
         updateBadges();
 
-        // Показываем баннер через 1.5 секунды
         setTimeout(function() {
             banner.classList.add('show');
         }, 1500);
@@ -4995,7 +5160,6 @@ if ('serviceWorker' in navigator) {
         }
     });
 
-    // Обновляем бейджи при открытии
     updateBadges();
 
     console.log('🍪 Cookie-баннер и управление данными инициализированы');
