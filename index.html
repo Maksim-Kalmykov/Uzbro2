@@ -4125,6 +4125,31 @@
     </div>
 </div>
 
+<!-- Оффлайн-индикатор -->
+<div id="offlineIndicator" style="display:none; position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:#6b2a2a; color:#ff6b6b; padding:8px 20px; border-radius:30px; font-size:0.8rem; font-weight:600; z-index:9999; border:1px solid #ff6b6b; box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+    📡 Нет интернета — сайт работает в офлайн-режиме
+</div>
+
+<script>
+// Показываем индикатор при потере сети
+window.addEventListener('online', function() {
+    var indicator = document.getElementById('offlineIndicator');
+    if (indicator) indicator.style.display = 'none';
+});
+
+window.addEventListener('offline', function() {
+    var indicator = document.getElementById('offlineIndicator');
+    if (indicator) indicator.style.display = 'block';
+});
+
+// Проверяем при загрузке
+if (!navigator.onLine) {
+    var indicator = document.getElementById('offlineIndicator');
+    if (indicator) indicator.style.display = 'block';
+}
+</script>
+
+
 <script src="js/particles.min.js"></script>
 
 <script>
