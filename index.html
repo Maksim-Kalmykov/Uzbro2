@@ -1366,15 +1366,21 @@
             will-change: transform;
         }
 
-        /* ----- SERVICES ----- */
+        /* ============================================================ */
+        /* ===== СЕТКА УСЛУГ С ЦЕНТРИРОВАНИЕМ ПОСЛЕДНЕГО РЯДА ===== */
+        /* ============================================================ */
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 2rem;
             margin: 2rem 0 1.25rem;
         }
 
         .service-card {
+            flex: 0 1 calc(33.333% - 2rem);
+            min-width: 280px;
+            max-width: 400px;
             background: var(--bg-card);
             border: 0.18rem solid var(--border-color);
             padding: 1.5rem;
@@ -1385,6 +1391,22 @@
             transform-style: preserve-3d;
             border-radius: var(--border-radius-card);
             touch-action: manipulation;
+        }
+
+        @media (max-width: 992px) {
+            .service-card {
+                flex: 0 1 calc(50% - 2rem);
+                min-width: 260px;
+                max-width: 380px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .service-card {
+                flex: 0 1 100%;
+                min-width: 0;
+                max-width: 100%;
+            }
         }
 
         .service-card:active {
@@ -1465,124 +1487,71 @@
             margin-top: 3rem;
         }
 
-        /* ===== БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ ===== */
-        .services-summary {
-            display: none;
-            margin: 0.5rem 0 1.5rem 0;
-            padding: 0.75rem 1.5rem;
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent-color);
-            border-radius: var(--border-radius-card);
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.05);
-        }
-
-        .services-summary.visible {
-            display: block;
-            animation: summaryFadeIn 0.4s ease;
-        }
-
-        @keyframes summaryFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .services-summary__text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-color);
+        /* ============================================================ */
+        /* ===== СЕТКА РАБОТ МАСТЕРА С ЦЕНТРИРОВАНИЕМ ===== */
+        /* ============================================================ */
+        .gallery-grid {
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 0.5rem 1.5rem;
+            justify-content: center;
+            gap: 1.75rem;
+            margin-top: 1.875rem;
         }
 
-        .services-summary__text .count {
-            color: var(--accent-color);
-            font-weight: 800;
-            font-size: 1.3rem;
+        .gallery-item {
+            flex: 0 1 calc(25% - 1.75rem);
+            min-width: 200px;
+            max-width: 320px;
+            background-color: var(--bg-card);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
         }
 
-        .services-summary__text .total {
-            color: var(--accent-color);
-            font-weight: 800;
-            font-size: 1.3rem;
+        .gallery-item__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.4s ease;
+            display: block;
         }
 
-        .services-summary__text .label {
+        .gallery-caption {
+            text-align: center;
+            margin-top: 1rem;
             color: var(--text-muted);
-            font-weight: 400;
+            font-size: 0.9rem;
         }
 
-        .services-summary__text .divider {
-            color: var(--border-color);
-            font-weight: 300;
-        }
-
-        .services-summary__clear {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s ease;
-            text-decoration: underline;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .services-summary__clear:hover {
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 500px) {
-            .services-summary {
-                padding: 0.6rem 0.75rem;
-            }
-            .services-summary__text {
-                font-size: 0.95rem;
-                gap: 0.25rem 0.5rem;
-                flex-wrap: wrap;
-            }
-            .services-summary__text .count,
-            .services-summary__text .total {
-                font-size: 1.1rem;
-            }
-            .services-summary__text .label {
-                font-size: 0.85rem;
-            }
-            .services-summary__clear {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.5rem;
-                width: 100%;
-                text-align: center;
-                margin-top: 0.25rem;
-            }
-            .services-summary__text .divider {
-                display: none;
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex: 0 1 calc(33.333% - 1.75rem);
+                min-width: 180px;
+                max-width: 300px;
             }
         }
 
-        @media (max-width: 380px) {
-            .services-summary__text {
-                font-size: 0.85rem;
-                gap: 0.15rem 0.3rem;
+        @media (max-width: 640px) {
+            .gallery-item {
+                flex: 0 1 calc(50% - 1rem);
+                min-width: 140px;
+                max-width: 250px;
             }
-            .services-summary__text .count,
-            .services-summary__text .total {
-                font-size: 1rem;
+            .gallery-grid {
+                gap: 1rem;
             }
-            .services-summary {
-                padding: 0.5rem 0.5rem;
+        }
+
+        @media (max-width: 420px) {
+            .gallery-item {
+                flex: 0 1 calc(50% - 0.75rem);
+                min-width: 120px;
+                max-width: 200px;
+            }
+            .gallery-grid {
+                gap: 0.75rem;
             }
         }
 
@@ -1737,55 +1706,6 @@
         @media (min-width: 769px) {
             .slider-grid .slider-nav-btn {
                 display: flex;
-            }
-        }
-
-        /* ----- GALLERY ----- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.75rem;
-            margin-top: 1.875rem;
-        }
-
-        .gallery-item {
-            background-color: var(--bg-card);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
-        }
-
-        .gallery-item__img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: 0.4s ease;
-            display: block;
-        }
-
-        .gallery-caption {
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 992px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.25rem;
-            }
-        }
-
-        @media (max-width: 678px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                max-width: 25rem;
-                margin-left: auto;
-                margin-right: auto;
             }
         }
 
@@ -3435,6 +3355,127 @@
                 min-width: 80px;
             }
         }
+
+        /* ===== БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ ===== */
+        .services-summary {
+            display: none;
+            margin: 0.5rem 0 1.5rem 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-color);
+            border-radius: var(--border-radius-card);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.05);
+        }
+
+        .services-summary.visible {
+            display: block;
+            animation: summaryFadeIn 0.4s ease;
+        }
+
+        @keyframes summaryFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services-summary__text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+        }
+
+        .services-summary__text .count {
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .services-summary__text .total {
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .services-summary__text .label {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .services-summary__text .divider {
+            color: var(--border-color);
+            font-weight: 300;
+        }
+
+        .services-summary__clear {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s ease;
+            text-decoration: underline;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .services-summary__clear:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 500px) {
+            .services-summary {
+                padding: 0.6rem 0.75rem;
+            }
+            .services-summary__text {
+                font-size: 0.95rem;
+                gap: 0.25rem 0.5rem;
+                flex-wrap: wrap;
+            }
+            .services-summary__text .count,
+            .services-summary__text .total {
+                font-size: 1.1rem;
+            }
+            .services-summary__text .label {
+                font-size: 0.85rem;
+            }
+            .services-summary__clear {
+                font-size: 0.7rem;
+                padding: 0.2rem 0.5rem;
+                width: 100%;
+                text-align: center;
+                margin-top: 0.25rem;
+            }
+            .services-summary__text .divider {
+                display: none;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .services-summary__text {
+                font-size: 0.85rem;
+                gap: 0.15rem 0.3rem;
+            }
+            .services-summary__text .count,
+            .services-summary__text .total {
+                font-size: 1rem;
+            }
+            .services-summary {
+                padding: 0.5rem 0.5rem;
+            }
+        }
     </style>
 
     <script type="application/ld+json">
@@ -3472,15 +3513,15 @@
     <!-- ⚡ КРИТИЧЕСКИЙ СКРИПТ: фиксация высоты hero с учётом шапки и бегущей строки (БЕЗ СКАЧКА) -->
     <script>
         (function() {
-            var hero = document.getElementById('heroSection');
-            var header = document.querySelector('.page-header');
-            var ticker = document.querySelector('.hero-ticker');
+            const hero = document.getElementById('heroSection');
+            const header = document.querySelector('.page-header');
+            const ticker = document.querySelector('.hero-ticker');
             
             function setHeroHeight() {
                 if (!hero) return;
-                var headerHeight = header ? header.offsetHeight : 70;
-                var tickerHeight = ticker ? ticker.offsetHeight : 0;
-                var heroHeight = Math.max(window.innerHeight - headerHeight - tickerHeight, 300);
+                const headerHeight = header ? header.offsetHeight : 70;
+                const tickerHeight = ticker ? ticker.offsetHeight : 0;
+                const heroHeight = Math.max(window.innerHeight - headerHeight - tickerHeight, 300);
                 hero.style.minHeight = heroHeight + 'px';
                 hero.style.height = heroHeight + 'px';
             }
@@ -3622,7 +3663,7 @@
                 </div>
                 <div class="service-card fade-on-scroll fade-up" data-service="s28340082" data-price="1600" tabindex="0" role="button" aria-label="Моделирование бороды и бритьё, цена 1600 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
-                        <span class="fas fa-hand-sparkles service-card__icon" aria-hidden="true"></span>
+                        <span class="fas fa-fist-raised service-card__icon" aria-hidden="true"></span>
                     </div>
                     <h3 class="service-card__title">Моделирование бороды / Бритьё</h3>
                     <div class="service-card__price">1 600 ₽</div>
@@ -3716,7 +3757,7 @@
                             <p class="feature-card__text">Стерильность и безопасность</p>
                         </div>
                         <div class="feature-card">
-                            <span class="fas fa-hand-sparkles feature-card__icon"></span>
+                            <span class="fas fa-eye feature-card__icon"></span>
                             <h3 class="feature-card__title">Массаж лица</h3>
                             <p class="feature-card__text">Расслабление после бритья</p>
                         </div>
@@ -4133,28 +4174,27 @@
 <script>
 // Показываем индикатор при потере сети
 window.addEventListener('online', function() {
-    var indicator = document.getElementById('offlineIndicator');
+    const indicator = document.getElementById('offlineIndicator');
     if (indicator) indicator.style.display = 'none';
 });
 
 window.addEventListener('offline', function() {
-    var indicator = document.getElementById('offlineIndicator');
+    const indicator = document.getElementById('offlineIndicator');
     if (indicator) indicator.style.display = 'block';
 });
 
 // Проверяем при загрузке
 if (!navigator.onLine) {
-    var indicator = document.getElementById('offlineIndicator');
+    const indicator = document.getElementById('offlineIndicator');
     if (indicator) indicator.style.display = 'block';
 }
 </script>
-
 
 <script src="js/particles.min.js"></script>
 
 <script>
 // ============================================================
-// ПОЛНЫЙ JS КОД
+// ПОЛНЫЙ JS КОД (исправлено: const/let вместо var)
 // ============================================================
 
 if (typeof particlesJS !== 'undefined') {
@@ -4176,24 +4216,24 @@ if (typeof particlesJS !== 'undefined') {
 }
 
 // ----- HERO BG -----
-(function() {
-    var heroBg = document.getElementById('heroBg');
+(() => {
+    const heroBg = document.getElementById('heroBg');
     if (heroBg) {
-        window.addEventListener('load', function() {
+        window.addEventListener('load', () => {
             heroBg.style.backgroundImage = "url('images/1-1.jpg')";
         });
     }
 })();
 
 // ----- PWA BANNER -----
-(function() {
-    var banner = document.getElementById('pwaTopBanner');
-    var installBtn = document.getElementById('pwaInstallBtn');
-    var closeBtn = document.getElementById('pwaCloseBanner');
+(() => {
+    const banner = document.getElementById('pwaTopBanner');
+    const installBtn = document.getElementById('pwaInstallBtn');
+    const closeBtn = document.getElementById('pwaCloseBanner');
     
-    var deferredPrompt = null;
-    var bannerTimeout = null;
-    var bannerVisible = false;
+    let deferredPrompt = null;
+    let bannerTimeout = null;
+    let bannerVisible = false;
     
     function isAppInstalled() {
         return window.matchMedia('(display-mode: standalone)').matches || 
@@ -4208,7 +4248,7 @@ if (typeof particlesJS !== 'undefined') {
             clearTimeout(bannerTimeout);
             bannerTimeout = null;
         }
-        setTimeout(function() {
+        setTimeout(() => {
             if (!bannerVisible) {
                 banner.classList.add('hide');
             }
@@ -4226,22 +4266,22 @@ if (typeof particlesJS !== 'undefined') {
         }
         banner.classList.remove('hide');
         bannerVisible = true;
-        setTimeout(function() {
+        setTimeout(() => {
             if (bannerVisible) {
                 banner.classList.add('show');
             }
         }, 50);
         if (bannerTimeout) clearTimeout(bannerTimeout);
-        bannerTimeout = setTimeout(function() {
+        bannerTimeout = setTimeout(() => {
             hideBanner();
         }, 25000);
     }
     
     if (installBtn) {
-        installBtn.addEventListener('click', function() {
+        installBtn.addEventListener('click', () => {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(function(choiceResult) {
+                deferredPrompt.userChoice.then((choiceResult) => {
                     deferredPrompt = null;
                     if (choiceResult.outcome === 'accepted') {
                         hideBanner();
@@ -4252,12 +4292,12 @@ if (typeof particlesJS !== 'undefined') {
     }
     
     if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
+        closeBtn.addEventListener('click', () => {
             hideBanner();
         });
     }
     
-    window.addEventListener('beforeinstallprompt', function(e) {
+    window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
         if (!isAppInstalled()) {
@@ -4266,8 +4306,8 @@ if (typeof particlesJS !== 'undefined') {
     });
     
     if (window.matchMedia) {
-        var displayModeQuery = window.matchMedia('(display-mode: standalone)');
-        displayModeQuery.addEventListener('change', function(e) {
+        const displayModeQuery = window.matchMedia('(display-mode: standalone)');
+        displayModeQuery.addEventListener('change', (e) => {
             if (e.matches) {
                 hideBanner();
             } else {
@@ -4284,15 +4324,15 @@ if (typeof particlesJS !== 'undefined') {
 })();
 
 // ----- VH FIX -----
-(function() {
-    var vh = window.innerHeight * 0.01;
+(() => {
+    let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', vh + 'px');
     
-    var ticking = false;
-    var lastVh = vh;
+    let ticking = false;
+    let lastVh = vh;
     
     function updateVh() {
-        var newVh = window.innerHeight * 0.01;
+        const newVh = window.innerHeight * 0.01;
         if (Math.abs(newVh - lastVh) > 0.05) {
             lastVh = newVh;
             document.documentElement.style.setProperty('--vh', newVh + 'px');
@@ -4300,7 +4340,7 @@ if (typeof particlesJS !== 'undefined') {
         ticking = false;
     }
     
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', () => {
         if (!ticking) {
             requestAnimationFrame(updateVh);
             ticking = true;
@@ -4310,27 +4350,27 @@ if (typeof particlesJS !== 'undefined') {
     updateVh();
     
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        window.addEventListener('load', function() {
-            setTimeout(function() { 
+        window.addEventListener('load', () => {
+            setTimeout(() => { 
                 window.scrollTo(0, 1);
-                setTimeout(function() { window.scrollTo(0, 0); }, 50);
+                setTimeout(() => { window.scrollTo(0, 0); }, 50);
             }, 100);
         });
     }
 })();
 
 // ----- HERO HEIGHT FIX -----
-(function() {
-    var hero = document.getElementById('heroSection');
+(() => {
+    const hero = document.getElementById('heroSection');
     if (!hero) return;
     
-    var heroFixedHeight = null;
-    var resizeTimer = null;
+    let heroFixedHeight = null;
+    let resizeTimer = null;
     
     function fixHeroHeight() {
-        var viewportHeight = window.innerHeight;
-        var headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
-        var desiredHeight = Math.max(viewportHeight - headerHeight, 450);
+        const viewportHeight = window.innerHeight;
+        const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+        const desiredHeight = Math.max(viewportHeight - headerHeight, 450);
         
         if (heroFixedHeight === null || Math.abs(hero.offsetHeight - desiredHeight) > 50) {
             heroFixedHeight = desiredHeight;
@@ -4341,13 +4381,13 @@ if (typeof particlesJS !== 'undefined') {
     
     function onOrientationChange() {
         if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
+        resizeTimer = setTimeout(() => {
             heroFixedHeight = null;
             fixHeroHeight();
         }, 100);
     }
     
-    window.addEventListener('load', function() {
+    window.addEventListener('load', () => {
         fixHeroHeight();
         setTimeout(fixHeroHeight, 100);
     });
@@ -4359,26 +4399,26 @@ if (typeof particlesJS !== 'undefined') {
 })();
 
 // ----- PARALLAX -----
-(function() {
-    var heroBg = document.querySelector('.hero__bg');
-    var parallaxBg = document.querySelector('.section__bg');
+(() => {
+    const heroBg = document.querySelector('.hero__bg');
+    const parallaxBg = document.querySelector('.section__bg');
     
     if (!heroBg && !parallaxBg) return;
     
-    var ticking = false;
+    let ticking = false;
     
     function applyParallax() {
-        var scrollY = window.scrollY;
+        const scrollY = window.scrollY;
         
         if (heroBg) {
-            var heroSection = document.getElementById('heroSection');
+            const heroSection = document.getElementById('heroSection');
             if (heroSection) {
-                var rect = heroSection.getBoundingClientRect();
-                var heroTop = rect.top + scrollY;
-                var heroBottom = heroTop + rect.height;
+                const rect = heroSection.getBoundingClientRect();
+                const heroTop = rect.top + scrollY;
+                const heroBottom = heroTop + rect.height;
                 
                 if (scrollY + window.innerHeight > heroTop && scrollY < heroBottom) {
-                    var offset = (scrollY - heroTop) * 0.3;
+                    const offset = (scrollY - heroTop) * 0.3;
                     heroBg.style.transform = 'translateY(' + offset + 'px)';
                 } else if (scrollY < heroTop) {
                     heroBg.style.transform = 'translateY(0px)';
@@ -4387,14 +4427,14 @@ if (typeof particlesJS !== 'undefined') {
         }
         
         if (parallaxBg) {
-            var parallaxSection = document.getElementById('parallax-combined');
+            const parallaxSection = document.getElementById('parallax-combined');
             if (parallaxSection) {
-                var rect = parallaxSection.getBoundingClientRect();
-                var sectionTop = rect.top + scrollY;
-                var sectionBottom = sectionTop + rect.height;
+                const rect = parallaxSection.getBoundingClientRect();
+                const sectionTop = rect.top + scrollY;
+                const sectionBottom = sectionTop + rect.height;
                 
                 if (scrollY + window.innerHeight > sectionTop && scrollY < sectionBottom) {
-                    var offset = (scrollY - sectionTop) * 0.4;
+                    const offset = (scrollY - sectionTop) * 0.4;
                     parallaxBg.style.transform = 'translateY(' + offset + 'px)';
                 } else if (scrollY < sectionTop) {
                     parallaxBg.style.transform = 'translateY(0px)';
@@ -4412,10 +4452,10 @@ if (typeof particlesJS !== 'undefined') {
         }
     }
     
-    var resizeTimeout;
+    let resizeTimeout;
     function onResize() {
         if (resizeTimeout) clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
+        resizeTimeout = setTimeout(() => {
             if (heroBg) heroBg.style.transform = '';
             if (parallaxBg) parallaxBg.style.transform = '';
             applyParallax();
@@ -4429,15 +4469,15 @@ if (typeof particlesJS !== 'undefined') {
 })();
 
 // ----- READY -----
-(function() {
-    var isReady = false;
-    var readyTimeout = null;
+(() => {
+    let isReady = false;
+    let readyTimeout = null;
     
     function showContent() {
         if (isReady) return;
         isReady = true;
         if (readyTimeout) clearTimeout(readyTimeout);
-        readyTimeout = setTimeout(function() {
+        readyTimeout = setTimeout(() => {
             document.body.classList.add('ready');
             readyTimeout = null;
         }, 50);
@@ -4448,34 +4488,34 @@ if (typeof particlesJS !== 'undefined') {
 })();
 
 // ----- IOS FIX -----
-(function() {
+(() => {
     if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-        window.addEventListener('load', function() {
-            setTimeout(function() { window.scrollTo(0, 1); }, 100);
+        window.addEventListener('load', () => {
+            setTimeout(() => { window.scrollTo(0, 1); }, 100);
         });
     }
 })();
 
 // ----- LAZY IMAGES -----
-(function() {
-    var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+(() => {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
     if (!lazyImages.length) return;
     
-    var rafQueue = [];
+    let rafQueue = [];
     
     function batchAddClass(images) {
         if (rafQueue.length) return;
         rafQueue = images;
-        requestAnimationFrame(function() {
-            rafQueue.forEach(function(img) { img.classList.add('loaded'); });
+        requestAnimationFrame(() => {
+            rafQueue.forEach((img) => { img.classList.add('loaded'); });
             rafQueue = [];
         });
     }
     
     if ('IntersectionObserver' in window) {
-        var imageObserver = new IntersectionObserver(function(entries) {
-            var toLoad = [];
-            entries.forEach(function(entry) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            const toLoad = [];
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     toLoad.push(entry.target);
                     imageObserver.unobserve(entry.target);
@@ -4484,23 +4524,23 @@ if (typeof particlesJS !== 'undefined') {
             if (toLoad.length) batchAddClass(toLoad);
         }, { rootMargin: '50px', threshold: 0.01 });
         
-        lazyImages.forEach(function(img) {
+        lazyImages.forEach((img) => {
             if (img.complete) {
                 img.classList.add('loaded');
             } else {
                 imageObserver.observe(img);
-                img.addEventListener('load', function() { batchAddClass([img]); }, { once: true });
+                img.addEventListener('load', () => { batchAddClass([img]); }, { once: true });
             }
         });
     } else {
-        requestAnimationFrame(function() { lazyImages.forEach(function(img) { img.classList.add('loaded'); }); });
+        requestAnimationFrame(() => { lazyImages.forEach((img) => { img.classList.add('loaded'); }); });
     }
 })();
 
 // ----- CONTEXT MENU -----
-document.addEventListener('contextmenu', function(e) {
-    var isFooter = e.target.closest('.footer');
-    var isContacts = e.target.closest('#info');
+document.addEventListener('contextmenu', (e) => {
+    const isFooter = e.target.closest('.footer');
+    const isContacts = e.target.closest('#info');
     if (!isFooter && !isContacts) {
         e.preventDefault();
         return false;
@@ -4510,12 +4550,12 @@ document.addEventListener('contextmenu', function(e) {
 // ============================================================
 // ТЕМА: ОСНОВНАЯ ЛОГИКА
 // ============================================================
-var themeIcon = document.getElementById('theme-toggle-icon');
-var mobileThemeIcon = document.getElementById('mobile-theme-icon');
-var themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
-var mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
+const themeIcon = document.getElementById('theme-toggle-icon');
+const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+const themeIconSpan = themeIcon ? themeIcon.querySelector('span') : null;
+const mobileThemeSpan = mobileThemeIcon ? mobileThemeIcon.querySelector('span') : null;
 
-var currentThemeIsLight = false;
+let currentThemeIsLight = false;
 
 function updateThemeIcons(isLight) {
     if (themeIconSpan) themeIconSpan.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
@@ -4524,8 +4564,8 @@ function updateThemeIcons(isLight) {
 
 function addLightThemeStars() {
     if (document.querySelector('.theme__star')) return;
-    for (var i = 0; i < 60; i++) {
-        var star = document.createElement('div');
+    for (let i = 0; i < 60; i++) {
+        const star = document.createElement('div');
         star.className = 'theme__star';
         star.style.cssText = 'position:fixed; width:' + (Math.random() * 3 + 1) + 'px; height:' + (Math.random() * 3 + 1) + 'px; left:' + (Math.random() * 100) + '%; top:' + (Math.random() * 100) + '%; animation-delay:' + (Math.random() * 8) + 's; animation-duration:' + (Math.random() * 10 + 6) + 's; opacity:0';
         document.body.appendChild(star);
@@ -4533,15 +4573,15 @@ function addLightThemeStars() {
 }
 
 function removeLightThemeStars() {
-    var stars = document.querySelectorAll('.theme__star');
-    stars.forEach(function(star) { star.remove(); });
+    const stars = document.querySelectorAll('.theme__star');
+    stars.forEach((star) => { star.remove(); });
 }
 
 function hasFunctionalConsent() {
-    var saved = localStorage.getItem('uzbro_cookie_consent');
+    const saved = localStorage.getItem('uzbro_cookie_consent');
     if (saved) {
         try {
-            var data = JSON.parse(saved);
+            const data = JSON.parse(saved);
             return data.consent === true && data.functional === true;
         } catch (e) {
             return false;
@@ -4551,8 +4591,8 @@ function hasFunctionalConsent() {
 }
 
 function applySavedTheme() {
-    var savedTheme = localStorage.getItem('theme');
-    var hasFunctional = hasFunctionalConsent();
+    const savedTheme = localStorage.getItem('theme');
+    const hasFunctional = hasFunctionalConsent();
     
     if (savedTheme === 'light' && hasFunctional) {
         document.body.classList.add('light-theme');
@@ -4573,8 +4613,8 @@ function applySavedTheme() {
 applySavedTheme();
 
 function handleThemeChange() {
-    var hasFunctional = hasFunctionalConsent();
-    var isLight = document.body.classList.contains('light-theme');
+    const hasFunctional = hasFunctionalConsent();
+    const isLight = document.body.classList.contains('light-theme');
     
     if (isLight) {
         document.body.classList.remove('light-theme');
@@ -4599,8 +4639,8 @@ if (themeIcon) themeIcon.addEventListener('click', handleThemeChange);
 if (mobileThemeIcon) mobileThemeIcon.addEventListener('click', handleThemeChange);
 
 // ----- MOBILE MENU -----
-var mobileMenuBtn = document.getElementById('mobileMenuBtn');
-var mobileNav = document.getElementById('mobileNav');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNav = document.getElementById('mobileNav');
 
 function closeMobileMenu() {
     mobileNav.classList.remove('open');
@@ -4609,22 +4649,22 @@ function closeMobileMenu() {
 }
 
 if (mobileMenuBtn && mobileNav) {
-    mobileMenuBtn.addEventListener('click', function(e) {
+    mobileMenuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        var isOpen = mobileNav.classList.contains('open');
+        const isOpen = mobileNav.classList.contains('open');
         if (isOpen) {
             closeMobileMenu();
         } else {
             mobileNav.classList.add('open');
-            this.setAttribute('aria-expanded', 'true');
-            this.innerHTML = '<span class="fas fa-times"></span>';
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            mobileMenuBtn.innerHTML = '<span class="fas fa-times"></span>';
         }
     });
     
-    var mobileLinks = mobileNav.querySelectorAll('.nav-link');
-    mobileLinks.forEach(function(link) { link.addEventListener('click', closeMobileMenu); });
+    const mobileLinks = mobileNav.querySelectorAll('.nav-link');
+    mobileLinks.forEach((link) => { link.addEventListener('click', closeMobileMenu); });
     
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', (e) => {
         if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && e.target !== mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
             closeMobileMenu();
         }
@@ -4632,15 +4672,15 @@ if (mobileMenuBtn && mobileNav) {
 }
 
 // ----- HEADER VISIBLE -----
-setTimeout(function() {
-    var header = document.querySelector('.page-header');
+setTimeout(() => {
+    const header = document.querySelector('.page-header');
     if (header) header.classList.add('page-header--visible');
 }, 100);
 
 // ----- SCROLL TO TOP -----
-var scrollBtn = document.getElementById('scrollToTopBtn');
-var progressCircle = document.querySelector('.scroll-progress-ring__circle');
-var CIRCUMFERENCE = 2 * Math.PI * 26;
+const scrollBtn = document.getElementById('scrollToTopBtn');
+const progressCircle = document.querySelector('.scroll-progress-ring__circle');
+const CIRCUMFERENCE = 2 * Math.PI * 26;
 
 if (progressCircle) {
     progressCircle.style.strokeDasharray = CIRCUMFERENCE;
@@ -4649,18 +4689,18 @@ if (progressCircle) {
 
 function updateProgressRing() {
     if (!progressCircle) return;
-    var scrollTop = window.scrollY;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
     progressCircle.style.strokeDashoffset = CIRCUMFERENCE * (1 - scrollPercent);
 }
 
-var tickingScroll = false;
-var tickingResize = false;
+let tickingScroll = false;
+let tickingResize = false;
 
 function onScroll() {
     if (!tickingScroll) {
-        requestAnimationFrame(function() {
+        requestAnimationFrame(() => {
             if (window.scrollY > 300) {
                 scrollBtn.classList.add('show');
             } else {
@@ -4675,7 +4715,7 @@ function onScroll() {
 
 function onResize() {
     if (!tickingResize) {
-        requestAnimationFrame(function() {
+        requestAnimationFrame(() => {
             updateProgressRing();
             tickingResize = false;
         });
@@ -4688,13 +4728,13 @@ window.addEventListener('resize', onResize, { passive: true });
 onScroll();
 
 if (scrollBtn) {
-    scrollBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 }
 
 // ----- TYPEWRITER -----
-var typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
-var i = 0;
-var typewriterElement = document.getElementById('typewriter-text');
+const typewriterText = "Стильная стрижка и ухоженная борода — твой пропуск в мир уверенности.";
+let i = 0;
+const typewriterElement = document.getElementById('typewriter-text');
 
 function typeWriter() {
     if (i < typewriterText.length && typewriterElement) {
@@ -4708,29 +4748,29 @@ function typeWriter() {
 setTimeout(typeWriter, 500);
 
 // ----- SERVICE CARDS -----
-(function() {
-    var cards = document.querySelectorAll('.service-card');
+(() => {
+    const cards = document.querySelectorAll('.service-card');
     if (!cards.length) return;
     
-    cards.forEach(function(card) {
-        var cardRect = null;
-        var rafId = null;
+    cards.forEach((card) => {
+        let cardRect = null;
+        let rafId = null;
         
         function updateCardRect() { cardRect = card.getBoundingClientRect(); }
         
         card.addEventListener('mouseenter', updateCardRect);
-        card.addEventListener('mouseleave', function() { card.style.transform = ''; if (rafId) cancelAnimationFrame(rafId); });
+        card.addEventListener('mouseleave', () => { card.style.transform = ''; if (rafId) cancelAnimationFrame(rafId); });
         
-        card.addEventListener('mousemove', function(e) {
+        card.addEventListener('mousemove', (e) => {
             if (!cardRect) return;
             if (rafId) cancelAnimationFrame(rafId);
-            rafId = requestAnimationFrame(function() {
-                var x = e.clientX - cardRect.left;
-                var y = e.clientY - cardRect.top;
-                var centerX = cardRect.width / 2;
-                var centerY = cardRect.height / 2;
-                var rotateX = (y - centerY) / 25;
-                var rotateY = (centerX - x) / 25;
+            rafId = requestAnimationFrame(() => {
+                const x = e.clientX - cardRect.left;
+                const y = e.clientY - cardRect.top;
+                const centerX = cardRect.width / 2;
+                const centerY = cardRect.height / 2;
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
                 card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-5px)';
                 rafId = null;
             });
@@ -4742,21 +4782,21 @@ setTimeout(typeWriter, 500);
 
 // ----- COUNTERS -----
 function animateCounter(id, target, duration) {
-    var current = 0;
-    var elem = document.getElementById(id);
+    let current = 0;
+    const elem = document.getElementById(id);
     if (!elem) return;
-    var stepTime = 16;
-    var steps = duration / stepTime;
-    var increment = target / steps;
-    var timer = setInterval(function() {
+    const stepTime = 16;
+    const steps = duration / stepTime;
+    const increment = target / steps;
+    const timer = setInterval(() => {
         current += increment;
         if (current >= target) { elem.innerText = target; clearInterval(timer); }
         else { elem.innerText = Math.floor(current); }
     }, stepTime);
 }
 
-var countersStarted = false;
-var counterObserver = new IntersectionObserver(function(entries) {
+let countersStarted = false;
+const counterObserver = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting && !countersStarted) {
         countersStarted = true;
         animateCounter('expCounter', 10, 1600);
@@ -4764,54 +4804,54 @@ var counterObserver = new IntersectionObserver(function(entries) {
         animateCounter('servicesCounter', 6, 1300);
     }
 }, { threshold: 0.4 });
-var statSection = document.querySelector('.stats-grid');
+const statSection = document.querySelector('.stats-grid');
 if (statSection) counterObserver.observe(statSection);
 
 // ----- SLIDER -----
-var sliderWrapper = document.getElementById('featuresSlider');
-var prevBtn = document.getElementById('sliderPrevBtn');
-var nextBtn = document.getElementById('sliderNextBtn');
+const sliderWrapper = document.getElementById('featuresSlider');
+const prevBtn = document.getElementById('sliderPrevBtn');
+const nextBtn = document.getElementById('sliderNextBtn');
 
 if (sliderWrapper && prevBtn && nextBtn) {
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var touchStartScrollLeft = 0;
-    var isSwiping = false;
-    var moveDirection = null;
-    var startTime = 0;
-    var lastTouchX = 0;
-    var velocity = 0;
-    var momentumId = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartScrollLeft = 0;
+    let isSwiping = false;
+    let moveDirection = null;
+    let startTime = 0;
+    let lastTouchX = 0;
+    let velocity = 0;
+    let momentumId = null;
     
-    var mouseStartX = 0;
-    var mouseStartScrollLeft = 0;
-    var isMouseDragging = false;
+    let mouseStartX = 0;
+    let mouseStartScrollLeft = 0;
+    let isMouseDragging = false;
     
     function snapToNearestMobile() {
-        var track = document.querySelector('.features-slider__track');
+        const track = document.querySelector('.features-slider__track');
         if (!track) return;
-        var cards = track.querySelectorAll('.feature-card');
+        const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
-        var containerRect = sliderWrapper.getBoundingClientRect();
-        var centerX = containerRect.left + containerRect.width / 2;
-        var minDistance = Infinity;
-        var closestIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        let minDistance = Infinity;
+        let closestIndex = 0;
         
-        cards.forEach(function(card, index) {
-            var cardRect = card.getBoundingClientRect();
-            var cardCenter = cardRect.left + cardRect.width / 2;
-            var distance = Math.abs(cardCenter - centerX);
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 closestIndex = index;
             }
         });
         
-        var firstCard = cards[0];
-        var lastCard = cards[cards.length - 1];
-        var firstCardRect = firstCard.getBoundingClientRect();
-        var lastCardRect = lastCard.getBoundingClientRect();
+        const firstCard = cards[0];
+        const lastCard = cards[cards.length - 1];
+        const firstCardRect = firstCard.getBoundingClientRect();
+        const lastCardRect = lastCard.getBoundingClientRect();
         
         if (lastCardRect.right > containerRect.right + 20) {
             lastCard.scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
@@ -4833,23 +4873,23 @@ if (sliderWrapper && prevBtn && nextBtn) {
     
     function applyMomentumMobile(velocity) {
         if (Math.abs(velocity) < 0.5) return;
-        var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        var step = velocity * 2.5;
-        var newScroll = sliderWrapper.scrollLeft + step;
+        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        const step = velocity * 2.5;
+        let newScroll = sliderWrapper.scrollLeft + step;
         if (newScroll < 0) newScroll = 0;
         if (newScroll > maxScroll) newScroll = maxScroll;
         sliderWrapper.scrollLeft = newScroll;
         velocity *= 0.92;
         if (Math.abs(velocity) > 0.5 && newScroll > 0 && newScroll < maxScroll) {
-            momentumId = requestAnimationFrame(function() { applyMomentumMobile(velocity); });
+            momentumId = requestAnimationFrame(() => { applyMomentumMobile(velocity); });
         } else {
             snapToNearestMobile();
         }
     }
     
-    sliderWrapper.addEventListener('touchstart', function(e) {
+    sliderWrapper.addEventListener('touchstart', (e) => {
         if (window.innerWidth > 768) return;
-        var touch = e.touches[0];
+        const touch = e.touches[0];
         touchStartX = touch.clientX;
         touchStartY = touch.clientY;
         touchStartScrollLeft = sliderWrapper.scrollLeft;
@@ -4865,12 +4905,12 @@ if (sliderWrapper && prevBtn && nextBtn) {
         sliderWrapper.classList.add('features-slider--dragging');
     }, { passive: true });
     
-    sliderWrapper.addEventListener('touchmove', function(e) {
+    sliderWrapper.addEventListener('touchmove', (e) => {
         if (window.innerWidth > 768) return;
-        var touch = e.touches[0];
-        var deltaX = touch.clientX - touchStartX;
-        var deltaY = Math.abs(touch.clientY - touchStartY);
-        var absDeltaX = Math.abs(deltaX);
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = Math.abs(touch.clientY - touchStartY);
+        const absDeltaX = Math.abs(deltaX);
         
         if (moveDirection === null && (absDeltaX > 5 || deltaY > 5)) {
             if (absDeltaX > deltaY) {
@@ -4884,14 +4924,14 @@ if (sliderWrapper && prevBtn && nextBtn) {
         if (moveDirection === 'vertical') return;
         if (moveDirection === 'horizontal') {
             e.preventDefault();
-            var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-            var newScroll = touchStartScrollLeft - deltaX;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            let newScroll = touchStartScrollLeft - deltaX;
             if (newScroll < 0) newScroll = 0;
             if (newScroll > maxScroll) newScroll = maxScroll;
             sliderWrapper.scrollLeft = newScroll;
-            var timeDelta = Date.now() - startTime;
+            const timeDelta = Date.now() - startTime;
             if (timeDelta > 30) {
-                var delta = lastTouchX - touch.clientX;
+                const delta = lastTouchX - touch.clientX;
                 velocity = delta / timeDelta * 12;
                 lastTouchX = touch.clientX;
                 startTime = Date.now();
@@ -4899,13 +4939,13 @@ if (sliderWrapper && prevBtn && nextBtn) {
         }
     }, { passive: false });
     
-    sliderWrapper.addEventListener('touchend', function(e) {
+    sliderWrapper.addEventListener('touchend', (e) => {
         if (window.innerWidth > 768) return;
         sliderWrapper.classList.remove('features-slider--dragging');
         if (moveDirection === 'horizontal' && isSwiping) {
             if (Math.abs(velocity) > 1.5) {
                 if (momentumId) cancelAnimationFrame(momentumId);
-                momentumId = requestAnimationFrame(function() { applyMomentumMobile(velocity); });
+                momentumId = requestAnimationFrame(() => { applyMomentumMobile(velocity); });
             } else {
                 snapToNearestMobile();
             }
@@ -4915,7 +4955,7 @@ if (sliderWrapper && prevBtn && nextBtn) {
         velocity = 0;
     }, { passive: true });
     
-    sliderWrapper.addEventListener('mousedown', function(e) {
+    sliderWrapper.addEventListener('mousedown', (e) => {
         isMouseDragging = true;
         sliderWrapper.classList.add('features-slider--dragging');
         mouseStartX = e.clientX;
@@ -4924,17 +4964,17 @@ if (sliderWrapper && prevBtn && nextBtn) {
         e.preventDefault();
     });
     
-    window.addEventListener('mousemove', function(e) {
+    window.addEventListener('mousemove', (e) => {
         if (!isMouseDragging) return;
-        var deltaX = mouseStartX - e.clientX;
-        var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
-        var newScroll = mouseStartScrollLeft + deltaX;
+        const deltaX = mouseStartX - e.clientX;
+        const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+        let newScroll = mouseStartScrollLeft + deltaX;
         if (newScroll < 0) newScroll = 0;
         if (newScroll > maxScroll) newScroll = maxScroll;
         sliderWrapper.scrollLeft = newScroll;
     });
     
-    window.addEventListener('mouseup', function() {
+    window.addEventListener('mouseup', () => {
         if (isMouseDragging) {
             isMouseDragging = false;
             sliderWrapper.classList.remove('features-slider--dragging');
@@ -4942,36 +4982,36 @@ if (sliderWrapper && prevBtn && nextBtn) {
         }
     });
     
-    prevBtn.addEventListener('click', function() {
-        var track = document.querySelector('.features-slider__track');
+    prevBtn.addEventListener('click', () => {
+        const track = document.querySelector('.features-slider__track');
         if (!track) return;
-        var cards = track.querySelectorAll('.feature-card');
+        const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
         if (window.innerWidth > 768) {
-            var firstCard = cards[0];
-            var cardWidth = firstCard.offsetWidth;
-            var gap = parseFloat(getComputedStyle(track).gap) || 0;
-            var step = cardWidth + gap;
-            var currentScroll = sliderWrapper.scrollLeft;
+            const firstCard = cards[0];
+            const cardWidth = firstCard.offsetWidth;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const step = cardWidth + gap;
+            const currentScroll = sliderWrapper.scrollLeft;
             sliderWrapper.scrollTo({ left: Math.max(0, currentScroll - step), behavior: 'smooth' });
             return;
         }
         
-        var currentIndex = 0;
-        var containerRect = sliderWrapper.getBoundingClientRect();
-        var centerX = containerRect.left + containerRect.width / 2;
-        var minDistance = Infinity;
-        cards.forEach(function(card, index) {
-            var cardRect = card.getBoundingClientRect();
-            var cardCenter = cardRect.left + cardRect.width / 2;
-            var distance = Math.abs(cardCenter - centerX);
+        let currentIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        let minDistance = Infinity;
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 currentIndex = index;
             }
         });
-        var prevIndex = Math.max(0, currentIndex - 1);
+        const prevIndex = Math.max(0, currentIndex - 1);
         if (prevIndex === 0) {
             cards[prevIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
         } else {
@@ -4979,37 +5019,37 @@ if (sliderWrapper && prevBtn && nextBtn) {
         }
     });
     
-    nextBtn.addEventListener('click', function() {
-        var track = document.querySelector('.features-slider__track');
+    nextBtn.addEventListener('click', () => {
+        const track = document.querySelector('.features-slider__track');
         if (!track) return;
-        var cards = track.querySelectorAll('.feature-card');
+        const cards = track.querySelectorAll('.feature-card');
         if (!cards.length) return;
         
         if (window.innerWidth > 768) {
-            var firstCard = cards[0];
-            var cardWidth = firstCard.offsetWidth;
-            var gap = parseFloat(getComputedStyle(track).gap) || 0;
-            var step = cardWidth + gap;
-            var currentScroll = sliderWrapper.scrollLeft;
-            var maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
+            const firstCard = cards[0];
+            const cardWidth = firstCard.offsetWidth;
+            const gap = parseFloat(getComputedStyle(track).gap) || 0;
+            const step = cardWidth + gap;
+            const currentScroll = sliderWrapper.scrollLeft;
+            const maxScroll = sliderWrapper.scrollWidth - sliderWrapper.clientWidth;
             sliderWrapper.scrollTo({ left: Math.min(maxScroll, currentScroll + step), behavior: 'smooth' });
             return;
         }
         
-        var currentIndex = 0;
-        var containerRect = sliderWrapper.getBoundingClientRect();
-        var centerX = containerRect.left + containerRect.width / 2;
-        var minDistance = Infinity;
-        cards.forEach(function(card, index) {
-            var cardRect = card.getBoundingClientRect();
-            var cardCenter = cardRect.left + cardRect.width / 2;
-            var distance = Math.abs(cardCenter - centerX);
+        let currentIndex = 0;
+        const containerRect = sliderWrapper.getBoundingClientRect();
+        const centerX = containerRect.left + containerRect.width / 2;
+        let minDistance = Infinity;
+        cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - centerX);
             if (distance < minDistance) {
                 minDistance = distance;
                 currentIndex = index;
             }
         });
-        var nextIndex = Math.min(cards.length - 1, currentIndex + 1);
+        const nextIndex = Math.min(cards.length - 1, currentIndex + 1);
         if (nextIndex === cards.length - 1) {
             cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'end', block: 'nearest' });
         } else {
@@ -5019,40 +5059,40 @@ if (sliderWrapper && prevBtn && nextBtn) {
 }
 
 // ----- FADE ON SCROLL -----
-var fadeElements = document.querySelectorAll('.fade-on-scroll');
-var fadeObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
+const fadeElements = document.querySelectorAll('.fade-on-scroll');
+const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
         else entry.target.classList.remove('visible');
     });
 }, { threshold: 0.1 });
-fadeElements.forEach(function(el) { fadeObserver.observe(el); });
+fadeElements.forEach((el) => { fadeObserver.observe(el); });
 
 // ============================================================
 // BOOKING — СЧЁТЧИК ВЫБРАННЫХ УСЛУГ И СУММА
 // ============================================================
-var serviceCards = document.querySelectorAll('.service-card[data-service]');
-var bookingLink = document.getElementById('bookingLink');
-var servicesSummary = document.getElementById('servicesSummary');
-var selectedCount = document.getElementById('selectedCount');
-var selectedTotal = document.getElementById('selectedTotal');
-var clearSelectionBtn = document.getElementById('clearSelectionBtn');
-var baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
-var selectedServices = [];
+const serviceCards = document.querySelectorAll('.service-card[data-service]');
+const bookingLink = document.getElementById('bookingLink');
+const servicesSummary = document.getElementById('servicesSummary');
+const selectedCount = document.getElementById('selectedCount');
+const selectedTotal = document.getElementById('selectedTotal');
+const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
+let selectedServices = [];
 
-var servicePrices = {};
+const servicePrices = {};
 
-serviceCards.forEach(function(card) {
-    var serviceId = card.getAttribute('data-service');
-    var price = parseInt(card.getAttribute('data-price')) || 0;
+serviceCards.forEach((card) => {
+    const serviceId = card.getAttribute('data-service');
+    const price = parseInt(card.getAttribute('data-price')) || 0;
     servicePrices[serviceId] = price;
 });
 
 function updateBookingSummary() {
-    var count = selectedServices.length;
-    var total = 0;
+    const count = selectedServices.length;
+    let total = 0;
     
-    selectedServices.forEach(function(id) {
+    selectedServices.forEach((id) => {
         total += servicePrices[id] || 0;
     });
     
@@ -5062,7 +5102,7 @@ function updateBookingSummary() {
         servicesSummary.classList.remove('visible');
         bookingLink.setAttribute('aria-label', 'Записаться на услуги');
     } else {
-        var totalStr = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        const totalStr = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         selectedCount.textContent = count;
         selectedTotal.textContent = totalStr + ' ₽';
         servicesSummary.classList.add('visible');
@@ -5073,35 +5113,35 @@ function updateBookingSummary() {
 function toggleService(card, serviceId) {
     if (card.classList.contains('service-card--selected')) {
         card.classList.remove('service-card--selected');
-        selectedServices = selectedServices.filter(function(id) { return id !== serviceId; });
+        selectedServices = selectedServices.filter((id) => { return id !== serviceId; });
         card.setAttribute('aria-pressed', 'false');
-        var label = card.getAttribute('aria-label') || '';
+        let label = card.getAttribute('aria-label') || '';
         card.setAttribute('aria-label', label.replace(' (выбрано)', ''));
     } else {
         card.classList.add('service-card--selected');
         selectedServices.push(serviceId);
         card.setAttribute('aria-pressed', 'true');
-        var label = card.getAttribute('aria-label') || '';
+        let label = card.getAttribute('aria-label') || '';
         if (!label.includes('(выбрано)')) card.setAttribute('aria-label', label + ' (выбрано)');
     }
     updateBookingSummary();
 }
 
 function clearSelection() {
-    serviceCards.forEach(function(card) {
+    serviceCards.forEach((card) => {
         card.classList.remove('service-card--selected');
         card.setAttribute('aria-pressed', 'false');
-        var label = card.getAttribute('aria-label') || '';
+        let label = card.getAttribute('aria-label') || '';
         card.setAttribute('aria-label', label.replace(' (выбрано)', ''));
     });
     selectedServices = [];
     updateBookingSummary();
 }
 
-serviceCards.forEach(function(card) {
+serviceCards.forEach((card) => {
     if (!card.hasAttribute('aria-pressed')) card.setAttribute('aria-pressed', 'false');
-    card.addEventListener('click', function(e) { e.stopPropagation(); toggleService(card, card.getAttribute('data-service')); });
-    card.addEventListener('keydown', function(e) {
+    card.addEventListener('click', (e) => { e.stopPropagation(); toggleService(card, card.getAttribute('data-service')); });
+    card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleService(card, card.getAttribute('data-service')); }
     });
 });
@@ -5121,45 +5161,45 @@ function removeHashFromUrl() {
 
 function smoothScrollToElement(targetElement) {
     if (!targetElement) return;
-    var headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
-    var targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const headerHeight = document.querySelector('.page-header')?.offsetHeight || 0;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo({ top: Math.max(0, targetPosition - headerHeight - 1), behavior: 'smooth' });
     removeHashFromUrl();
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
-        var href = this.getAttribute('href');
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
         if (href === '#' || href === '' || href === '#/') return;
-        var target = document.querySelector(href);
+        const target = document.querySelector(href);
         if (target) {
             e.preventDefault();
             if (mobileNav && mobileNav.classList.contains('open')) closeMobileMenu();
-            setTimeout(function() { smoothScrollToElement(target); }, 10);
+            setTimeout(() => { smoothScrollToElement(target); }, 10);
         }
     });
 });
 
 if (window.location.hash) {
-    setTimeout(function() {
-        var target = document.querySelector(window.location.hash);
+    setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
         if (target) smoothScrollToElement(target);
     }, 200);
 }
 
 // ----- TICKER PAUSE -----
-(function() {
-    var tickerElement = document.querySelector('.ticker');
-    var tickerWrap = document.querySelector('.ticker-wrap');
+(() => {
+    const tickerElement = document.querySelector('.ticker');
+    const tickerWrap = document.querySelector('.ticker-wrap');
     
     if (tickerElement && tickerWrap) {
-        var isPaused = false;
+        let isPaused = false;
         
         function updateAriaLabel() {
             tickerWrap.setAttribute('aria-label', isPaused ? 'Бегущая строка на паузе. Нажмите для воспроизведения' : 'Бегущая строка с преимуществами. Нажмите для паузы');
         }
         
-        tickerWrap.addEventListener('click', function() {
+        tickerWrap.addEventListener('click', () => {
             if (isPaused) {
                 tickerElement.style.animationPlayState = 'running';
                 isPaused = false;
@@ -5175,46 +5215,46 @@ if (window.location.hash) {
 
 // ----- SERVICE WORKER -----
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./js/sw.js').catch(function(error) { console.log('SW registration failed: ', error); });
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./js/sw.js').catch((error) => { console.log('SW registration failed: ', error); });
     });
 }
 
 // ============================================================
 // COOKIE БАННЕР
 // ============================================================
-(function() {
+(() => {
     'use strict';
 
-    var COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
-    var COOKIE_EXPIRY_DAYS = 365;
+    const COOKIE_CONSENT_KEY = 'uzbro_cookie_consent';
+    const COOKIE_EXPIRY_DAYS = 365;
 
-    var banner = document.getElementById('cookieBanner');
-    var settingsModal = document.getElementById('cookieSettings');
-    var acceptBtn = document.getElementById('cookieAcceptBtn');
-    var declineBtn = document.getElementById('cookieDeclineBtn');
-    var settingsBtn = document.getElementById('cookieSettingsBtn');
-    var settingsClose = document.getElementById('cookieSettingsClose');
-    var settingsSave = document.getElementById('cookieSettingsSave');
+    const banner = document.getElementById('cookieBanner');
+    const settingsModal = document.getElementById('cookieSettings');
+    const acceptBtn = document.getElementById('cookieAcceptBtn');
+    const declineBtn = document.getElementById('cookieDeclineBtn');
+    const settingsBtn = document.getElementById('cookieSettingsBtn');
+    const settingsClose = document.getElementById('cookieSettingsClose');
+    const settingsSave = document.getElementById('cookieSettingsSave');
 
-    var analyticsCheckbox = document.getElementById('cookieAnalytics');
-    var marketingCheckbox = document.getElementById('cookieMarketing');
-    var functionalCheckbox = document.getElementById('cookieFunctional');
+    const analyticsCheckbox = document.getElementById('cookieAnalytics');
+    const marketingCheckbox = document.getElementById('cookieMarketing');
+    const functionalCheckbox = document.getElementById('cookieFunctional');
 
-    var dataModal = document.getElementById('dataModal');
-    var dataControlBtn = document.getElementById('dataControlBtn');
-    var dataModalClose = document.getElementById('dataModalClose');
-    var dataModalDelete = document.getElementById('dataModalDelete');
-    var dataModalReset = document.getElementById('dataModalReset');
+    const dataModal = document.getElementById('dataModal');
+    const dataControlBtn = document.getElementById('dataControlBtn');
+    const dataModalClose = document.getElementById('dataModalClose');
+    const dataModalDelete = document.getElementById('dataModalDelete');
+    const dataModalReset = document.getElementById('dataModalReset');
     
-    var themeBadge = document.getElementById('themeBadge');
-    var consentBadge = document.getElementById('consentBadge');
-    var analyticsBadge = document.getElementById('analyticsBadge');
-    var marketingBadge = document.getElementById('marketingBadge');
-    var functionalBadge = document.getElementById('functionalBadge');
+    const themeBadge = document.getElementById('themeBadge');
+    const consentBadge = document.getElementById('consentBadge');
+    const analyticsBadge = document.getElementById('analyticsBadge');
+    const marketingBadge = document.getElementById('marketingBadge');
+    const functionalBadge = document.getElementById('functionalBadge');
 
     function setCookie(name, value, days) {
-        var date = new Date();
+        const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/; SameSite=Lax';
     }
@@ -5224,7 +5264,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function getConsentSettings() {
-        var saved = localStorage.getItem(COOKIE_CONSENT_KEY);
+        const saved = localStorage.getItem(COOKIE_CONSENT_KEY);
         if (saved) {
             try {
                 return JSON.parse(saved);
@@ -5234,17 +5274,17 @@ if ('serviceWorker' in navigator) {
     }
 
     function hasConsent() {
-        var saved = getConsentSettings();
+        const saved = getConsentSettings();
         return saved && saved.consent === true;
     }
 
     function hasFunctionalConsent() {
-        var saved = getConsentSettings();
+        const saved = getConsentSettings();
         return saved && saved.consent === true && saved.functional === true;
     }
 
     function saveConsent(settings) {
-        var consentData = {
+        const consentData = {
             consent: true,
             analytics: settings.analytics || false,
             marketing: settings.marketing || false,
@@ -5275,14 +5315,14 @@ if ('serviceWorker' in navigator) {
             document.body.classList.remove('light-theme');
             document.body.classList.add('dark-theme');
             if (document.querySelector('.theme__star')) {
-                document.querySelectorAll('.theme__star').forEach(function(el) { el.remove(); });
+                document.querySelectorAll('.theme__star').forEach((el) => { el.remove(); });
             }
             updateThemeIcons(false);
             return;
         }
 
         if (consentData.functional) {
-            var savedTheme = localStorage.getItem('theme');
+            const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-theme');
                 updateThemeIcons(true);
@@ -5302,34 +5342,34 @@ if ('serviceWorker' in navigator) {
     }
 
     function updateBadges() {
-        var settings = getConsentSettings();
+        const settings = getConsentSettings();
         
         if (themeBadge) {
-            var isLight = document.body.classList.contains('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
             themeBadge.textContent = isLight ? 'светлая' : 'тёмная';
             themeBadge.className = 'badge active';
         }
         
         if (consentBadge) {
-            var has = hasConsent();
+            const has = hasConsent();
             consentBadge.textContent = has ? 'принято' : 'не принято';
             consentBadge.className = 'badge ' + (has ? 'active' : 'inactive');
         }
         
         if (analyticsBadge) {
-            var analytics = settings && settings.analytics;
+            const analytics = settings && settings.analytics;
             analyticsBadge.textContent = analytics ? 'активно' : 'не активно';
             analyticsBadge.className = 'badge ' + (analytics ? 'active' : 'inactive');
         }
         
         if (marketingBadge) {
-            var marketing = settings && settings.marketing;
+            const marketing = settings && settings.marketing;
             marketingBadge.textContent = marketing ? 'активно' : 'не активно';
             marketingBadge.className = 'badge ' + (marketing ? 'active' : 'inactive');
         }
         
         if (functionalBadge) {
-            var functional = settings && settings.functional;
+            const functional = settings && settings.functional;
             functionalBadge.textContent = functional ? 'активно' : 'не активно';
             functionalBadge.className = 'badge ' + (functional ? 'active' : 'inactive');
         }
@@ -5337,13 +5377,13 @@ if ('serviceWorker' in navigator) {
 
     function hideBanner() {
         banner.classList.remove('show');
-        setTimeout(function() {
+        setTimeout(() => {
             banner.style.display = 'none';
         }, 500);
     }
 
     function openSettings() {
-        var saved = getConsentSettings();
+        const saved = getConsentSettings();
         if (saved) {
             analyticsCheckbox.checked = saved.analytics !== undefined ? saved.analytics : true;
             marketingCheckbox.checked = saved.marketing !== undefined ? saved.marketing : true;
@@ -5374,7 +5414,7 @@ if ('serviceWorker' in navigator) {
     }
 
     function acceptAll() {
-        var settings = {
+        const settings = {
             analytics: true,
             marketing: true,
             functional: true
@@ -5392,14 +5432,14 @@ if ('serviceWorker' in navigator) {
         document.body.classList.remove('light-theme');
         document.body.classList.add('dark-theme');
         if (document.querySelector('.theme__star')) {
-            document.querySelectorAll('.theme__star').forEach(function(el) { el.remove(); });
+            document.querySelectorAll('.theme__star').forEach((el) => { el.remove(); });
         }
         updateThemeIcons(false);
         updateBadges();
     }
 
     function saveSettings() {
-        var settings = {
+        const settings = {
             analytics: analyticsCheckbox.checked,
             marketing: marketingCheckbox.checked,
             functional: functionalCheckbox.checked
@@ -5422,7 +5462,7 @@ if ('serviceWorker' in navigator) {
         updateBadges();
         closeDataModal();
         banner.style.display = 'block';
-        setTimeout(function() {
+        setTimeout(() => {
             banner.classList.add('show');
         }, 300);
     }
@@ -5430,7 +5470,7 @@ if ('serviceWorker' in navigator) {
     function deleteAllData() {
         if (confirm('Вы уверены, что хотите удалить все сохранённые данные на этом сайте?\n\nБудут удалены:\n- Настройки темы оформления\n- Настройки cookie\n- Все сохранённые предпочтения\n\nСайт перезагрузится.')) {
             localStorage.clear();
-            document.cookie.split(';').forEach(function(c) {
+            document.cookie.split(';').forEach((c) => {
                 document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
             });
             document.body.classList.remove('light-theme');
@@ -5444,7 +5484,7 @@ if ('serviceWorker' in navigator) {
     }
 
     if (hasConsent()) {
-        var settings = getConsentSettings();
+        const settings = getConsentSettings();
         applyConsent(settings);
         banner.style.display = 'none';
         updateBadges();
@@ -5457,19 +5497,19 @@ if ('serviceWorker' in navigator) {
         removeLightThemeStars();
         updateBadges();
 
-        setTimeout(function() {
+        setTimeout(() => {
             banner.classList.add('show');
         }, 1500);
     }
 
     if (acceptBtn) acceptBtn.addEventListener('click', acceptAll);
     if (declineBtn) declineBtn.addEventListener('click', declineAll);
-    if (settingsBtn) settingsBtn.addEventListener('click', function(e) {
+    if (settingsBtn) settingsBtn.addEventListener('click', (e) => {
         e.preventDefault();
         openSettings();
     });
     if (settingsClose) settingsClose.addEventListener('click', closeSettings);
-    if (settingsModal) settingsModal.addEventListener('click', function(e) {
+    if (settingsModal) settingsModal.addEventListener('click', (e) => {
         if (e.target === settingsModal) {
             closeSettings();
         }
@@ -5478,7 +5518,7 @@ if ('serviceWorker' in navigator) {
 
     if (dataControlBtn) dataControlBtn.addEventListener('click', openDataModal);
     if (dataModalClose) dataModalClose.addEventListener('click', closeDataModal);
-    if (dataModal) dataModal.addEventListener('click', function(e) {
+    if (dataModal) dataModal.addEventListener('click', (e) => {
         if (e.target === dataModal) {
             closeDataModal();
         }
@@ -5486,7 +5526,7 @@ if ('serviceWorker' in navigator) {
     if (dataModalReset) dataModalReset.addEventListener('click', resetCookieSettings);
     if (dataModalDelete) dataModalDelete.addEventListener('click', deleteAllData);
 
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (settingsModal.classList.contains('open')) {
                 closeSettings();
