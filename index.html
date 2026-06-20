@@ -1697,92 +1697,6 @@
             }
         }
 
-        /* ===== БЛОК ПОВТОРНОЙ ЗАПИСИ ===== */
-        .repeat-booking {
-            margin: 1rem 0 1.5rem 0;
-            padding: 0.75rem 1.5rem;
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent-color);
-            border-radius: var(--border-radius-card);
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.05);
-            display: none;
-        }
-
-        .repeat-booking.visible {
-            display: block;
-            animation: summaryFadeIn 0.4s ease;
-        }
-
-        .repeat-booking__title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .repeat-booking__badges {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .repeat-booking__badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.2rem 0.6rem;
-            background: var(--accent-color);
-            color: var(--bg-color);
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .repeat-booking__btn {
-            display: inline-block;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.09375rem;
-            padding: 0.5rem 1.2rem;
-            background: var(--btn-primary-bg);
-            color: var(--btn-primary-color);
-            border: 0.125rem solid var(--accent-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 0.75rem;
-            cursor: pointer;
-            text-align: center;
-            border-radius: var(--border-radius-btn);
-            touch-action: manipulation;
-            box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
-        }
-
-        .repeat-booking__btn:hover {
-            background: var(--btn-primary-hover-bg);
-            color: var(--btn-primary-hover-color);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0.9375rem var(--shadow-color);
-        }
-
-        @media (max-width: 500px) {
-            .repeat-booking {
-                padding: 0.6rem 0.75rem;
-            }
-            .repeat-booking__badge {
-                font-size: 0.6rem;
-                padding: 0.15rem 0.4rem;
-            }
-            .repeat-booking__btn {
-                font-size: 0.65rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
-
         /* ============================================================ */
         /* ===== СЕТКА РАБОТ МАСТЕРА С ЦЕНТРИРОВАНИЕМ ===== */
         /* ============================================================ */
@@ -3949,13 +3863,6 @@
         <div class="container">
             <h2 id="services-heading" class="section__title fade-on-scroll fade-right">ПРЕМИУМ УСЛУГИ</h2>
             
-            <!-- БЛОК ПОВТОРНОЙ ЗАПИСИ -->
-            <div class="repeat-booking" id="repeatBooking">
-                <div class="repeat-booking__title">📋 Ваши услуги из прошлой записи</div>
-                <div class="repeat-booking__badges" id="repeatBadges"></div>
-                <a href="#" target="_blank" id="repeatBookingLink" class="repeat-booking__btn">ПОВТОРИТЬ ЗАПИСЬ</a>
-            </div>
-
             <div class="services-grid" role="group" aria-label="Список услуг">
                 <div class="service-card fade-on-scroll fade-up" data-service="s28340001" data-price="1900" tabindex="0" role="button" aria-label="Мужская стрижка, цена 1900 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
@@ -5425,11 +5332,6 @@ const selectionBadges = document.getElementById('selectionBadges');
 const selectedCount = document.getElementById('selectedCount');
 const selectedTotal = document.getElementById('selectedTotal');
 
-// Блок повторной записи
-const repeatBooking = document.getElementById('repeatBooking');
-const repeatBadges = document.getElementById('repeatBadges');
-const repeatBookingLink = document.getElementById('repeatBookingLink');
-
 const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
 let selectedServices = [];
 
@@ -5440,67 +5342,6 @@ serviceCards.forEach((card) => {
     const price = parseInt(card.getAttribute('data-price')) || 0;
     servicePrices[serviceId] = price;
 });
-
-// Сохранение последней записи
-function saveLastBooking(services) {
-    if (services.length > 0) {
-        localStorage.setItem('uzbro_last_booking', JSON.stringify(services));
-    }
-}
-
-// Загрузка последней записи
-function loadLastBooking() {
-    const saved = localStorage.getItem('uzbro_last_booking');
-    if (saved) {
-        try {
-            return JSON.parse(saved);
-        } catch (e) {
-            return [];
-        }
-    }
-    return [];
-}
-
-// Обновление блока повторной записи
-function updateRepeatBooking() {
-    const savedServices = loadLastBooking();
-    if (savedServices.length === 0) {
-        repeatBooking.classList.remove('visible');
-        return;
-    }
-    
-    // Проверяем, есть ли эти услуги на странице
-    const availableServices = [];
-    savedServices.forEach(id => {
-        const card = document.querySelector(`.service-card[data-service="${id}"]`);
-        if (card) {
-            availableServices.push(id);
-        }
-    });
-    
-    if (availableServices.length === 0) {
-        repeatBooking.classList.remove('visible');
-        return;
-    }
-    
-    repeatBooking.classList.add('visible');
-    
-    // Обновляем бейджи
-    repeatBadges.innerHTML = '';
-    availableServices.forEach(id => {
-        const card = document.querySelector(`.service-card[data-service="${id}"]`);
-        if (card) {
-            const title = card.querySelector('.service-card__title')?.textContent || '';
-            const badge = document.createElement('span');
-            badge.className = 'repeat-booking__badge';
-            badge.textContent = title;
-            repeatBadges.appendChild(badge);
-        }
-    });
-    
-    // Обновляем ссылку
-    repeatBookingLink.href = baseUrl + availableServices.join('');
-}
 
 function updateBookingSummary() {
     const count = selectedServices.length;
@@ -5559,12 +5400,6 @@ function toggleService(card, serviceId) {
         if (!label.includes('(выбрано)')) card.setAttribute('aria-label', label + ' (выбрано)');
     }
     updateBookingSummary();
-    
-    // Сохраняем последнюю запись
-    if (selectedServices.length > 0) {
-        saveLastBooking(selectedServices);
-        updateRepeatBooking();
-    }
 }
 
 function clearSelection() {
@@ -5586,30 +5421,7 @@ serviceCards.forEach((card) => {
     });
 });
 
-// Загружаем последнюю запись при старте
-const savedLastBooking = loadLastBooking();
-if (savedLastBooking.length > 0) {
-    // Проверяем, есть ли эти услуги на странице
-    let hasAvailable = false;
-    savedLastBooking.forEach(id => {
-        const card = document.querySelector(`.service-card[data-service="${id}"]`);
-        if (card) {
-            hasAvailable = true;
-            // Автоматически выбираем услуги из последней записи
-            if (!card.classList.contains('service-card--selected')) {
-                card.classList.add('service-card--selected');
-                card.setAttribute('aria-pressed', 'true');
-                selectedServices.push(id);
-                let label = card.getAttribute('aria-label') || '';
-                if (!label.includes('(выбрано)')) card.setAttribute('aria-label', label + ' (выбрано)');
-            }
-        }
-    });
-    if (hasAvailable) {
-        updateBookingSummary();
-    }
-}
-updateRepeatBooking();
+updateBookingSummary();
 
 // ----- SMOOTH SCROLL -----
 function removeHashFromUrl() {
