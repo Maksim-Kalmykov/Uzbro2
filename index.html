@@ -1367,7 +1367,7 @@
         }
 
         /* ============================================================ */
-        /* ===== СЕТКА УСЛУГ С ЦЕНТРИРОВАНИЕМ ПОСЛЕДНЕГО РЯДА ===== */
+        /* ===== СЕТКА УСЛУГ ===== */
         /* ============================================================ */
         .services-grid {
             display: flex;
@@ -1405,7 +1405,20 @@
             .service-card {
                 flex: 0 1 100%;
                 min-width: 0;
-                max-width: 100%;
+                max-width: none;
+                padding: 0.75rem;
+                border-width: 0.125rem;
+            }
+            
+            .services-grid {
+                gap: 0.75rem;
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .service-card {
+                padding: 0.5rem;
             }
         }
 
@@ -1431,6 +1444,14 @@
             pointer-events: none;
         }
 
+        @media (max-width: 640px) {
+            .service-card--selected::after {
+                top: 0.25rem;
+                right: 0.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
         .service-card::before {
             content: '';
             position: absolute;
@@ -1449,11 +1470,52 @@
             transition: transform 0.3s;
         }
 
+        @media (max-width: 640px) {
+            .service-card__icon {
+                font-size: 1.2rem;
+            }
+            
+            .service-card .icon-wrapper {
+                width: 1.8rem;
+                height: 1.8rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .service-card .icon-wrapper span {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .service-card .icon-wrapper {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            
+            .service-card .icon-wrapper span {
+                font-size: 1rem;
+            }
+        }
+
         .service-card__title {
             font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 0.75rem;
             color: var(--text-color);
+        }
+
+        @media (max-width: 640px) {
+            .service-card__title {
+                font-size: 0.9rem;
+                margin-bottom: 0.25rem;
+                line-height: 1.2;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .service-card__title {
+                font-size: 0.75rem;
+            }
         }
 
         .service-card__price {
@@ -1467,10 +1529,42 @@
             transition: border-color 0.3s;
         }
 
+        @media (max-width: 640px) {
+            .service-card__price {
+                font-size: 1.1rem;
+                margin: 0.25rem 0 0.25rem;
+                padding-bottom: 0.125rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .service-card__price {
+                font-size: 0.9rem;
+            }
+        }
+
         .service-card__desc {
             font-size: 0.9rem;
             line-height: 1.5;
             color: var(--text-secondary);
+        }
+
+        @media (max-width: 640px) {
+            .service-card__desc {
+                font-size: 0.65rem;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .service-card__desc {
+                font-size: 0.55rem;
+                -webkit-line-clamp: 1;
+            }
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -1485,6 +1579,142 @@
         .services-footer {
             text-align: center;
             margin-top: 3rem;
+        }
+
+        @media (max-width: 640px) {
+            .services-footer .btn {
+                font-size: 0.7rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        /* ===== БЛОК ВЫБРАННЫХ УСЛУГ ===== */
+        .services-selection {
+            margin: 0.5rem 0 1.5rem 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-color);
+            border-radius: var(--border-radius-card);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.05);
+            display: none;
+        }
+
+        .services-selection.visible {
+            display: block;
+            animation: summaryFadeIn 0.4s ease;
+        }
+
+        @keyframes summaryFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services-selection__badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .services-selection__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.6rem;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .services-selection__badge .remove {
+            cursor: pointer;
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-left: 0.2rem;
+            transition: opacity 0.2s;
+        }
+
+        .services-selection__badge .remove:hover {
+            opacity: 1;
+        }
+
+        .services-selection__summary {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+        }
+
+        .services-selection__summary .count {
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .services-selection__summary .total {
+            color: var(--accent-color);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .services-selection__summary .label {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .services-selection__clear {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.25rem;
+            transition: all 0.2s ease;
+            text-decoration: underline;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .services-selection__clear:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 500px) {
+            .services-selection {
+                padding: 0.6rem 0.75rem;
+            }
+            .services-selection__badge {
+                font-size: 0.6rem;
+                padding: 0.15rem 0.4rem;
+            }
+            .services-selection__summary {
+                font-size: 0.85rem;
+                gap: 0.25rem 0.5rem;
+            }
+            .services-selection__summary .count,
+            .services-selection__summary .total {
+                font-size: 1rem;
+            }
+            .services-selection__clear {
+                font-size: 0.6rem;
+                padding: 0.15rem 0.4rem;
+            }
         }
 
         /* ============================================================ */
@@ -1507,6 +1737,8 @@
             overflow: hidden;
             aspect-ratio: 1 / 1;
             box-shadow: 0 0.125rem 0.5rem var(--shadow-color-light);
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
         .gallery-item__img {
@@ -1516,6 +1748,7 @@
             filter: grayscale(100%);
             transition: 0.4s ease;
             display: block;
+            pointer-events: none;
         }
 
         .gallery-caption {
@@ -1552,6 +1785,88 @@
             }
             .gallery-grid {
                 gap: 0.75rem;
+            }
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ИЗОБРАЖЕНИЙ ===== */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10002;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(3px);
+        }
+
+        .gallery-modal.open {
+            display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-modal__content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: default;
+        }
+
+        .gallery-modal__img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 3rem rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+        }
+
+        .gallery-modal__close {
+            position: absolute;
+            top: -3.5rem;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .gallery-modal__close:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 640px) {
+            .gallery-modal__img {
+                max-width: 95vw;
+                max-height: 80vh;
+            }
+            .gallery-modal__close {
+                top: -2.5rem;
+                font-size: 2rem;
             }
         }
 
@@ -3355,127 +3670,6 @@
                 min-width: 80px;
             }
         }
-
-        /* ===== БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ ===== */
-        .services-summary {
-            display: none;
-            margin: 0.5rem 0 1.5rem 0;
-            padding: 0.75rem 1.5rem;
-            background: var(--bg-secondary);
-            border: 2px solid var(--accent-color);
-            border-radius: var(--border-radius-card);
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 1.25rem rgba(255, 255, 255, 0.05);
-        }
-
-        .services-summary.visible {
-            display: block;
-            animation: summaryFadeIn 0.4s ease;
-        }
-
-        @keyframes summaryFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .services-summary__text {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem 1.5rem;
-        }
-
-        .services-summary__text .count {
-            color: var(--accent-color);
-            font-weight: 800;
-            font-size: 1.3rem;
-        }
-
-        .services-summary__text .total {
-            color: var(--accent-color);
-            font-weight: 800;
-            font-size: 1.3rem;
-        }
-
-        .services-summary__text .label {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .services-summary__text .divider {
-            color: var(--border-color);
-            font-weight: 300;
-        }
-
-        .services-summary__clear {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            transition: all 0.2s ease;
-            text-decoration: underline;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .services-summary__clear:hover {
-            color: var(--accent-color);
-        }
-
-        @media (max-width: 500px) {
-            .services-summary {
-                padding: 0.6rem 0.75rem;
-            }
-            .services-summary__text {
-                font-size: 0.95rem;
-                gap: 0.25rem 0.5rem;
-                flex-wrap: wrap;
-            }
-            .services-summary__text .count,
-            .services-summary__text .total {
-                font-size: 1.1rem;
-            }
-            .services-summary__text .label {
-                font-size: 0.85rem;
-            }
-            .services-summary__clear {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.5rem;
-                width: 100%;
-                text-align: center;
-                margin-top: 0.25rem;
-            }
-            .services-summary__text .divider {
-                display: none;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .services-summary__text {
-                font-size: 0.85rem;
-                gap: 0.15rem 0.3rem;
-            }
-            .services-summary__text .count,
-            .services-summary__text .total {
-                font-size: 1rem;
-            }
-            .services-summary {
-                padding: 0.5rem 0.5rem;
-            }
-        }
     </style>
 
     <script type="application/ld+json">
@@ -3644,6 +3838,7 @@
     <section id="services" aria-labelledby="services-heading">
         <div class="container">
             <h2 id="services-heading" class="section__title fade-on-scroll fade-right">ПРЕМИУМ УСЛУГИ</h2>
+            
             <div class="services-grid" role="group" aria-label="Список услуг">
                 <div class="service-card fade-on-scroll fade-up" data-service="s28340001" data-price="1900" tabindex="0" role="button" aria-label="Мужская стрижка, цена 1900 рублей. Нажмите Пробел или Enter для выбора.">
                     <div class="icon-wrapper">
@@ -3695,15 +3890,16 @@
                 </div>
             </div>
 
-            <!-- БЛОК ИТОГОВ ВЫБРАННЫХ УСЛУГ -->
-            <div class="services-summary" id="servicesSummary">
-                <div class="services-summary__text">
+            <!-- БЛОК ВЫБРАННЫХ УСЛУГ (между карточками и кнопкой) -->
+            <div class="services-selection" id="servicesSelection">
+                <div class="services-selection__badges" id="selectionBadges"></div>
+                <div class="services-selection__summary">
                     <span class="label">Выбрано услуг:</span>
                     <span class="count" id="selectedCount">0</span>
                     <span class="divider">|</span>
                     <span class="label">Итого:</span>
                     <span class="total" id="selectedTotal">0 ₽</span>
-                    <button class="services-summary__clear" id="clearSelectionBtn">✕ Очистить всё</button>
+                    <button class="services-selection__clear" id="clearSelectionBtn">✕ Очистить всё</button>
                 </div>
             </div>
 
@@ -3785,22 +3981,30 @@
 
             <h2 class="section__title fade-on-scroll fade-left">РАБОТЫ МАСТЕРА</h2>
             <div class="gallery-grid">
-                <div class="gallery-item fade-on-scroll fade-scale">
+                <div class="gallery-item fade-on-scroll fade-scale" onclick="openGalleryModal(this.querySelector('img').src, this.querySelector('img').alt)">
                     <img class="gallery-item__img" src="images/1.png" alt="Фото работы: мужская стрижка" loading="lazy">
                 </div>
-                <div class="gallery-item fade-on-scroll fade-scale">
+                <div class="gallery-item fade-on-scroll fade-scale" onclick="openGalleryModal(this.querySelector('img').src, this.querySelector('img').alt)">
                     <img class="gallery-item__img" src="images/3.png" alt="Фото работы: моделирование бороды" loading="lazy">
                 </div>
-                <div class="gallery-item fade-on-scroll fade-scale">
+                <div class="gallery-item fade-on-scroll fade-scale" onclick="openGalleryModal(this.querySelector('img').src, this.querySelector('img').alt)">
                     <img class="gallery-item__img" src="images/5.png" alt="Фото работы: бритье опасной бритвой" loading="lazy">
                 </div>
-                <div class="gallery-item fade-on-scroll fade-scale">
+                <div class="gallery-item fade-on-scroll fade-scale" onclick="openGalleryModal(this.querySelector('img').src, this.querySelector('img').alt)">
                     <img class="gallery-item__img" src="images/6.png" alt="Фото работы: стильная укладка" loading="lazy">
                 </div>
             </div>
             <p class="gallery-caption">Мастер создаёт стиль, которому доверяют.</p>
         </div>
     </section>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ГАЛЕРЕИ -->
+    <div class="gallery-modal" id="galleryModal" onclick="closeGalleryModal()">
+        <div class="gallery-modal__content" onclick="event.stopPropagation()">
+            <img class="gallery-modal__img" id="galleryModalImg" src="" alt="" onclick="closeGalleryModal()">
+            <button class="gallery-modal__close" onclick="closeGalleryModal()" aria-label="Закрыть">&times;</button>
+        </div>
+    </div>
 
     <section id="info" aria-labelledby="contacts-heading">
         <div class="container">
@@ -4188,13 +4392,40 @@ if (!navigator.onLine) {
     const indicator = document.getElementById('offlineIndicator');
     if (indicator) indicator.style.display = 'block';
 }
+
+// ===== ФУНКЦИИ ДЛЯ ГАЛЕРЕИ =====
+function openGalleryModal(src, alt) {
+    const modal = document.getElementById('galleryModal');
+    const img = document.getElementById('galleryModalImg');
+    if (modal && img) {
+        img.src = src;
+        img.alt = alt || 'Фото работы мастера';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeGalleryModal() {
+    const modal = document.getElementById('galleryModal');
+    if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+
+// Закрытие по Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeGalleryModal();
+    }
+});
 </script>
 
 <script src="js/particles.min.js"></script>
 
 <script>
 // ============================================================
-// ПОЛНЫЙ JS КОД (исправлено: const/let вместо var)
+// ПОЛНЫЙ JS КОД
 // ============================================================
 
 if (typeof particlesJS !== 'undefined') {
@@ -5073,10 +5304,12 @@ fadeElements.forEach((el) => { fadeObserver.observe(el); });
 // ============================================================
 const serviceCards = document.querySelectorAll('.service-card[data-service]');
 const bookingLink = document.getElementById('bookingLink');
-const servicesSummary = document.getElementById('servicesSummary');
+const servicesSelection = document.getElementById('servicesSelection');
+const selectionBadges = document.getElementById('selectionBadges');
 const selectedCount = document.getElementById('selectedCount');
 const selectedTotal = document.getElementById('selectedTotal');
 const clearSelectionBtn = document.getElementById('clearSelectionBtn');
+
 const baseUrl = 'https://n2133024.yclients.com/company/1862679/personal/select-services?o=m5270073';
 let selectedServices = [];
 
@@ -5099,15 +5332,35 @@ function updateBookingSummary() {
     bookingLink.href = count === 0 ? baseUrl : baseUrl + selectedServices.join('');
     
     if (count === 0) {
-        servicesSummary.classList.remove('visible');
+        servicesSelection.classList.remove('visible');
         bookingLink.setAttribute('aria-label', 'Записаться на услуги');
-    } else {
-        const totalStr = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-        selectedCount.textContent = count;
-        selectedTotal.textContent = totalStr + ' ₽';
-        servicesSummary.classList.add('visible');
-        bookingLink.setAttribute('aria-label', 'Записаться на ' + count + ' услуг на сумму ' + totalStr + ' рублей');
+        return;
     }
+    
+    const totalStr = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    selectedCount.textContent = count;
+    selectedTotal.textContent = totalStr + ' ₽';
+    servicesSelection.classList.add('visible');
+    bookingLink.setAttribute('aria-label', 'Записаться на ' + count + ' услуг на сумму ' + totalStr + ' рублей');
+    
+    // Обновляем бейджи
+    selectionBadges.innerHTML = '';
+    selectedServices.forEach(id => {
+        const card = document.querySelector(`.service-card[data-service="${id}"]`);
+        if (card) {
+            const title = card.querySelector('.service-card__title')?.textContent || '';
+            const badge = document.createElement('span');
+            badge.className = 'services-selection__badge';
+            badge.innerHTML = `${title} <span class="remove" data-service="${id}">×</span>`;
+            badge.querySelector('.remove').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const serviceId = e.target.dataset.service;
+                const card = document.querySelector(`.service-card[data-service="${serviceId}"]`);
+                if (card) toggleService(card, serviceId);
+            });
+            selectionBadges.appendChild(badge);
+        }
+    });
 }
 
 function toggleService(card, serviceId) {
